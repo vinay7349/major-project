@@ -1,0 +1,46 @@
+# =============================
+# ShopGenie AI – .gitignore
+# =============================
+
+# Python / Django
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+.env
+
+# Virtual Environments
+venv/
+env/
+.venv/
+ENV/
+
+# Node / React
+node_modules/
+dist/
+.cache/
+*.local
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# Coverage / Tests
+htmlcov/
+.coverage
+.pytest_cache/
