@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { LogIn, Lock, User as UserIcon, Sparkles } from 'lucide-react';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
+import { LogIn, Lock, User as UserIcon, Store } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/NotificationContext';
 import GlassCard from '../components/GlassCard';
 
 const LoginPage = () => {
+  const [searchParams] = useSearchParams();
+  const isCustomerLogin = searchParams.get('role') === 'customer';
   const [username, setUsername] = useState('shopowner');
   const [password, setPassword] = useState('owner123');
   const { login, loading } = useAuth();
@@ -28,10 +30,11 @@ const LoginPage = () => {
       <div className="w-full max-w-md space-y-6">
         <div className="text-center space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-semibold">
-            <Sparkles className="w-3.5 h-3.5" /> ShopGenie AI Login
+            {isCustomerLogin ? <UserIcon className="w-3.5 h-3.5" /> : <Store className="w-3.5 h-3.5" />}
+            {isCustomerLogin ? 'Customer Login' : 'Shop Owner Login'}
           </div>
-          <h2 className="text-3xl font-extrabold text-white">Sign In to Store</h2>
-          <p className="text-slate-400 text-xs">Enter your credentials to access your retail management dashboard.</p>
+          <h2 className="text-3xl font-extrabold text-white">Sign In to {isCustomerLogin ? 'ShopGenie' : 'Your Store'}</h2>
+          <p className="text-slate-400 text-xs">Enter your credentials to continue.</p>
         </div>
 
         <GlassCard className="bg-slate-900/70 border-slate-800 p-8">

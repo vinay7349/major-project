@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { UserPlus, Mail, Lock, User as UserIcon, Store, Phone } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/NotificationContext';
 import GlassCard from '../components/GlassCard';
 
 const RegisterPage = () => {
+  const [searchParams] = useSearchParams();
+  const isCustomer = searchParams.get('role') === 'customer';
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
     first_name: '',
     last_name: '',
-    role: 'SHOP_OWNER',
+    role: isCustomer ? 'CUSTOMER' : 'SHOP_OWNER',
     shop_name: '',
     phone_number: '',
   });
@@ -40,13 +42,13 @@ const RegisterPage = () => {
     <div className="min-h-[85vh] flex items-center justify-center p-6">
       <div className="w-full max-w-lg space-y-6">
         <div className="text-center space-y-2">
-          <h2 className="text-3xl font-extrabold text-white">Create ShopGenie Account</h2>
-          <p className="text-slate-400 text-xs">Join thousands of smart retail store owners worldwide.</p>
+          <h2 className="text-3xl font-extrabold text-white">{isCustomer ? 'Create your shopper account' : 'Set up your shop workspace'}</h2>
+          <p className="text-slate-400 text-xs">{isCustomer ? 'Find products and connect with local stores.' : 'Bring your products, inventory, and sales into one clear view.'}</p>
         </div>
 
         <GlassCard className="bg-slate-900/70 border-slate-800 p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+            {!isCustomer && <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs font-medium text-slate-300 block mb-1">First Name</label>
                 <input
@@ -71,7 +73,7 @@ const RegisterPage = () => {
                   className="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
                 />
               </div>
-            </div>
+            </div>}
 
             <div>
               <label className="text-xs font-medium text-slate-300 block mb-1">Username</label>
@@ -121,7 +123,7 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            {!isCustomer && <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-xs font-medium text-slate-300 block mb-1">Shop Name</label>
                 <input
@@ -146,7 +148,7 @@ const RegisterPage = () => {
                   <option value="CUSTOMER">Customer</option>
                 </select>
               </div>
-            </div>
+            </div>}
 
             <button
               type="submit"
@@ -154,13 +156,13 @@ const RegisterPage = () => {
               className="w-full gradient-btn-primary py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 mt-4"
             >
               <UserPlus className="w-4 h-4" />
-              <span>{loading ? 'Creating Account...' : 'Register Store'}</span>
+              <span>{loading ? 'Creating Account...' : isCustomer ? 'Create shopper account' : 'Create shop account'}</span>
             </button>
           </form>
         </GlassCard>
 
         <p className="text-center text-xs text-slate-400">
-          Already have an account? <NavLink to="/login" className="text-indigo-400 hover:text-indigo-300 font-semibold">Sign in</NavLink>
+          Already have an account? <NavLink to={`/login${isCustomer ? '?role=customer' : ''}`} className="text-indigo-400 hover:text-indigo-300 font-semibold">Sign in</NavLink>
         </p>
       </div>
     </div>
