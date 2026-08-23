@@ -16,7 +16,12 @@ const FeaturesPage = () => {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto py-16 px-6 space-y-12">
+    <div
+      className="relative isolate min-h-[calc(100vh-5rem)] overflow-hidden bg-slate-950"
+      style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=2200&q=85)', backgroundPosition: 'center', backgroundSize: 'cover' }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/75 to-slate-950/40" />
+      <div className="relative max-w-6xl mx-auto py-16 px-6 space-y-12">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-extrabold text-white">Full Feature Specification</h1>
         <p className="text-slate-400 text-sm max-w-xl mx-auto">Explore all 12 modules included in ShopGenie AI.</p>
@@ -35,6 +40,7 @@ const FeaturesPage = () => {
             </GlassCard>
           );
         })}
+      </div>
       </div>
     </div>
   );

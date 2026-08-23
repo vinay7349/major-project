@@ -4,7 +4,12 @@ import GlassCard from '../components/GlassCard';
 
 const AboutPage = () => {
   return (
-    <div className="max-w-5xl mx-auto py-16 px-6 space-y-16">
+    <div
+      className="relative isolate min-h-[calc(100vh-5rem)] overflow-hidden bg-slate-950"
+      style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=2200&q=85)', backgroundPosition: 'center', backgroundSize: 'cover' }}
+    >
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-950/35" />
+      <div className="relative max-w-5xl mx-auto py-16 px-6 space-y-16">
       <div className="text-center space-y-4">
         <h1 className="text-4xl md:text-5xl font-extrabold text-white">
           About <span className="gradient-text">ShopGenie AI</span>
@@ -37,6 +42,7 @@ const AboutPage = () => {
             <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-400" /> PDF Invoicing & QR Code Validation</li>
           </ul>
         </GlassCard>
+      </div>
       </div>
     </div>
   );
