@@ -26,40 +26,21 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] bg-slate-50 text-slate-900">
-      <section className="relative h-56 overflow-hidden bg-slate-950" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1515706886582-54c73c5eaf41?auto=format&fit=crop&w=2200&q=85)', backgroundPosition: 'center', backgroundSize: 'cover' }}>
-        <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px]" />
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-          <h1 className="text-4xl font-bold">Sign In</h1>
-          <p className="mt-3 text-sm text-slate-200">Welcome back! Please sign in to your account.</p>
-        </div>
-      </section>
-
-      <div className="border-b border-slate-200 bg-white px-6 py-4">
-        <div className="mx-auto max-w-6xl text-sm text-slate-500"><NavLink to="/" className="hover:text-indigo-600">Home</NavLink><span className="mx-2">&gt;</span><span className="font-medium text-slate-900">Sign In</span></div>
-      </div>
-
-      <section className="flex justify-center px-5 py-12 sm:px-6 sm:py-16">
-        <div className="w-full max-w-[580px] overflow-hidden rounded-2xl bg-white shadow-xl shadow-slate-200/70">
-          <div className="bg-gradient-to-r from-[#6C3BFF] via-[#2563EB] to-[#00AEEF] px-8 py-7 text-center text-white sm:px-12">
-            <h2 className="text-3xl font-bold">Sign In</h2>
-          </div>
-          <div className="px-6 py-8 sm:px-12 sm:py-10">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="mb-2 block text-sm font-semibold text-[#172033]">Email Address <span className="text-rose-500">*</span></label>
-                <div className="relative"><Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /><input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your email address" className="w-full rounded-lg border border-slate-200 py-3.5 pl-11 pr-4 text-sm text-[#172033] outline-none transition focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100" /></div>
-              </div>
-              <div>
-                <div className="mb-2 flex items-center justify-between"><label className="block text-sm font-semibold text-[#172033]">Password <span className="text-rose-500">*</span></label><NavLink to="/forgot-password" className="text-sm font-medium text-[#2563EB] hover:text-[#6C3BFF]">Forgot Password?</NavLink></div>
-                <div className="relative"><Lock className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" /><input type={showPassword ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" className="w-full rounded-lg border border-slate-200 py-3.5 pl-11 pr-12 text-sm text-[#172033] outline-none transition focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100" /><button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#2563EB]">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button></div>
-              </div>
-              <button type="submit" disabled={loading} className="gradient-btn-primary w-full rounded-lg py-3.5 text-sm font-bold hover:-translate-y-0.5 hover:shadow-lg">{loading ? 'Authenticating...' : 'Sign In'}</button>
+    <div className="relative min-h-[calc(100vh-5rem)] overflow-hidden bg-[#080A19] text-white">
+      <video className="absolute inset-0 h-full w-full object-cover opacity-45" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260813_092641_de52eb87-daf2-41db-92cb-7a56eae012a5.mp4" autoPlay loop muted playsInline />
+      <div className="absolute inset-0 bg-[#080A19]/60" />
+      <div className="relative z-10 w-full max-w-[1800px] mx-auto px-5 py-8 sm:px-8 sm:py-12 md:px-[82px] lg:min-h-[calc(100vh-5rem)] lg:flex lg:items-center lg:justify-center">
+        <section className="w-full max-w-[680px] mx-auto rounded-[24px] sm:rounded-[33px] border border-white/[0.08] bg-[rgba(17,16,15,0.52)] p-6 sm:p-10 lg:p-12 backdrop-blur-[20px] shadow-2xl shadow-black/30">
+            <NavLink to="/" className="inline-flex text-sm text-white/65 transition-colors hover:text-white">Home<span className="mx-2">&gt;</span><span className="text-white">Sign In</span></NavLink>
+            <div className="mt-8 mb-8 sm:mt-10 sm:mb-10"><div className="w-11 h-11 rounded-[12px] bg-white/10 flex items-center justify-center mb-5"><LogIn className="w-5 h-5 text-white" /></div><h1 className="text-[38px] sm:text-[48px] font-normal leading-[0.95] tracking-[-0.035em]">Sign In</h1><p className="mt-4 text-[16px] sm:text-[18px] font-[450] leading-[1.3] text-white/80">Welcome back! Please sign in to your account.</p></div>
+            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
+              <div><label className="mb-2 block text-sm font-[450] text-white/90">Email Address <span className="text-white/50">*</span></label><div className="relative"><Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" /><input type="text" required value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your email address" className="w-full h-[52px] rounded-[12px] border border-white/[0.12] bg-white/[0.06] py-3 pl-11 pr-4 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-white/40 focus:bg-white/[0.1] focus:ring-4 focus:ring-white/[0.06]" /></div></div>
+              <div><div className="mb-2 flex items-center justify-between gap-3"><label className="block text-sm font-[450] text-white/90">Password <span className="text-white/50">*</span></label><NavLink to="/forgot-password" className="text-sm font-[450] text-white/70 transition-colors hover:text-white">Forgot Password?</NavLink></div><div className="relative"><Lock className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-white/45" /><input type={showPassword ? 'text' : 'password'} required value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" className="w-full h-[52px] rounded-[12px] border border-white/[0.12] bg-white/[0.06] py-3 pl-11 pr-12 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-white/40 focus:bg-white/[0.1] focus:ring-4 focus:ring-white/[0.06]" /><button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-white/45 transition-colors hover:text-white">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button></div></div>
+              <button type="submit" disabled={loading} className="w-full h-[52px] rounded-[12px] bg-[#E9E9E9] text-[#0A0707] text-[15px] font-[450] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">{loading ? 'Authenticating...' : 'Sign In'}</button>
             </form>
-          </div>
-          <div className="border-t border-slate-200 px-6 py-6 text-center text-sm text-slate-500 sm:px-12">Don't have an account? <NavLink to={`/register${isCustomerLogin ? '?role=customer' : ''}`} className="font-semibold text-[#2563EB] hover:text-[#6C3BFF]">Register</NavLink></div>
-        </div>
-      </section>
+            <div className="mt-7 border-t border-white/10 pt-6 text-center text-sm text-white/65">Don't have an account? <NavLink to={`/register${isCustomerLogin ? '?role=customer' : ''}`} className="font-[450] text-white transition-colors hover:text-white/70">Register</NavLink></div>
+        </section>
+      </div>
     </div>
   );
 };
