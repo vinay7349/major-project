@@ -124,6 +124,22 @@ python seed_data.py
 python manage.py runserver
 ```
 
+### PostgreSQL Configuration
+
+Set `DB_ENGINE=postgresql` and provide the database connection settings before running migrations:
+
+```text
+DB_ENGINE=postgresql
+POSTGRES_DB=shopgenie
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=your-password
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_SSLMODE=prefer
+```
+
+The backend uses SQLite when `DB_ENGINE` is not set, which keeps local setup compatible with the included development database. Never commit real credentials; use environment variables or a local `.env` file.
+
 ### 2. Frontend Setup (React.js + Vite)
 
 ```bash
