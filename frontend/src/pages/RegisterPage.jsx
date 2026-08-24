@@ -32,7 +32,7 @@ const RegisterPage = () => {
     const res = await register(formData);
     if (res.success) {
       addToast('Registration complete! Please sign in with your new account.', 'success', 'Account Created');
-      navigate('/login');
+      navigate(`/login${isCustomer ? '?role=customer' : ''}`);
     } else {
       addToast('Registration error. Please check your form fields.', 'error');
     }
@@ -52,7 +52,7 @@ const RegisterPage = () => {
 
       <section className="flex -translate-y-2 justify-center px-5 py-12 sm:px-6 sm:py-16">
         <div className="w-full max-w-[580px] overflow-hidden rounded-2xl bg-white shadow-xl shadow-slate-200/70">
-          <div className="bg-gradient-to-r from-[#6C3BFF] via-[#2563EB] to-[#00AEEF] px-8 py-7 text-center text-white sm:px-12"><h2 className="text-3xl font-bold">{isCustomer ? 'Create your shopper account' : 'Set up your shop'}</h2></div>
+          <div className="bg-gradient-to-r from-[#6C3BFF] via-[#2563EB] to-[#00AEEF] px-8 py-7 text-center text-white sm:px-12"><h2 className="text-3xl font-bold">{isCustomer ? 'Create your customer account' : 'Set up your shop'}</h2><p className="mt-2 text-sm text-white/80">{isCustomer ? 'Discover products and nearby shops with a customer account.' : 'Manage your shop with an owner account.'}</p></div>
           <div className="px-6 py-8 sm:px-12 sm:py-10">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -145,16 +145,8 @@ const RegisterPage = () => {
               </div>
               <div>
                 <label className="text-xs font-medium text-slate-300 block mb-1">Role Access</label>
-                <select
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  className="w-full rounded-lg border border-slate-200 bg-white px-4 py-3.5 text-sm text-[#172033] outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
-                >
-                  <option value="SHOP_OWNER">Shop Owner</option>
-                  <option value="ADMIN">Administrator</option>
-                  <option value="CUSTOMER">Customer</option>
-                </select>
+                <input type="hidden" name="role" value="SHOP_OWNER" />
+                <div className="flex h-[50px] items-center rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-[#172033]">Shop Owner</div>
               </div>
             </div>}
 
@@ -163,7 +155,7 @@ const RegisterPage = () => {
               disabled={loading}
               className="w-full gradient-btn-primary py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 mt-4"
             >
-              <span>{loading ? 'Creating Account...' : isCustomer ? 'Create shopper account' : 'Create shop account'}</span>
+              <span>{loading ? 'Creating Account...' : isCustomer ? 'Create customer account' : 'Create shop account'}</span>
             </button>
           </form>
           </div>

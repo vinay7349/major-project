@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { Search, Sun, Moon, Bell, User, LogOut, Sparkles, Mic } from 'lucide-react';
+import { Search, Sun, Moon, Bell, User, LogOut, Mic, Menu, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 
-const Navbar = ({ onOpenVoice }) => {
+const Navbar = ({ onOpenVoice, onToggleSidebar, isSidebarOpen }) => {
   const { user, logout } = useAuth();
   const { isDarkMode, toggleTheme } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
@@ -19,9 +19,18 @@ const Navbar = ({ onOpenVoice }) => {
   };
 
   return (
-    <header className="h-20 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800/80 px-8 flex items-center justify-between sticky top-0 z-20 transition-colors">
+    <header className="h-20 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800/80 px-4 sm:px-8 flex items-center justify-between sticky top-0 z-40 transition-colors">
+      <button
+        type="button"
+        onClick={onToggleSidebar}
+        aria-label={isSidebarOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={isSidebarOpen}
+        className="lg:hidden mr-3 shrink-0 p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/60 text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-colors border border-slate-200 dark:border-slate-700/50"
+      >
+        {isSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+      </button>
       {/* Search Input */}
-      <form onSubmit={handleSearchSubmit} className="relative w-96">
+      <form onSubmit={handleSearchSubmit} className="relative w-full max-w-96">
         <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
         <input
           type="text"
@@ -33,7 +42,7 @@ const Navbar = ({ onOpenVoice }) => {
       </form>
 
       {/* Right Controls */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         {/* Voice Assistant Trigger */}
         <button
           onClick={onOpenVoice}

@@ -4,17 +4,18 @@ from rest_framework.response import Response
 from .models import StockAlert, RestockLog
 from .serializers import StockAlertSerializer, RestockLogSerializer
 from products.models import Product
+from accounts.permissions import IsShopOwnerOrAdmin
 
 class StockAlertListView(generics.ListAPIView):
     serializer_class = StockAlertSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]
 
     def get_queryset(self):
         queryset = StockAlert.objects.filter(is_resolved=False)
         return queryset
 
 class RestockProductView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]
 
     def post(self, request):
         product_id = request.data.get('product_id')
@@ -57,4 +58,4 @@ class RestockProductView(APIView):
 class RestockLogListView(generics.ListAPIView):
     queryset = RestockLog.objects.all()
     serializer_class = RestockLogSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]

@@ -15,7 +15,7 @@ import {
   Bot
 } from 'lucide-react';
 
-const Sidebar = ({ isVoiceOpen, setIsVoiceOpen }) => {
+const Sidebar = ({ isOpen, onClose, isVoiceOpen, setIsVoiceOpen }) => {
   const navItems = [
     { label: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { label: 'Products', path: '/products', icon: Package },
@@ -31,7 +31,13 @@ const Sidebar = ({ isVoiceOpen, setIsVoiceOpen }) => {
   ];
 
   return (
-    <aside className="w-64 bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200 dark:border-slate-800/80 flex flex-col justify-between h-screen sticky top-0 z-30 transition-all duration-300">
+    <>
+      <div
+        aria-hidden="true"
+        onClick={onClose}
+        className={`lg:hidden fixed inset-0 z-40 bg-slate-950/50 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+      />
+      <aside className={`fixed lg:sticky top-0 left-0 z-50 w-64 bg-white/70 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200 dark:border-slate-800/80 flex flex-col justify-between h-screen transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
       <div>
         {/* Brand Logo */}
         <div className="p-6 flex items-center justify-between border-b border-slate-200 dark:border-slate-800/60">
@@ -54,6 +60,7 @@ const Sidebar = ({ isVoiceOpen, setIsVoiceOpen }) => {
               <NavLink
                 key={item.path}
                 to={item.path}
+                onClick={onClose}
                 className={({ isActive }) =>
                   `flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-200 group ${
                     isActive
@@ -87,7 +94,8 @@ const Sidebar = ({ isVoiceOpen, setIsVoiceOpen }) => {
           <span>Launch AI Voice</span>
         </button>
       </div>
-    </aside>
+      </aside>
+    </>
   );
 };
 

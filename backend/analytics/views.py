@@ -9,9 +9,10 @@ from rest_framework import permissions, status
 from products.models import Product, Category
 from billing.models import Order, OrderItem
 from inventory.models import StockAlert
+from accounts.permissions import IsShopOwnerOrAdmin
 
 class DashboardOverviewView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]
 
     def get(self, request):
         today = timezone.now().date()
@@ -82,7 +83,7 @@ class DashboardOverviewView(APIView):
         })
 
 class DetailedSalesAnalyticsView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]
 
     def get(self, request):
         today = timezone.now().date()
