@@ -7,19 +7,22 @@ import { useToast } from '../context/NotificationContext';
 const LoginPage = () => {
   const [searchParams] = useSearchParams();
   const isCustomerLogin = searchParams.get('role') === 'customer';
-  const [username, setUsername] = useState('shopowner');
-  const [password, setPassword] = useState('owner123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { login, loading } = useAuth();
+  const { login, logout, loading } = useAuth();
   const { addToast } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await login(username, password);
-    if (result.success) {
+    const result = await login(username, password, isCustomerLogin ? 'customer' : 'owner');
+    if (result.success && (!isCustomerLogin || result.user.role === 'CUSTOMER') && (isCustomerLogin || result.user.role !== 'CUSTOMER')) {
       addToast(`Welcome back, ${result.user.username}!`, 'success', 'Login Successful');
-      navigate('/dashboard');
+      navigate(result.user.role === 'CUSTOMER' ? '/customer' : '/dashboard');
+    } else if (result.success) {
+      logout();
+      addToast(`This account is registered as ${result.user.role === 'CUSTOMER' ? 'a customer' : 'a shop owner'}. Use the matching login.` , 'error', 'Wrong Login Type');
     } else {
       addToast('Invalid credentials. Try demo credentials: shopowner / owner123', 'error', 'Login Failed');
     }

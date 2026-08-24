@@ -17,6 +17,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ('username', 'email', 'password', 'first_name', 'last_name', 'role', 'phone_number', 'shop_name', 'address')
 
+    def validate_role(self, value):
+        if value not in (User.Role.CUSTOMER, User.Role.SHOP_OWNER):
+            raise serializers.ValidationError('Self-service registration is limited to customers and shop owners.')
+        return value
+
     def create(self, validated_data):
         user = User.objects.create_user(
             username=validated_data['username'],

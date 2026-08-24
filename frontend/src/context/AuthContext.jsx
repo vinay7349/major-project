@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(false);
 
-  const login = async (username, password) => {
+  const login = async (username, password, requestedRole) => {
     setLoading(true);
     try {
       const response = await authAPI.login({ username, password });
@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }) => {
         email: 'owner@shopgenie.ai',
         first_name: 'Alex',
         last_name: 'Morgan',
-        role: 'SHOP_OWNER',
-        shop_name: 'Genie Mart Downtown'
+        role: requestedRole === 'customer' ? 'CUSTOMER' : 'SHOP_OWNER',
+        shop_name: requestedRole === 'customer' ? '' : 'Genie Mart Downtown'
       };
       localStorage.setItem('shopgenie_access_token', 'demo-access-token');
       localStorage.setItem('shopgenie_user', JSON.stringify(demoUser));

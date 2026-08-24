@@ -9,9 +9,10 @@ from .serializers import OrderSerializer
 from products.models import Product
 from inventory.models import StockAlert
 from notifications.models import Notification
+from accounts.permissions import IsShopOwnerOrAdmin
 
 class OrderListCreateView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]
 
     def get(self, request):
         orders = Order.objects.all()
@@ -103,10 +104,10 @@ class OrderListCreateView(APIView):
 class OrderDetailView(generics.RetrieveAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]
 
 class InvoiceDownloadView(APIView):
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [IsShopOwnerOrAdmin]
 
     def get(self, request, pk):
         try:

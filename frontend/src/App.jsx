@@ -26,6 +26,8 @@ import ProfilePage from './pages/ProfilePage';
 import SettingsPage from './pages/SettingsPage';
 import NearbyShopsPage from './pages/NearbyShopsPage';
 import AdminPanelPage from './pages/AdminPanelPage';
+import CustomerHomePage from './pages/CustomerHomePage';
+import CustomerProfilePage from './pages/CustomerProfilePage';
 
 function App() {
   return (
@@ -42,13 +44,15 @@ function App() {
                 <Route path="login" element={<LoginPage />} />
                 <Route path="register" element={<RegisterPage />} />
                 <Route path="forgot-password" element={<ForgotPasswordPage />} />
+                <Route path="customer" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><CustomerHomePage /></ProtectedRoute>} />
+                <Route path="customer/profile" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><CustomerProfilePage /></ProtectedRoute>} />
               </Route>
 
               {/* Protected Dashboard Routes */}
               <Route
                 path="/"
                 element={
-                  <ProtectedRoute>
+                  <ProtectedRoute allowedRoles={['SHOP_OWNER', 'ADMIN']}>
                     <DashboardLayout />
                   </ProtectedRoute>
                 }

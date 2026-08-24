@@ -5,20 +5,21 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
 from .models import Category, Product
 from .serializers import CategorySerializer, ProductSerializer
+from accounts.permissions import ReadOnlyOrShopOwner
 
 class CategoryListCreateView(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [ReadOnlyOrShopOwner]
 
 class CategoryDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [ReadOnlyOrShopOwner]
 
 class ProductListCreateView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [ReadOnlyOrShopOwner]
 
     def get_queryset(self):
         queryset = Product.objects.all()
@@ -37,7 +38,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [ReadOnlyOrShopOwner]
 
 class AIDetectProductView(APIView):
     permission_classes = [permissions.AllowAny]
