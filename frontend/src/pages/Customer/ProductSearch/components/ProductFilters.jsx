@@ -1,7 +1,7 @@
 import React from 'react';
-import { X, SlidersHorizontal, RefreshCw, Star, Check } from 'lucide-react';
+import { X, SlidersHorizontal, RefreshCw, Star } from 'lucide-react';
 
-const FilterDrawer = ({
+const ProductFilters = ({
   isOpen,
   onClose,
   categories = [],
@@ -16,7 +16,7 @@ const FilterDrawer = ({
   setSelectedShop,
   minRating,
   setMinRating,
-  onReset
+  onReset,
 }) => {
   if (!isOpen) return null;
 
@@ -24,7 +24,6 @@ const FilterDrawer = ({
     <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/80 backdrop-blur-sm animate-fade-left">
       <div className="relative w-full max-w-md bg-slate-900 border-l border-white/10 p-6 shadow-2xl text-white flex flex-col justify-between h-full overflow-hidden">
         <div className="min-h-0 flex-1 overflow-hidden">
-          {/* Header */}
           <div className="flex items-center justify-between pb-4 border-b border-white/10">
             <div className="flex items-center gap-2">
               <SlidersHorizontal className="h-5 w-5 text-cyan-400" />
@@ -38,10 +37,7 @@ const FilterDrawer = ({
             </button>
           </div>
 
-          {/* Filters List */}
           <div className="mt-6 space-y-6">
-            
-            {/* Category Filter */}
             <div>
               <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-3">
                 Category
@@ -73,7 +69,6 @@ const FilterDrawer = ({
               </div>
             </div>
 
-            {/* Price Filter */}
             <div>
               <div className="flex items-center justify-between mb-2">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
@@ -97,7 +92,6 @@ const FilterDrawer = ({
               </div>
             </div>
 
-            {/* In-Stock Toggle */}
             <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] p-3.5">
               <div>
                 <p className="text-xs font-semibold text-white">In-Stock Items Only</p>
@@ -117,7 +111,6 @@ const FilterDrawer = ({
               </button>
             </div>
 
-            {/* Minimum Rating Filter */}
             {setMinRating && (
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
@@ -134,21 +127,13 @@ const FilterDrawer = ({
                           : 'border-white/10 bg-white/[0.05] text-slate-400 hover:bg-white/10'
                       }`}
                     >
-                      {rating === 0 ? (
-                        'All'
-                      ) : (
-                        <>
-                          <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-                          <span>{rating}+</span>
-                        </>
-                      )}
+                      {rating === 0 ? 'All' : <><Star className="h-3 w-3 fill-amber-400 text-amber-400" /><span>{rating}+</span></>}
                     </button>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Filter by Shop */}
             {shops.length > 0 && (
               <div>
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
@@ -189,7 +174,6 @@ const FilterDrawer = ({
           </div>
         </div>
 
-        {/* Footer Actions */}
         <div className="pt-6 border-t border-white/10 flex items-center gap-3">
           <button
             onClick={onReset}
@@ -210,4 +194,4 @@ const FilterDrawer = ({
   );
 };
 
-export default FilterDrawer;
+export default ProductFilters;

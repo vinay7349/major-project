@@ -5,7 +5,7 @@ const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('shopgenie_theme');
-    return saved ? saved === 'dark' : true; // Default dark mode for sleek AI look
+    return saved ? saved === 'dark' : false;
   });
 
   useEffect(() => {

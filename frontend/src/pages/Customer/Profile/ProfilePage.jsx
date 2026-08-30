@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { ArrowLeft, UserCheck, Mail, Phone, Save, CheckCircle2, ShieldCheck } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import CustomerDiscoveryHeader from '../components/CustomerDiscoveryHeader';
+import { ArrowLeft, UserCheck, Mail, Phone, Save, CheckCircle2 } from 'lucide-react';
+import { useAuth } from '../../../context/AuthContext';
 
 const CustomerProfilePage = () => {
   const { user, updateProfile } = useAuth();
@@ -24,10 +23,7 @@ const CustomerProfilePage = () => {
   return (
     <div className="bg-slate-950 text-white font-sans selection:bg-cyan-500 selection:text-slate-950 pb-20">
       <main className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 pt-10">
-        <NavLink
-          to="/customer"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-cyan-400 hover:text-white transition-colors"
-        >
+        <NavLink to="/customer" className="inline-flex items-center gap-2 text-xs font-semibold text-cyan-400 hover:text-white transition-colors">
           <ArrowLeft className="h-4 w-4" />
           <span>Back to customer discovery</span>
         </NavLink>
@@ -39,9 +35,7 @@ const CustomerProfilePage = () => {
             </div>
             <div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Customer profile</h1>
-              <p className="mt-1 text-xs sm:text-sm text-slate-400">
-                Manage the details for your product and shop discovery account.
-              </p>
+              <p className="mt-1 text-xs sm:text-sm text-slate-400">Manage the details for your product and shop discovery account.</p>
             </div>
           </div>
 
