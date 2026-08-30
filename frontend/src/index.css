@@ -1,9 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: light;
+  --page-bg: #f6f1ea;
+  --panel: rgba(255, 255, 255, 0.82);
+  --panel-strong: #ffffff;
+  --panel-subtle: #f8f5f1;
+  --border: rgba(120, 113, 108, 0.16);
+  --border-strong: rgba(120, 113, 108, 0.22);
+  --text: #1f2937;
+  --muted: #6b7280;
+  --soft: #f3efe9;
+  --shadow: rgba(15, 23, 42, 0.08);
+  --accent: #f59e0b;
+}
+
+html.dark {
+  color-scheme: dark;
+  --page-bg: #0d1320;
+  --panel: rgba(15, 23, 42, 0.82);
+  --panel-strong: #111827;
+  --panel-subtle: #111827;
+  --border: rgba(148, 163, 184, 0.18);
+  --border-strong: rgba(148, 163, 184, 0.26);
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --soft: #0f172a;
+  --shadow: rgba(2, 6, 23, 0.4);
+  --accent: #f59e0b;
+}
+
 * { box-sizing: border-box; }
-body { font-family: 'Suisse Intl', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+html {
+  background: var(--page-bg);
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--page-bg);
+  color: var(--text);
+  font-family: 'Manrope', 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fade-down { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes fade-left { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
@@ -17,20 +62,21 @@ body { font-family: 'Suisse Intl', -apple-system, BlinkMacSystemFont, 'Segoe UI'
 
 @layer utilities {
   .glass-card {
-    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/40 dark:border-slate-800/60 shadow-xl shadow-slate-200/50 dark:shadow-none;
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-stone-200/80 dark:border-slate-800/70 shadow-[0_8px_24px_rgba(15,23,42,0.05)] dark:shadow-none;
   }
   .glass-input {
-    @apply bg-white/50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700/60 rounded-xl px-4 py-2.5 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 transition-all;
+    @apply bg-white/80 dark:bg-slate-900/80 border border-stone-200 dark:border-slate-700 rounded-2xl px-4 py-2.5 text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-3 focus:ring-amber-500/20 transition-all;
   }
   .gradient-btn-primary {
-    @apply bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 hover:from-indigo-500 hover:via-purple-500 hover:to-cyan-400 text-white font-medium shadow-lg shadow-indigo-500/25 transition-all duration-300 rounded-xl active:scale-95;
+    @apply bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-medium shadow-md shadow-amber-500/20 transition-all duration-300 rounded-xl active:scale-95;
   }
   .gradient-text {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 dark:from-indigo-400 dark:via-purple-400 dark:to-cyan-300;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-500 to-orange-500 dark:from-amber-400 dark:to-orange-300;
   }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 }
 
-/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -39,8 +85,8 @@ body { font-family: 'Suisse Intl', -apple-system, BlinkMacSystemFont, 'Segoe UI'
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  @apply bg-stone-300 dark:bg-slate-700 rounded-full;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400 dark:bg-slate-600;
+  @apply bg-stone-400 dark:bg-slate-600;
 }

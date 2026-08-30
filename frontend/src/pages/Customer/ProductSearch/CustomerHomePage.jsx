@@ -20,11 +20,11 @@ import {
   Tag,
   Filter
 } from 'lucide-react';
-import { productsAPI, communityAPI } from '../services/api';
-import ProductDetailModal from '../components/ProductDetailModal';
-import ShopDetailModal from '../components/ShopDetailModal';
-import ProductCompareModal from '../components/ProductCompareModal';
-import FilterDrawer from '../components/FilterDrawer';
+import { productsAPI, communityAPI } from '../../../services/api';
+import ProductDetailModal from '../../../components/ProductDetailModal';
+import ShopDetailModal from '../../../components/ShopDetailModal';
+import ProductCompareModal from '../../../components/ProductCompareModal';
+import FilterDrawer from '../../../components/FilterDrawer';
 
 // Seeded fallback data for seamless demo when backend is offline
 const FALLBACK_CATEGORIES = [

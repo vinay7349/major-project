@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowLeft, UserCheck, Mail, Phone, Save, CheckCircle2, ShieldCheck } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import CustomerDiscoveryHeader from '../components/CustomerDiscoveryHeader';
+import { useAuth } from '../../../context/AuthContext';
+import CustomerDiscoveryHeader from '../../../components/CustomerDiscoveryHeader';
 
 const CustomerProfilePage = () => {
   const { user, updateProfile } = useAuth();

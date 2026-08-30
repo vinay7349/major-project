@@ -1,32 +1,29 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { 
-  Search, 
-  Package, 
-  Store, 
-  MapPin, 
-  Star, 
-  SlidersHorizontal, 
-  X, 
-  CheckCircle, 
-  AlertTriangle, 
-  ArrowRight, 
-  ArrowLeftRight, 
-  Eye, 
-  Sparkles, 
+import {
+  Search,
+  Package,
+  Store,
+  MapPin,
+  Star,
+  SlidersHorizontal,
+  X,
+  CheckCircle,
+  AlertTriangle,
+  ArrowLeftRight,
+  Eye,
+  Sparkles,
   ShoppingBag,
   RefreshCw,
   ArrowUpDown,
-  Tag,
   Filter
 } from 'lucide-react';
-import { productsAPI, communityAPI } from '../services/api';
-import ProductDetailModal from '../components/ProductDetailModal';
-import ShopDetailModal from '../components/ShopDetailModal';
-import ProductCompareModal from '../components/ProductCompareModal';
-import FilterDrawer from '../components/FilterDrawer';
+import { productsAPI, communityAPI } from '../../../services/api';
+import ProductDetailModal from '../../../components/ProductDetailModal';
+import ShopDetailModal from '../../../components/ShopDetailModal';
+import ProductCompareModal from '../../../components/ProductCompareModal';
+import ProductFilters from './components/ProductFilters';
 
-// Seeded fallback data for seamless demo when backend is offline
 const FALLBACK_CATEGORIES = [
   { id: 1, name: 'Beverages & Drinks' },
   { id: 2, name: 'Snacks & Confectionery' },
@@ -182,13 +179,11 @@ const FALLBACK_SHOPS = [
   }
 ];
 
-const CustomerHomePage = () => {
+const ProductSearchPage = () => {
   const [products, setProducts] = useState([]);
   const [shops, setShops] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Search & Filter State
   const [search, setSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [onlyInStock, setOnlyInStock] = useState(false);
@@ -197,14 +192,11 @@ const CustomerHomePage = () => {
   const [minRating, setMinRating] = useState(0);
   const [sortBy, setSortBy] = useState('relevance');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-  // Modals & Comparison State
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selectedShopModal, setSelectedShopModal] = useState(null);
   const [compareList, setCompareList] = useState([]);
   const [isCompareModalOpen, setIsCompareModalOpen] = useState(false);
 
-  // Load Data from REST API (with Fallback fallback if offline)
   useEffect(() => {
     let isMounted = true;
     const loadDiscoveryData = async () => {
@@ -238,13 +230,11 @@ const CustomerHomePage = () => {
     };
 
     loadDiscoveryData();
-
     return () => {
       isMounted = false;
     };
   }, [search]);
 
-  // Client-side Filter Matrix & Sorting
   const filteredProducts = useMemo(() => {
     let list = products.filter((p) => {
       const pName = (p.name || '').toLowerCase();
@@ -252,29 +242,16 @@ const CustomerHomePage = () => {
       const pShop = (p.shop_name || '').toLowerCase();
       const query = search.toLowerCase().trim();
 
-      // Search matching (product name, category, shop name)
       const matchesSearch = !query || pName.includes(query) || pCat.includes(query) || pShop.includes(query);
-
-      // Category matching
-      const matchesCategory = selectedCategory === 'all' || 
-        (p.category_name || p.category || '').toLowerCase() === selectedCategory.toLowerCase();
-
-      // Stock filter
+      const matchesCategory = selectedCategory === 'all' || (p.category_name || p.category || '').toLowerCase() === selectedCategory.toLowerCase();
       const matchesStock = !onlyInStock || (p.stock_quantity ?? 10) > 0;
-
-      // Price filter
       const matchesPrice = Number(p.price || 0) <= maxPrice;
-
-      // Shop filter
       const matchesShop = selectedShop === 'all' || (p.shop_name || '').toLowerCase() === selectedShop.toLowerCase();
-
-      // Rating filter
       const matchesRating = minRating === 0 || (p.rating || 4.7) >= minRating;
 
       return matchesSearch && matchesCategory && matchesStock && matchesPrice && matchesShop && matchesRating;
     });
 
-    // Sorting logic
     if (sortBy === 'price-low') {
       list.sort((a, b) => Number(a.price || 0) - Number(b.price || 0));
     } else if (sortBy === 'price-high') {
@@ -288,7 +265,6 @@ const CustomerHomePage = () => {
     return list;
   }, [products, search, selectedCategory, onlyInStock, maxPrice, selectedShop, minRating, sortBy]);
 
-  // Toggle product in comparison list
   const toggleCompare = (product) => {
     if (compareList.some((item) => item.id === product.id)) {
       setCompareList(compareList.filter((item) => item.id !== product.id));
@@ -839,41 +815,21 @@ const CustomerHomePage = () => {
         </section>
       </main>
 
+      {selectedProduct && (
+        <ProductDetailModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+      )}
+      {selectedShopModal && (
+        <ShopDetailModal shop={selectedShopModal} onClose={() => setSelectedShopModal(null)} />
+      )}
       {compareList.length > 0 && (
-        <div className="fixed bottom-4 left-4 right-4 z-40 mx-auto max-w-3xl rounded-[24px] border border-amber-300/50 bg-white/95 p-4 shadow-[0_12px_32px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-amber-500/30 dark:bg-slate-900/95">
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-sm font-bold text-white">
-                {compareList.length}
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-900 dark:text-white">Compare products ({compareList.length}/3)</p>
-                <p className="hidden text-[11px] text-slate-500 dark:text-slate-400 sm:block">{compareList.map((p) => p.name).join(', ')}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setCompareList([])}
-                className="rounded-xl border border-stone-200 bg-stone-50 px-3 py-2 text-xs font-medium text-slate-600 transition-colors hover:bg-stone-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
-              >
-                Clear
-              </button>
-              <button
-                type="button"
-                onClick={() => setIsCompareModalOpen(true)}
-                className="flex items-center gap-1.5 rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-slate-700 dark:bg-amber-500 dark:text-slate-950 dark:hover:bg-amber-400"
-              >
-                <ArrowLeftRight className="h-4 w-4" />
-                Compare specs
-              </button>
-            </div>
-          </div>
-        </div>
+        <ProductCompareModal
+          compareList={compareList}
+          isOpen={isCompareModalOpen}
+          onClose={() => setIsCompareModalOpen(false)}
+        />
       )}
 
-      <FilterDrawer
+      <ProductFilters
         isOpen={isFilterOpen}
         onClose={() => setIsFilterOpen(false)}
         categories={categories}
@@ -890,34 +846,8 @@ const CustomerHomePage = () => {
         setMinRating={setMinRating}
         onReset={handleResetFilters}
       />
-
-      <ProductDetailModal
-        product={selectedProduct}
-        shop={shops.find((s) => s.name === selectedProduct?.shop_name)}
-        shops={shops}
-        onClose={() => setSelectedProduct(null)}
-        onViewShop={(shopToView) => setSelectedShopModal(shopToView)}
-      />
-
-      <ShopDetailModal
-        shop={selectedShopModal}
-        products={products}
-        onClose={() => setSelectedShopModal(null)}
-      />
-
-      {isCompareModalOpen && (
-        <ProductCompareModal
-          compareProducts={compareList}
-          onRemove={(id) => setCompareList(compareList.filter((p) => p.id !== id))}
-          onClear={() => {
-            setCompareList([]);
-            setIsCompareModalOpen(false);
-          }}
-          onClose={() => setIsCompareModalOpen(false)}
-        />
-      )}
     </div>
   );
 };
 
-export default CustomerHomePage;
+export default ProductSearchPage;
