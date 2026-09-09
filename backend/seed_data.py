@@ -1,5 +1,6 @@
 import os
 import sys
+# pyrefly: ignore [missing-import]
 import django
 import random
 from decimal import Decimal
@@ -9,6 +10,7 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'shopgenie.settings')
 django.setup()
 
+# pyrefly: ignore [missing-import]
 from django.contrib.auth import get_user_model
 from products.models import Category, Product
 from inventory.models import StockAlert, RestockLog

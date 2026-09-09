@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   if (allowedRoles && user?.role && !allowedRoles.includes(user.role)) {
     return (
       <div className="flex items-center justify-center min-h-[60vh] text-center p-8">
-        <div className="space-y-3">
+        <div className="space-y-3 3d-tilt">
           <div className="text-4xl">🔒</div>
           <h2 className="text-xl font-bold text-white">Access Restricted</h2>
           <p className="text-sm text-slate-400">
