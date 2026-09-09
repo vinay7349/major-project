@@ -17,7 +17,7 @@ const StatCard = ({
   borderHighlight,
 }) => {
   return (
-    <GlassCard className={`relative overflow-hidden ${borderHighlight ? `border-${borderHighlight}-500/30` : ''}`}>
+    <GlassCard className={`relative overflow-hidden 3d-tilt ${borderHighlight ? `border-${borderHighlight}-500/30` : ''}`}>
       <div className="flex items-center justify-between">
         <div className="space-y-2 flex-1 min-w-0 pr-4">
           <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate">
@@ -40,7 +40,7 @@ const StatCard = ({
         </div>
 
         {Icon && (
-          <div className={`w-12 h-12 rounded-2xl ${iconBg} border flex items-center justify-center flex-shrink-0`}>
+          <div className={`w-12 h-12 rounded-2xl ${iconBg} border flex items-center justify-center flex-shrink-0 3d-icon`}>
             <Icon className={`w-6 h-6 ${iconColor}`} />
           </div>
         )}
