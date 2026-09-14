@@ -3,6 +3,7 @@ import { Package } from 'lucide-react';
 
 /**
  * EmptyState – Used when a list has no items to show.
+ * Enhanced with 3D effects
  */
 const EmptyState = ({
   icon: Icon = Package,
@@ -11,15 +12,15 @@ const EmptyState = ({
   action,
 }) => {
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-6 text-center space-y-4">
-      <div className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800/60 flex items-center justify-center">
+    <div className="flex flex-col items-center justify-center py-16 px-6 text-center space-y-4 3d-tilt">
+      <div className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800/60 flex items-center justify-center 3d-icon">
         <Icon className="w-8 h-8 text-slate-400" />
       </div>
       <div className="space-y-1">
         <h3 className="text-base font-bold text-slate-700 dark:text-slate-200">{title}</h3>
         <p className="text-xs text-slate-400 max-w-xs leading-relaxed">{description}</p>
       </div>
-      {action && <div className="pt-2">{action}</div>}
+      {action && <div className="pt-2 3d-badge">{action}</div>}
     </div>
   );
 };

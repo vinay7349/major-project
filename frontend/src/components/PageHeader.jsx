@@ -13,10 +13,10 @@ const PageHeader = ({ title, subtitle, badge, badgeColor = 'indigo', children })
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <div className="3d-header flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
       <div className="space-y-1">
         {badge && (
-          <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-semibold ${colorMap[badgeColor] || colorMap.indigo}`}>
+          <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-semibold 3d-badge ${colorMap[badgeColor] || colorMap.indigo}`}>
             {badge}
           </div>
         )}
