@@ -32,7 +32,7 @@ const RegisterPage = () => {
     const res = await register(formData);
     if (res.success) {
       addToast('Registration complete! Please sign in with your new account.', 'success', 'Account Created');
-      navigate(`/login${isCustomer ? '?role=customer' : ''}`);
+      navigate('/customer/login');
     } else {
       addToast('Registration error. Please check your form fields.', 'error');
     }
@@ -159,7 +159,7 @@ const RegisterPage = () => {
             </button>
           </form>
           </div>
-          <div className="border-t border-slate-200 px-6 py-6 text-center text-sm text-slate-500 sm:px-12">Already have an account? <NavLink to={`/login${isCustomer ? '?role=customer' : ''}`} className="font-semibold text-[#2563EB] hover:text-[#6C3BFF]">Sign in</NavLink></div>
+          <div className="border-t border-slate-200 px-6 py-6 text-center text-sm text-slate-500 sm:px-12">Already have an account? <NavLink to="/customer/login" className="font-semibold text-[#2563EB] hover:text-[#6C3BFF]">Sign in</NavLink></div>
         </div>
       </section>
     </div>

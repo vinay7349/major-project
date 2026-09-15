@@ -13,7 +13,6 @@ import CustomerLayout from './layouts/CustomerLayout';
 import LandingPage from './pages/Public/Landing/LandingPage';
 import AboutPage from './pages/Public/About/AboutPage';
 import FeaturesPage from './pages/Public/Features/FeaturesPage';
-import LoginPage from './pages/Public/Login/LoginPage';
 import RegisterPage from './pages/Public/Register/RegisterPage';
 import ForgotPasswordPage from './pages/Public/ForgotPassword/ForgotPasswordPage';
 
@@ -50,7 +49,6 @@ function App() {
                 <Route index element={<LandingPage />} />
                 <Route path="about" element={<AboutPage />} />
                 <Route path="features" element={<FeaturesPage />} />
-                <Route path="login" element={<LoginPage />} />
                 <Route path="register" element={<RegisterPage />} />
                 <Route path="forgot-password" element={<ForgotPasswordPage />} />
               </Route>

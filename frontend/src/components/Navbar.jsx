@@ -104,7 +104,7 @@ const Navbar = ({ onOpenVoice, onToggleSidebar, isSidebarOpen }) => {
                 onClick={() => {
                   setShowDropdown(false);
                   logout();
-                  navigate('/login');
+                  navigate('/customer/login');
                 }}
                 className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-rose-500 hover:bg-rose-500/10 rounded-xl transition-colors"
               >

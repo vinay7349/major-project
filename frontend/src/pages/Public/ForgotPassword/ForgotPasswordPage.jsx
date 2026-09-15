@@ -63,7 +63,7 @@ const ForgotPasswordPage = () => {
         </GlassCard>
 
         <div className="text-center">
-          <NavLink to="/login" className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-400 hover:text-indigo-300">
+          <NavLink to="/customer/login" className="inline-flex items-center gap-2 text-xs font-semibold text-indigo-400 hover:text-indigo-300">
             <ArrowLeft className="w-4 h-4" /> Back to Login
           </NavLink>
         </div>
