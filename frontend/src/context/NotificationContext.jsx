@@ -60,4 +60,21 @@ export const NotificationProvider = ({ children }) => {
   );
 };
 
-export const useToast = () => useContext(NotificationContext);
+export const useToast = () => {
+  const context = useContext(NotificationContext);
+  if (!context) {
+    return {
+      addToast: () => {},
+      removeToast: () => {},
+      success: () => {},
+      error: () => {},
+      info: () => {},
+    };
+  }
+  return {
+    ...context,
+    success: (msg, title) => context.addToast(msg, 'success', title),
+    error: (msg, title) => context.addToast(msg, 'error', title),
+    info: (msg, title) => context.addToast(msg, 'info', title),
+  };
+};

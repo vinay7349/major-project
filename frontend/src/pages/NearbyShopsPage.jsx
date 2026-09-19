@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Store, MapPin, Star, Phone, MessageSquare, Plus, ThumbsUp } from 'lucide-react';
-import { communityAPI } from '../services/api';
+import { Store, MapPin, Star, Phone, MessageSquare, Plus, ChevronDown } from 'lucide-react';
+import { communityAPI, productsAPI } from '../services/api';
 import GlassCard from '../components/GlassCard';
+import ShopCard from '../components/ShopCard';
+import ShopDetailDrawer from '../components/ShopDetailDrawer';
+import LocationSelector from '../components/LocationSelector';
+import MapDrawer from '../components/MapDrawer';
+import { LocationProvider, useLocationContext } from '../context/LocationContext';
 import { useToast } from '../context/NotificationContext';
 
 const NearbyShopsPage = () => {
@@ -12,6 +17,21 @@ const NearbyShopsPage = () => {
   const [authorName, setAuthorName] = useState('Local Retailer');
   const [rating, setRating] = useState(5);
   const { addToast } = useToast();
+  const { radius, setRadius, lat, lng } = useLocationContext();
+  const [selectedShop, setSelectedShop] = useState(null);
+  const [allProducts, setAllProducts] = useState([]);
+  const [showMap, setShowMap] = useState(false);
+
+  // Listen for map marker clicks to open shop drawer
+  useEffect(() => {
+    const handler = (e) => {
+      const shopId = e.detail;
+      const shop = shops.find((s) => s.id === shopId);
+      if (shop) setSelectedShop(shop);
+    };
+    window.addEventListener('openShop', handler);
+    return () => window.removeEventListener('openShop', handler);
+  }, [shops]);
 
   useEffect(() => {
     fetchNetworkData();
@@ -20,12 +40,14 @@ const NearbyShopsPage = () => {
   const fetchNetworkData = async () => {
     setLoading(true);
     try {
-      const [shopRes, revRes] = await Promise.all([
+      const [shopRes, revRes, productRes] = await Promise.all([
         communityAPI.getNearbyShops(),
         communityAPI.getReviews(),
+        productsAPI.getAll(),
       ]);
       setShops(shopRes.data.results || shopRes.data || []);
       setReviews(revRes.data.results || revRes.data || []);
+      setAllProducts(productRes.data.results || productRes.data || []);
     } catch (err) {
       console.error(err);
       setShops([
@@ -79,29 +101,19 @@ const NearbyShopsPage = () => {
           Locate neighboring merchant inventories, check ratings, and share product feedback.
         </p>
       </div>
-
+      <LocationSelector />
+      <button onClick={() => setShowMap(true)} className="ml-2 px-3 py-1 bg-amber-500 text-white rounded-lg hover:bg-amber-600">Show Map</button>
       {/* Nearby Shop Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {shops.map((shop) => (
-          <GlassCard key={shop.id} className="bg-slate-900/60 border-slate-800 space-y-3">
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="px-2 py-0.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-[10px] font-bold">
-                  {shop.category}
-                </span>
-                <h3 className="font-bold text-white text-base mt-1">{shop.name}</h3>
-                <p className="text-xs text-slate-400">Owner: {shop.owner_name}</p>
-              </div>
-              <span className="flex items-center gap-1 text-amber-400 text-xs font-bold bg-amber-500/10 px-2 py-1 rounded-lg">
-                <Star className="w-3.5 h-3.5 fill-amber-400" /> {shop.rating}
-              </span>
-            </div>
-
-            <div className="space-y-1 text-xs text-slate-400 border-t border-slate-800 pt-3">
-              <p className="flex items-center gap-2"><MapPin className="w-3.5 h-3.5 text-cyan-400" /> {shop.address} ({shop.distance_km} km)</p>
-              <p className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-emerald-400" /> {shop.phone}</p>
-            </div>
-          </GlassCard>
+          <ShopCard
+            key={shop.id}
+            shop={shop}
+            onSelect={setSelectedShop}
+            onFollow={(shopId) => {
+              addToast('Follow action requires login', 'info');
+            }}
+          />
         ))}
       </div>
 
@@ -158,6 +170,13 @@ const NearbyShopsPage = () => {
         </div>
       </GlassCard>
     </div>
+        {selectedShop && (
+          <ShopDetailDrawer
+            shop={selectedShop}
+            products={allProducts.filter((p) => p.shop === selectedShop.id || p.shop_name === selectedShop.name)}
+            onClose={() => setSelectedShop(null)}
+          />
+        )}
   );
 };
 

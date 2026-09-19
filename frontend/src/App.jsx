@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
+import { LocationProvider } from './context/LocationContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { NotificationProvider } from './context/NotificationContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -18,7 +21,8 @@ import ForgotPasswordPage from './pages/Public/ForgotPassword/ForgotPasswordPage
 
 // Customer pages
 import CustomerLoginPage from './pages/Customer/Login/CustomerLoginPage';
-import CustomerHomePage from './pages/Customer/ProductSearch/CustomerHomePage';
+import ProductDiscoveryPage from './pages/Customer/ProductSearch/ProductDiscoveryPage';
+import ProductDiscoveryPageV2 from './pages/Customer/ProductSearch/ProductDiscoveryPageV2';
 import CustomerProfilePage from './pages/Customer/Profile/CustomerProfilePage';
 
 // Shop Owner pages
@@ -42,7 +46,10 @@ function App() {
     <ThemeProvider>
       <NotificationProvider>
         <AuthProvider>
-          <BrowserRouter>
+        <CartProvider>
+          <WishlistProvider>
+            <LocationProvider>
+              <BrowserRouter>
             <Routes>
               {/* Public Routes with Landing Header & Navbar */}
               <Route path="/" element={<MainLayout />}>
@@ -58,7 +65,7 @@ function App() {
 
               {/* Dedicated Customer Portal Routes with Customer Header Layout */}
               <Route path="/customer" element={<CustomerLayout />}>
-                <Route index element={<CustomerHomePage />} />
+                <Route index element={<ProductDiscoveryPageV2 />} />
                 <Route path="profile" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><CustomerProfilePage /></ProtectedRoute>} />
               </Route>
 
@@ -92,8 +99,11 @@ function App() {
               {/* Fallback redirect */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-          </BrowserRouter>
-        </AuthProvider>
+              </BrowserRouter>
+            </LocationProvider>
+          </WishlistProvider>
+        </CartProvider>
+      </AuthProvider>
       </NotificationProvider>
     </ThemeProvider>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   ShoppingBag, MapPin, Mail, Lock, Eye, EyeOff,
   Sparkles, Zap, Package, Search, ShieldCheck,
@@ -15,13 +15,15 @@ const CustomerLoginPage = () => {
   const { login, loading } = useAuth();
   const { addToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location.state?.from || '/customer';
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const result = await login(email, password, 'customer');
     if (result.success) {
       addToast(`Welcome to ShopGenie, ${result.user.username || 'Customer'}!`, 'success', 'Sign In Successful');
-      navigate('/customer');
+      navigate(redirectTo, { replace: true });
     } else {
       addToast('Sign in failed. Try using demo customer access below.', 'error', 'Authentication Failed');
     }
@@ -31,33 +33,36 @@ const CustomerLoginPage = () => {
     const result = await login('demo_customer', 'customer123', 'customer');
     if (result.success) {
       addToast('Signed in as Demo Customer!', 'success', 'Demo Session Started');
-      navigate('/customer');
+      navigate(redirectTo, { replace: true });
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#eef3fb] via-[#f6f7fc] to-[#eaeef9] text-slate-900 font-sans relative overflow-hidden flex flex-col dark:from-[#0b1220] dark:via-[#0d1526] dark:to-[#0a1019] dark:text-slate-100 transition-colors duration-300">
-      {/* Ambient light blobs */}
-      <div className="absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-blue-300/25 blur-3xl pointer-events-none dark:bg-blue-500/10" />
-      <div className="absolute top-1/3 -right-40 w-[480px] h-[480px] rounded-full bg-indigo-300/20 blur-3xl pointer-events-none dark:bg-indigo-500/10" />
-      <div className="absolute -bottom-40 left-1/4 w-[380px] h-[380px] rounded-full bg-sky-200/30 blur-3xl pointer-events-none dark:bg-sky-500/10" />
+    <div className="min-h-screen bg-[#f8f5f1] text-slate-900 font-sans relative overflow-hidden flex flex-col dark:bg-[#0d1320] dark:text-slate-100 transition-colors duration-300">
+      {/* Ambient warm blobs matching ShopGenie palette */}
+      <div className="absolute -top-32 -left-32 w-[420px] h-[420px] rounded-full bg-amber-200/20 blur-3xl pointer-events-none dark:bg-amber-500/5" />
+      <div className="absolute top-1/3 -right-40 w-[480px] h-[480px] rounded-full bg-orange-200/20 blur-3xl pointer-events-none dark:bg-orange-500/5" />
+      <div className="absolute -bottom-40 left-1/4 w-[380px] h-[380px] rounded-full bg-amber-100/30 blur-3xl pointer-events-none dark:bg-amber-500/5" />
 
       {/* Top brand bar */}
-      <header className="relative z-20 w-full border-b border-slate-900/5 bg-white/60 backdrop-blur-xl dark:border-white/10 dark:bg-slate-950/60">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-          <NavLink to="/" className="flex items-center gap-3">
-            <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/20">
-              <Sparkles className="h-5 w-5 text-white" />
+      <header className="relative z-20 w-full border-b border-stone-200/80 bg-[#f8f5f1]/90 backdrop-blur-xl dark:border-slate-800 dark:bg-slate-950/80">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6 lg:px-8">
+          <NavLink to="/customer" className="flex items-center gap-3">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#f59e0b] text-white shadow-sm shadow-amber-500/25 ring-4 ring-amber-500/10">
+              <Sparkles className="h-4 w-4" />
             </div>
-            <div>
+            <div className="leading-none">
               <div className="flex items-center gap-2">
-                <span className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">ShopGenie</span>
-                <span className="rounded-full bg-blue-600/10 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700 border border-blue-600/20 dark:bg-blue-500/15 dark:text-blue-300 dark:border-blue-500/30">
-                  Customer Portal
+                <span className="text-[17px] font-bold tracking-tight text-slate-900 dark:text-white">ShopGenie</span>
+                <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.12em] text-amber-700 dark:text-amber-300">
+                  Local
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">Find products &amp; local shops near you</p>
+              <p className="mt-0.5 text-[10px] text-slate-500 dark:text-slate-400">Find products &amp; local shops near you</p>
             </div>
+          </NavLink>
+          <NavLink to="/customer" className="text-xs font-semibold text-slate-500 hover:text-amber-600 dark:text-slate-400 dark:hover:text-amber-400 transition-colors">
+            ← Back to discovery
           </NavLink>
         </div>
       </header>
@@ -134,17 +139,17 @@ const CustomerLoginPage = () => {
 
           {/* Right Column: Customer Authentication Card */}
           <div className="lg:col-span-5">
-            <div className="rounded-[28px] border border-white/70 bg-white/80 backdrop-blur-2xl p-6 sm:p-9 shadow-[0_40px_90px_-30px_rgba(79,70,229,0.35)] space-y-6 relative overflow-hidden dark:border-white/10 dark:bg-slate-900/70 dark:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.7)]">
+            <div className="rounded-[28px] border border-stone-200 bg-white/90 backdrop-blur-2xl p-6 sm:p-9 shadow-[0_40px_90px_-30px_rgba(245,158,11,0.2)] space-y-6 relative overflow-hidden dark:border-slate-700 dark:bg-slate-900/80 dark:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.7)]">
               <div className="absolute top-0 right-0 w-40 h-40 rounded-full bg-gradient-to-br from-blue-500/10 to-violet-500/10 pointer-events-none" />
 
               <div>
                 <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 text-white shadow-lg shadow-indigo-500/25">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#f59e0b] text-white shadow-lg shadow-amber-500/25">
                     <ShoppingBag className="h-5 w-5" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Customer Sign In</h2>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Access your saved items &amp; customer profile</p>
+                    <h2 className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Sign in to ShopGenie</h2>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Access saved shops, products &amp; your cart</p>
                   </div>
                 </div>
               </div>
@@ -153,9 +158,8 @@ const CustomerLoginPage = () => {
               <button
                 onClick={handleDemoCustomerLogin}
                 type="button"
-                className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-indigo-500/30 bg-gradient-to-r from-blue-600/10 via-indigo-600/10 to-violet-600/10 py-3 px-4 text-xs font-bold text-indigo-700 hover:border-indigo-500/60 hover:from-blue-600/15 hover:to-violet-600/15 hover:text-indigo-800 transition-all shadow-sm dark:text-indigo-300 dark:hover:text-indigo-200"
-              >
-                <Zap className="h-4 w-4 text-indigo-500 fill-indigo-500 dark:text-indigo-400 dark:fill-indigo-400" />
+                className="w-full flex items-center justify-center gap-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 py-3 px-4 text-xs font-bold text-amber-700 hover:border-amber-500/60 hover:bg-amber-500/15 hover:text-amber-800 transition-all shadow-sm dark:text-amber-300 dark:hover:text-amber-200">
+                <Zap className="h-4 w-4 text-amber-600 fill-amber-500 dark:text-amber-400 dark:fill-amber-400" />
                 <span>Continue with 1-Click Demo Customer</span>
               </button>
 
@@ -180,7 +184,7 @@ const CustomerLoginPage = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="customer@example.com"
-                      className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/15 transition-all shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder-slate-500"
+                      className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/15 transition-all shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder-slate-500"
                     />
                   </div>
                 </div>
@@ -192,7 +196,7 @@ const CustomerLoginPage = () => {
                     </label>
                     <NavLink
                       to="/forgot-password"
-                      className="text-xs font-medium text-indigo-600 hover:text-indigo-500 transition-colors dark:text-indigo-400 dark:hover:text-indigo-300"
+                      className="text-xs font-medium text-amber-600 hover:text-amber-500 transition-colors dark:text-amber-400 dark:hover:text-amber-300"
                     >
                       Forgot password?
                     </NavLink>
@@ -205,7 +209,7 @@ const CustomerLoginPage = () => {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       placeholder="••••••••"
-                      className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-10 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none focus:border-indigo-500/60 focus:ring-2 focus:ring-indigo-500/15 transition-all shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder-slate-500"
+                      className="h-12 w-full rounded-xl border border-slate-200 bg-white pl-10 pr-10 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none focus:border-amber-500/60 focus:ring-2 focus:ring-amber-500/15 transition-all shadow-sm dark:border-slate-700 dark:bg-slate-800 dark:text-white dark:placeholder-slate-500"
                     />
                     <button
                       type="button"
@@ -220,9 +224,9 @@ const CustomerLoginPage = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full h-12 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-xs sm:text-sm font-bold hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30 disabled:opacity-50"
+                  className="w-full h-12 rounded-xl bg-slate-900 text-white text-xs sm:text-sm font-bold hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20 hover:shadow-xl disabled:opacity-50 dark:bg-amber-500 dark:text-slate-950 dark:hover:bg-amber-400"
                 >
-                  {loading ? 'Signing In...' : 'Sign In as Customer'}
+                  {loading ? 'Signing In...' : 'Sign In'}
                 </button>
               </form>
 
@@ -231,7 +235,7 @@ const CustomerLoginPage = () => {
                   New to ShopGenie?{' '}
                   <NavLink
                     to="/register?role=customer"
-                    className="font-bold text-indigo-600 hover:text-indigo-500 transition-colors"
+                    className="font-bold text-amber-600 hover:text-amber-500 transition-colors dark:text-amber-400"
                   >
                     Create Customer Account
                   </NavLink>

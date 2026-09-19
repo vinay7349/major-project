@@ -15,6 +15,8 @@ export default {
           600: '#0284c7',
           700: '#0369a1',
         },
+        'forest-green': '#14533b',
+        'muted-sage': '#cbd5c0',
         genie: {
           purple: '#6366f1',
           cyan: '#06b6d4',

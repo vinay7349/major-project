@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
-from .models import ProductReview, NearbyShop
-from .serializers import ProductReviewSerializer, NearbyShopSerializer
+from .models import ProductReview, NearbyShop, CommunityPost, CommunityComment
+from .serializers import ProductReviewSerializer, NearbyShopSerializer, CommunityPostSerializer, CommunityCommentSerializer
 
 class ProductReviewListCreateView(generics.ListCreateAPIView):
     serializer_class = ProductReviewSerializer
@@ -16,4 +16,15 @@ class ProductReviewListCreateView(generics.ListCreateAPIView):
 class NearbyShopListView(generics.ListAPIView):
     queryset = NearbyShop.objects.all()
     serializer_class = NearbyShopSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class CommunityPostListCreateView(generics.ListCreateAPIView):
+    serializer_class = CommunityPostSerializer
+    permission_classes = [permissions.AllowAny]
+    queryset = CommunityPost.objects.select_related('shop').prefetch_related('comments').all()
+
+
+class CommunityCommentCreateView(generics.CreateAPIView):
+    serializer_class = CommunityCommentSerializer
     permission_classes = [permissions.AllowAny]
