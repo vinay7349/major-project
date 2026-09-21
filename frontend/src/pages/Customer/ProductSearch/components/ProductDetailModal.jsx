@@ -94,12 +94,12 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-slate-950/85 backdrop-blur-md animate-fade-scale">
-      <div className="relative w-full max-w-3xl rounded-3xl border border-white/10 bg-slate-900/95 p-6 sm:p-8 shadow-2xl text-white my-8 max-h-[90vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto bg-navy/85 backdrop-blur-md animate-fade-scale">
+      <div className="relative w-full max-w-3xl rounded-3xl border border-white/10 bg-charcoal/95 p-6 sm:p-8 shadow-2xl text-white my-8 max-h-[90vh] overflow-y-auto">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute right-5 top-5 p-2 rounded-full bg-white/10 text-slate-300 hover:bg-white/20 hover:text-white transition-all"
+          className="absolute right-5 top-5 p-2 rounded-full bg-white/10 text-slate/60 hover:bg-white/20 hover:text-white transition-all"
         >
           <X className="h-5 w-5" />
         </button>
@@ -107,7 +107,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
         {/* Modal Main Grid */}
         <div className="grid gap-6 md:grid-cols-12">
           {/* Product Image */}
-          <div className="md:col-span-5 relative overflow-hidden rounded-2xl border border-white/10 bg-slate-950/50 aspect-square flex items-center justify-center">
+          <div className="md:col-span-5 relative overflow-hidden rounded-2xl border border-white/10 bg-navy/50 aspect-square flex items-center justify-center">
             <img
               src={imageUrl}
               alt={product.name}
@@ -116,7 +116,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
                 e.target.src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80';
               }}
             />
-            <span className="absolute top-3 left-3 rounded-full bg-slate-950/80 px-3 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-md border border-cyan-500/20">
+            <span className="absolute top-3 left-3 rounded-full bg-navy/80 px-3 py-1 text-xs font-semibold text-cyan-300 backdrop-blur-md border border-amber/20">
               {product.category_name || product.category || 'General'}
             </span>
             <span className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-cyan-500 to-indigo-600 px-2.5 py-0.5 text-[10px] font-bold text-white shadow-md">
@@ -127,7 +127,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
           {/* Product Info */}
           <div className="md:col-span-7 flex flex-col justify-between space-y-4">
             <div>
-              <div className="flex items-center gap-2 text-xs font-medium text-slate-400">
+              <div className="flex items-center gap-2 text-xs font-medium text-slate/80">
                 <Store className="h-3.5 w-3.5 text-cyan-400" />
                 <span>Sold by: <strong className="text-white">{mainShopName}</strong></span>
               </div>
@@ -136,12 +136,12 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
               <div className="mt-3 flex items-center gap-3">
                 <span className="text-3xl font-extrabold text-cyan-300">{displayPrice}</span>
                 {isAvailable ? (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2.5 py-1 text-xs font-semibold text-emerald-400 border border-emerald-500/20">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-mutedgreen/10 px-2.5 py-1 text-xs font-semibold text-emerald-400 border border-mutedgreen/20">
                     <CheckCircle className="h-3.5 w-3.5" />
                     <span>In Stock ({product.stock_quantity || 'Available'})</span>
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 rounded-full bg-rose-500/10 px-2.5 py-1 text-xs font-semibold text-rose-400 border border-rose-500/20">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-red/10 px-2.5 py-1 text-xs font-semibold text-rose-400 border border-red/20">
                     <AlertTriangle className="h-3.5 w-3.5" />
                     <span>Out of Stock</span>
                   </span>
@@ -149,12 +149,12 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
               </div>
             </div>
 
-            <div className="space-y-2 border-t border-white/10 pt-4 text-xs text-slate-300">
-              <p className="leading-relaxed text-slate-300">
+            <div className="space-y-2 border-t border-white/10 pt-4 text-xs text-slate/60">
+              <p className="leading-relaxed text-slate/60">
                 {product.description || 'Premium local product available for discovery, price check, and in-person purchase at nearby shops.'}
               </p>
               
-              <div className="flex flex-wrap gap-4 pt-2 text-slate-400 font-mono text-[11px]">
+              <div className="flex flex-wrap gap-4 pt-2 text-slate/80 font-mono text-[11px]">
                 {product.sku && (
                   <div className="flex items-center gap-1.5">
                     <Tag className="h-3.5 w-3.5 text-cyan-400" />
@@ -170,7 +170,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
               </div>
             </div>
 
-            <div className="rounded-xl border border-cyan-500/20 bg-cyan-500/10 p-3 text-xs text-cyan-200 flex items-start gap-2.5">
+            <div className="rounded-xl border border-amber/20 bg-amber/10 p-3 text-xs text-cyan-200 flex items-start gap-2.5">
               <ShieldAlert className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
               <span>ShopGenie connects you directly with nearby sellers. Visit <strong>{mainShopName}</strong> for physical inspection & purchase.</span>
             </div>
@@ -184,7 +184,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
               <MapPin className="h-4 w-4 text-cyan-400" />
               <span>Available at Nearby Local Shops</span>
             </h3>
-            <span className="text-xs text-slate-400">Compare pricing & distance</span>
+            <span className="text-xs text-slate/80">Compare pricing & distance</span>
           </div>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -198,7 +198,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
                     <Store className="h-4 w-4 text-indigo-400" />
                     <span className="text-xs font-bold text-white">{seller.name}</span>
                   </div>
-                  <div className="mt-1 flex items-center gap-3 text-[11px] text-slate-400">
+                  <div className="mt-1 flex items-center gap-3 text-[11px] text-slate/80">
                     <span className="flex items-center gap-1">
                       <MapPin className="h-3 w-3 text-cyan-400" />
                       {seller.distance_km || 0.8} km away
@@ -216,7 +216,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
                       onClose();
                       onViewShop(seller);
                     }}
-                    className="flex items-center gap-1 rounded-xl bg-cyan-500/20 px-3 py-1.5 text-xs font-semibold text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500 hover:text-slate-950 transition-all"
+                    className="flex items-center gap-1 rounded-xl bg-amber/20 px-3 py-1.5 text-xs font-semibold text-cyan-300 border border-amber/30 hover:bg-amber hover:text-slate-950 transition-all"
                   >
                     <span>View Shop</span>
                     <ArrowRight className="h-3 w-3" />
@@ -234,47 +234,47 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
               <MessageSquare className="h-4 w-4 text-cyan-400" />
               <span>Customer Reviews & Ratings</span>
             </h3>
-            <span className="text-xs text-slate-400">{reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}</span>
+            <span className="text-xs text-slate/80">{reviews.length} {reviews.length === 1 ? 'review' : 'reviews'}</span>
           </div>
 
           {/* Reviews List */}
           <div className="mt-4 space-y-3 max-h-44 overflow-y-auto pr-1">
             {loadingReviews ? (
-              <p className="text-xs text-slate-400 animate-pulse">Loading customer feedback...</p>
+              <p className="text-xs text-slate/80 animate-pulse">Loading customer feedback...</p>
             ) : reviews.length > 0 ? (
               reviews.map((rev, idx) => (
                 <div key={rev.id || idx} className="rounded-xl border border-white/5 bg-white/[0.03] p-3">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="font-semibold text-slate-200">{rev.author_name || 'Verified Customer'}</span>
+                    <span className="font-semibold text-slate/60">{rev.author_name || 'Verified Customer'}</span>
                     <div className="flex items-center text-amber-400 text-xs">
                       {'★'.repeat(rev.rating || 5)}
                     </div>
                   </div>
-                  <p className="mt-1 text-xs text-slate-300 leading-normal">{rev.comment}</p>
+                  <p className="mt-1 text-xs text-slate/60 leading-normal">{rev.comment}</p>
                 </div>
               ))
             ) : (
-              <p className="text-xs text-slate-400">No reviews yet for this product. Be the first to leave a review!</p>
+              <p className="text-xs text-slate/80">No reviews yet for this product. Be the first to leave a review!</p>
             )}
           </div>
 
           {/* Add Review Form */}
           <form onSubmit={handleAddReview} className="mt-5 space-y-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
-            <h4 className="text-xs font-semibold text-slate-200">Write a Review</h4>
+            <h4 className="text-xs font-semibold text-slate/60">Write a Review</h4>
             <div className="grid gap-3 sm:grid-cols-2">
               <input
                 type="text"
                 placeholder="Your Name (e.g., Sarah J.)"
                 value={authorName}
                 onChange={(e) => setAuthorName(e.target.value)}
-                className="h-10 rounded-xl border border-white/10 bg-slate-950/60 px-3 text-xs text-white placeholder-slate-500 outline-none focus:border-cyan-500/50"
+                className="h-10 rounded-xl border border-white/10 bg-navy/60 px-3 text-xs text-white placeholder-slate-500 outline-none focus:border-amber/50"
               />
-              <div className="flex items-center gap-2 text-xs text-slate-300">
+              <div className="flex items-center gap-2 text-xs text-slate/60">
                 <span>Rating:</span>
                 <select
                   value={newRating}
                   onChange={(e) => setNewRating(Number(e.target.value))}
-                  className="h-10 rounded-xl border border-white/10 bg-slate-950/60 px-3 text-xs text-amber-400 outline-none focus:border-cyan-500/50"
+                  className="h-10 rounded-xl border border-white/10 bg-navy/60 px-3 text-xs text-amber-400 outline-none focus:border-amber/50"
                 >
                   <option value={5}>⭐⭐⭐⭐⭐ (5/5)</option>
                   <option value={4}>⭐⭐⭐⭐ (4/5)</option>
@@ -289,7 +289,7 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
               placeholder="Share your experience with this product..."
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
-              className="w-full rounded-xl border border-white/10 bg-slate-950/60 p-3 text-xs text-white placeholder-slate-500 outline-none focus:border-cyan-500/50"
+              className="w-full rounded-xl border border-white/10 bg-navy/60 p-3 text-xs text-white placeholder-slate-500 outline-none focus:border-amber/50"
             />
             <div className="flex items-center justify-between">
               <button
@@ -308,3 +308,6 @@ const ProductDetailModal = ({ product, shop, shops = [], onClose, onViewShop }) 
 };
 
 export default ProductDetailModal;
+
+
+

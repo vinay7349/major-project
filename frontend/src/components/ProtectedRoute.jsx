@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
         <div className="space-y-3 3d-tilt">
           <div className="text-4xl">🔒</div>
           <h2 className="text-xl font-bold text-white">Access Restricted</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate/80">
             Your role ({user.role}) does not have permission to access this module.
           </p>
         </div>
@@ -32,3 +32,4 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 };
 
 export default ProtectedRoute;
+

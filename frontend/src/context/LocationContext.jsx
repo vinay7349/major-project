@@ -13,12 +13,14 @@ const LocationContext = createContext({
 export const LocationProvider = ({ children }) => {
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
-  const [radius, setRadius] = useState(5);
-  const [areaName, setAreaName] = useState('');
+  const [radius, setRadius] = useState(() => {
+    const storedRadius = Number(localStorage.getItem('shopgenie_discovery_radius'));
+    return Number.isFinite(storedRadius) && storedRadius > 0 ? storedRadius : 5;
+  });
+  const [areaName, setAreaName] = useState(() => localStorage.getItem('shopgenie_discovery_area') || '');
 
-  // Try to get geolocation on mount
   useEffect(() => {
-    if (navigator.geolocation) {
+    if (!areaName && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setLat(position.coords.latitude);
@@ -31,6 +33,11 @@ export const LocationProvider = ({ children }) => {
       );
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('shopgenie_discovery_area', areaName);
+    localStorage.setItem('shopgenie_discovery_radius', String(radius));
+  }, [areaName, radius]);
 
   const setLocation = (newLat, newLng, name = '') => {
     setLat(newLat);

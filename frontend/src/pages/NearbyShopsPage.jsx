@@ -91,18 +91,18 @@ const NearbyShopsPage = () => {
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
       <div>
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-2">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber/10 border border-amber/30 text-cyan-400 text-xs font-semibold mb-2">
           <Store className="w-3.5 h-3.5" /> Neighborhood Merchant Network
         </div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-white">
+        <h1 className="text-3xl font-extrabold tracking-tight text-charcoal dark:text-white">
           Community Retail Network & Nearby Shops
         </h1>
-        <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
+        <p className="text-slate dark:text-slate/80 text-xs mt-1">
           Locate neighboring merchant inventories, check ratings, and share product feedback.
         </p>
       </div>
       <LocationSelector />
-      <button onClick={() => setShowMap(true)} className="ml-2 px-3 py-1 bg-amber-500 text-white rounded-lg hover:bg-amber-600">Show Map</button>
+      <button onClick={() => setShowMap(true)} className="ml-2 px-3 py-1 bg-amber text-white rounded-lg hover:bg-amber">Show Map</button>
       {/* Nearby Shop Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {shops.map((shop) => (
@@ -118,25 +118,25 @@ const NearbyShopsPage = () => {
       </div>
 
       {/* Community Reviews & Feedback */}
-      <GlassCard className="border-slate-800 space-y-6">
-        <h3 className="font-bold text-slate-100 text-base flex items-center gap-2">
+      <GlassCard className="border-charcoal space-y-6">
+        <h3 className="font-bold text-slate/60 text-base flex items-center gap-2">
           <MessageSquare className="w-5 h-5 text-indigo-400" /> Community Product Reviews & Ratings
         </h3>
 
         {/* New Review Form */}
-        <form onSubmit={handlePostReview} className="space-y-3 bg-slate-900/80 p-4 rounded-2xl border border-slate-800 text-xs">
+        <form onSubmit={handlePostReview} className="space-y-3 bg-charcoal/80 p-4 rounded-2xl border border-charcoal text-xs">
           <div className="grid grid-cols-2 gap-3">
             <input
               type="text"
               placeholder="Your Name"
               value={authorName}
               onChange={(e) => setAuthorName(e.target.value)}
-              className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white"
+              className="px-3 py-2 rounded-xl bg-charcoal border border-charcoal text-white"
             />
             <select
               value={rating}
               onChange={(e) => setRating(e.target.value)}
-              className="px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white"
+              className="px-3 py-2 rounded-xl bg-charcoal border border-charcoal text-white"
             >
               <option value="5">5 Stars ★★★★★</option>
               <option value="4">4 Stars ★★★★☆</option>
@@ -148,7 +148,7 @@ const NearbyShopsPage = () => {
             value={newReview}
             onChange={(e) => setNewReview(e.target.value)}
             rows={2}
-            className="w-full px-3 py-2 rounded-xl bg-slate-800 border border-slate-700 text-white focus:outline-none"
+            className="w-full px-3 py-2 rounded-xl bg-charcoal border border-charcoal text-white focus:outline-none"
           />
           <button type="submit" className="gradient-btn-primary px-5 py-2 rounded-xl font-bold text-xs">
             Post Community Review
@@ -158,13 +158,13 @@ const NearbyShopsPage = () => {
         {/* Reviews List */}
         <div className="space-y-3 text-xs">
           {reviews.map((r) => (
-            <div key={r.id} className="p-4 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-1">
+            <div key={r.id} className="p-4 rounded-2xl bg-charcoal/40 border border-charcoal space-y-1">
               <div className="flex justify-between items-center">
                 <span className="font-bold text-white">{r.author_name}</span>
                 <span className="text-amber-400 font-bold">{'★'.repeat(r.rating)}</span>
               </div>
-              <p className="text-slate-300">{r.comment}</p>
-              <span className="text-[10px] text-slate-500 block">{new Date(r.created_at || Date.now()).toLocaleDateString()}</span>
+              <p className="text-slate/60">{r.comment}</p>
+              <span className="text-[10px] text-slate block">{new Date(r.created_at || Date.now()).toLocaleDateString()}</span>
             </div>
           ))}
         </div>
@@ -181,3 +181,6 @@ const NearbyShopsPage = () => {
 };
 
 export default NearbyShopsPage;
+
+
+

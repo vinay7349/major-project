@@ -46,16 +46,16 @@ const ExperienceCard = ({ to, icon: Icon, title, description, action }) => (
 );
 
 const LandingPage = () => (
-  <div className="bg-[#080A19] text-white overflow-hidden">
+  <div className="bg-navy text-white overflow-hidden">
     <section className="relative min-h-[calc(100vh-5rem)] lg:min-h-screen flex items-center overflow-hidden">
       <video className="absolute inset-0 w-full h-full object-cover" src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260813_092641_de52eb87-daf2-41db-92cb-7a56eae012a5.mp4" autoPlay loop muted playsInline />
-      <div className="absolute inset-0 bg-[#080A19]/20" />
+      <div className="absolute inset-0 bg-navy/20" />
       <div className="relative w-full max-w-[1800px] mx-auto px-5 sm:px-8 md:px-[82px] pt-28 sm:pt-32 pb-12">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10 lg:gap-12">
           <div className="max-w-[593px]">
             <Animate delay={300}><p className="text-xs font-bold uppercase tracking-[0.2em] text-white/70 mb-5">LOCAL SHOPPING, MADE SIMPLE</p><h1 className="text-white text-[36px] sm:text-[52px] md:text-[64px] lg:text-[72px] font-normal leading-[0.95] tracking-[-0.035em] mb-5 sm:mb-8"><span className="block">Find What You Need,</span><span className="block">Right Near You</span><span className="block text-white/70">with ShopGenie</span></h1></Animate>
             <Animate delay={500}><p className="max-w-[550px] text-white/80 text-[16px] sm:text-[18px] md:text-[20px] font-[450] leading-[1.3] mb-7 sm:mb-10">Discover products from trusted local shops, or bring your own store online with one clear retail workspace.</p></Animate>
-            <Animate delay={700}><NavLink to="/customer" className="inline-flex h-[46px] sm:h-[51px] items-center gap-3 px-5 sm:px-[27px] bg-[#E9E9E9] rounded-[12px] text-[#0A0707] text-[14px] sm:text-[15.5px] font-[450] transition-opacity hover:opacity-90">Find products near you <ArrowRight className="w-4 h-4" /></NavLink></Animate>
+            <Animate delay={700}><NavLink to="/customer" className="inline-flex h-[46px] sm:h-[51px] items-center gap-3 px-5 sm:px-[27px] bg-[#E9E9E9] rounded-[12px] text-navy text-[14px] sm:text-[15.5px] font-[450] transition-opacity hover:opacity-90">Find products near you <ArrowRight className="w-4 h-4" /></NavLink></Animate>
           </div>
           <Animate delay={900} direction="scale" className="w-full max-w-[405px] mx-auto lg:mx-0"><div className="rounded-[24px] sm:rounded-[33px] bg-[rgba(17,16,15,0.45)] backdrop-blur-[20px] border border-white/[0.08] p-5 sm:p-8 pb-5 sm:pb-6"><p className="text-white text-[16px] sm:text-[20px] font-[450] leading-[20px]">Choose your experience</p><h2 className="text-white/65 text-sm mt-2 mb-5 sm:mb-7">One platform. Two simple ways in.</h2><div className="space-y-3"><ExperienceCard to="/customer" icon={ShoppingBag} title="I’m a customer" description="Explore products, discover nearby shops, check prices and availability, and stay connected with the shops you trust." action="Explore products" /><ExperienceCard to="/register?role=owner" icon={Store} title="I run a shop" description="Manage products, inventory, billing, alerts, and sales performance from one focused workspace." action="Set up my shop" /></div></div></Animate>
         </div>
@@ -75,10 +75,10 @@ const LandingPage = () => (
       <div className="mt-16 sm:mt-24 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal className="lg:col-span-6">
           <div className="relative">
-            <div className="absolute -inset-6 rounded-[36px] bg-[#2D5016]/25 blur-3xl" aria-hidden="true" />
+            <div className="absolute -inset-6 rounded-[36px] bg-mutedgreen/25 blur-3xl" aria-hidden="true" />
             <div className="relative rounded-[24px] sm:rounded-[32px] bg-[rgba(17,16,15,0.55)] backdrop-blur-[20px] border border-white/[0.08] p-4 sm:p-6">
               {/* dashboard device frame */}
-              <div className="rounded-[16px] sm:rounded-[22px] bg-[#0D1320]/90 border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/40">
+              <div className="rounded-[16px] sm:rounded-[22px] bg-navy/90 border border-white/[0.08] overflow-hidden shadow-2xl shadow-black/40">
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/[0.07]"><span className="w-2.5 h-2.5 rounded-full bg-[#F87171]" /><span className="w-2.5 h-2.5 rounded-full bg-[#FBBF24]" /><span className="w-2.5 h-2.5 rounded-full bg-[#34D399]" /><span className="ml-3 text-[11px] text-white/40 tracking-wide">ShopGenie · Admin Panel</span></div>
                 <div className="p-4 sm:p-6 grid grid-cols-3 gap-3 sm:gap-4">
                   {[38, 62, 44].map((v, i) => <div key={i} className="rounded-xl bg-white/[0.05] p-3"><div className="text-[10px] text-white/40 uppercase tracking-wide">{['Stock', 'Sales', 'Orders'][i]}</div><div className="text-lg sm:text-xl font-[450] text-white mt-1">{['2,318', '₹4.6L', '312'][i]}</div><div className="mt-2 h-1.5 rounded-full bg-white/10"><div className="h-full rounded-full bg-[#34D399]" style={{ width: `${v}%` }} /></div></div>)}
@@ -88,13 +88,13 @@ const LandingPage = () => (
                   </div>
                 </div>
               </div>
-              <div className="absolute -bottom-5 -right-3 sm:-right-5 rounded-2xl bg-[#2D5016] text-white px-4 py-3 shadow-xl shadow-black/30"><p className="text-[11px] uppercase tracking-[0.15em] text-white/70">Dashboard</p><p className="text-sm font-[450]">One view. Complete control.</p></div>
+              <div className="absolute -bottom-5 -right-3 sm:-right-5 rounded-2xl bg-mutedgreen text-white px-4 py-3 shadow-xl shadow-black/30"><p className="text-[11px] uppercase tracking-[0.15em] text-white/70">Dashboard</p><p className="text-sm font-[450]">One view. Complete control.</p></div>
             </div>
           </div>
         </Reveal>
         <Reveal delay={120} className="lg:col-span-6">
           <div>
-            <div className="flex items-center gap-3 mb-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#2D5016] text-white text-xs font-[450]">01</span><span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">Admin Panel</span></div>
+            <div className="flex items-center gap-3 mb-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-mutedgreen text-white text-xs font-[450]">01</span><span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">Admin Panel</span></div>
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-[-0.02em] text-white leading-tight">One view.<br />Complete control.</h3>
             <p className="mt-4 text-white/70 text-base leading-relaxed max-w-[460px]">Stock, sales, and orders — managed from a single focused dashboard built for shop owners.</p>
             <div className="mt-6 inline-flex items-center gap-2 text-[#34D399] text-sm font-[450]">See the dashboard <ArrowRight className="w-4 h-4" /></div>
@@ -106,21 +106,21 @@ const LandingPage = () => (
       <div className="mt-20 sm:mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal delay={120} className="lg:col-span-6 lg:order-2">
           <div className="relative">
-            <div className="absolute -inset-6 rounded-[36px] bg-[#2D5016]/25 blur-3xl" aria-hidden="true" />
-            <div className="relative mx-auto max-w-[280px] sm:max-w-[320px] rounded-[28px] sm:rounded-[36px] bg-[#0D1320] border border-white/[0.1] p-2.5 shadow-2xl shadow-black/40">
+            <div className="absolute -inset-6 rounded-[36px] bg-mutedgreen/25 blur-3xl" aria-hidden="true" />
+            <div className="relative mx-auto max-w-[280px] sm:max-w-[320px] rounded-[28px] sm:rounded-[36px] bg-navy border border-white/[0.1] p-2.5 shadow-2xl shadow-black/40">
               <div className="rounded-[22px] sm:rounded-[28px] bg-[#111a14] overflow-hidden">
                 <div className="relative h-36 sm:h-44 overflow-hidden"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80" alt="Retail products" className="w-full h-full object-cover" /><span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wide bg-black/50 text-white px-2.5 py-1 rounded-full">Step 1 · Search</span></div>
                 <div className="p-4 sm:p-5 space-y-2.5">
                   {[{ label: 'In stock', val: '2 shops', on: true }, { label: 'Near you', val: '0.8 km', on: true }, { label: 'Price', val: '$4.50', on: true }].map((r) => <div key={r.label} className="flex items-center justify-between rounded-lg bg-white/[0.06] px-3 py-2.5"><span className="text-xs text-white/60">{r.label}</span><span className="text-xs text-[#34D399] font-[450]">{r.val}</span></div>)}
                 </div>
               </div>
-              <div className="absolute -bottom-5 -left-3 sm:-left-5 rounded-2xl bg-[#2D5016] text-white px-4 py-3 shadow-xl shadow-black/30"><p className="text-[11px] uppercase tracking-[0.15em] text-white/70">Discovery</p><p className="text-sm font-[450]">Find it. Check it. Nearby.</p></div>
+              <div className="absolute -bottom-5 -left-3 sm:-left-5 rounded-2xl bg-mutedgreen text-white px-4 py-3 shadow-xl shadow-black/30"><p className="text-[11px] uppercase tracking-[0.15em] text-white/70">Discovery</p><p className="text-sm font-[450]">Find it. Check it. Nearby.</p></div>
             </div>
           </div>
         </Reveal>
         <Reveal className="lg:col-span-6 lg:order-1">
           <div>
-            <div className="flex items-center gap-3 mb-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#2D5016] text-white text-xs font-[450]">02</span><span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">Product Discovery</span></div>
+            <div className="flex items-center gap-3 mb-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-mutedgreen text-white text-xs font-[450]">02</span><span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">Product Discovery</span></div>
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-[-0.02em] text-white leading-tight">Find it. Check it.<br />Nearby.</h3>
             <p className="mt-4 text-white/70 text-base leading-relaxed max-w-[460px]">Search a product, see live availability, and find the nearest shop stocking it — right from a phone.</p>
             <div className="mt-6 inline-flex items-center gap-2 text-[#34D399] text-sm font-[450]">Start searching <ArrowRight className="w-4 h-4" /></div>
@@ -132,7 +132,7 @@ const LandingPage = () => (
       <div className="mt-20 sm:mt-28 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <Reveal className="lg:col-span-6">
           <div className="relative">
-            <div className="absolute -inset-6 rounded-[36px] bg-[#2D5016]/25 blur-3xl" aria-hidden="true" />
+            <div className="absolute -inset-6 rounded-[36px] bg-mutedgreen/25 blur-3xl" aria-hidden="true" />
             <div className="relative flex items-end justify-center gap-3 sm:gap-5">
               {/* shelf */}
               <div className="relative w-36 sm:w-48 rounded-[18px] sm:rounded-[24px] bg-[rgba(20,26,18,0.7)] border border-white/[0.08] p-3 pb-6 overflow-hidden shadow-2xl shadow-black/40">
@@ -147,7 +147,7 @@ const LandingPage = () => (
                 <p className="text-sm font-[450] text-white">In stock</p>
               </div>
               {/* phone */}
-              <div className="relative w-40 sm:w-52 rounded-[22px] sm:rounded-[28px] bg-[#0D1320] border border-white/[0.1] p-2 sm:p-2.5 shadow-2xl shadow-black/40">
+              <div className="relative w-40 sm:w-52 rounded-[22px] sm:rounded-[28px] bg-navy border border-white/[0.1] p-2 sm:p-2.5 shadow-2xl shadow-black/40">
                 <div className="rounded-[16px] sm:rounded-[20px] bg-[#111a14] overflow-hidden">
                   <div className="h-24 sm:h-32 overflow-hidden"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80" alt="Product on phone screen" className="w-full h-full object-cover" /></div>
                   <div className="p-3"><div className="h-2 rounded-full bg-white/15 w-3/4 mb-2" /><div className="h-2 rounded-full bg-white/10 w-1/2" /><div className="mt-2 flex items-center gap-1.5 text-[10px] text-[#34D399]"><span className="w-1.5 h-1.5 rounded-full bg-[#34D399]" />Available · 0.8 km</div></div>
@@ -156,12 +156,12 @@ const LandingPage = () => (
               {/* green connection line */}
               <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 300 200" fill="none" preserveAspectRatio="none"><path d="M45 120 C 110 55, 190 55, 255 130" stroke="#34D399" strokeWidth="2" strokeDasharray="6 7" opacity="0.7" /></svg>
             </div>
-            <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-2xl bg-[#2D5016] text-white px-4 py-3 shadow-xl shadow-black/30 whitespace-nowrap"><p className="text-[11px] uppercase tracking-[0.15em] text-white/70">Connected Retail</p><p className="text-sm font-[450]">From the shelf to the screen.</p></div>
+            <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-2xl bg-mutedgreen text-white px-4 py-3 shadow-xl shadow-black/30 whitespace-nowrap"><p className="text-[11px] uppercase tracking-[0.15em] text-white/70">Connected Retail</p><p className="text-sm font-[450]">From the shelf to the screen.</p></div>
           </div>
         </Reveal>
         <Reveal delay={120} className="lg:col-span-6">
           <div>
-            <div className="flex items-center gap-3 mb-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#2D5016] text-white text-xs font-[450]">03</span><span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">Connected Retail</span></div>
+            <div className="flex items-center gap-3 mb-4"><span className="flex items-center justify-center w-8 h-8 rounded-full bg-mutedgreen text-white text-xs font-[450]">03</span><span className="text-xs font-bold uppercase tracking-[0.2em] text-white/60">Connected Retail</span></div>
             <h3 className="text-2xl sm:text-3xl md:text-4xl font-normal tracking-[-0.02em] text-white leading-tight">From the shelf<br />to the screen.</h3>
             <p className="mt-4 text-white/70 text-base leading-relaxed max-w-[460px]">A connected thread runs through every local shop — from what's stocked on shelves to what customers see on their phones.</p>
             <div className="mt-6 inline-flex items-center gap-2 text-[#34D399] text-sm font-[450]">Explore the network <ArrowRight className="w-4 h-4" /></div>
@@ -173,3 +173,4 @@ const LandingPage = () => (
 );
 
 export default LandingPage;
+

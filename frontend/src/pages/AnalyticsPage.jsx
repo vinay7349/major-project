@@ -59,10 +59,10 @@ const AnalyticsPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight text-charcoal dark:text-white">
             Deep-Dive Sales & Revenue Analytics
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
+          <p className="text-slate dark:text-slate/80 text-xs mt-1">
             Historical revenue breakdowns, profit margin tracking, and hourly customer traffic.
           </p>
         </div>
@@ -77,32 +77,32 @@ const AnalyticsPage = () => {
 
       {/* Customer Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <GlassCard className="bg-slate-900/60 border-slate-800 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+        <GlassCard className="bg-charcoal/60 border-charcoal flex items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-charcoal/10 text-indigo-400 flex items-center justify-center">
             <Users className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-slate-400">Repeat Customer Rate</p>
+            <p className="text-xs text-slate/80">Repeat Customer Rate</p>
             <h3 className="text-2xl font-extrabold text-white font-mono">{customer_metrics.repeat_customer_rate}</h3>
           </div>
         </GlassCard>
 
-        <GlassCard className="bg-slate-900/60 border-slate-800 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+        <GlassCard className="bg-charcoal/60 border-charcoal flex items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-amber/10 text-cyan-400 flex items-center justify-center">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-slate-400">Average Order Value (AOV)</p>
+            <p className="text-xs text-slate/80">Average Order Value (AOV)</p>
             <h3 className="text-2xl font-extrabold text-white font-mono">{customer_metrics.average_order_value}</h3>
           </div>
         </GlassCard>
 
-        <GlassCard className="bg-slate-900/60 border-slate-800 flex items-center gap-4">
-          <div className="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+        <GlassCard className="bg-charcoal/60 border-charcoal flex items-center gap-4">
+          <div className="w-12 h-12 rounded-2xl bg-charcoal/10 text-purple-400 flex items-center justify-center">
             <Award className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-slate-400">Customer Satisfaction</p>
+            <p className="text-xs text-slate/80">Customer Satisfaction</p>
             <h3 className="text-2xl font-extrabold text-white font-mono">{customer_metrics.customer_satisfaction_score}</h3>
           </div>
         </GlassCard>
@@ -153,3 +153,5 @@ const AnalyticsPage = () => {
 };
 
 export default AnalyticsPage;
+
+

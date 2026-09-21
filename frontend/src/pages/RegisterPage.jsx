@@ -39,16 +39,16 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] bg-slate-50 text-slate-900">
-      <section className="relative h-56 overflow-hidden bg-slate-950" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=2200&q=85)', backgroundPosition: 'center', backgroundSize: 'cover' }}>
-        <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px]" />
+    <div className="min-h-[calc(100vh-5rem)] bg-warmwhite text-navy">
+      <section className="relative h-56 overflow-hidden bg-navy" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1534723452862-4c874018d66d?auto=format&fit=crop&w=2200&q=85)', backgroundPosition: 'center', backgroundSize: 'cover' }}>
+        <div className="absolute inset-0 bg-navy/70 backdrop-blur-[2px]" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
           <h1 className="text-4xl font-bold">Create Account</h1>
-          <p className="mt-3 text-sm text-slate-200">Join ShopGenie and connect with your local retail community.</p>
+          <p className="mt-3 text-sm text-slate/60">Join ShopGenie and connect with your local retail community.</p>
         </div>
       </section>
 
-      <div className="border-b border-slate-200 bg-white px-6 py-4"><div className="mx-auto max-w-6xl text-sm text-slate-500"><NavLink to="/" className="hover:text-indigo-600">Home</NavLink><span className="mx-2">&gt;</span><span className="font-medium text-slate-900">Create Account</span></div></div>
+      <div className="border-b border-warmwhite/60 bg-white px-6 py-4"><div className="mx-auto max-w-6xl text-sm text-slate"><NavLink to="/" className="hover:text-charcoal">Home</NavLink><span className="mx-2">&gt;</span><span className="font-medium text-navy">Create Account</span></div></div>
 
       <section className="flex -translate-y-2 justify-center px-5 py-12 sm:px-6 sm:py-16">
         <div className="w-full max-w-[580px] overflow-hidden rounded-2xl bg-white shadow-xl shadow-slate-200/70">
@@ -57,7 +57,7 @@ const RegisterPage = () => {
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
-                <label className="text-xs font-medium text-slate-300 block mb-1">First Name</label>
+                <label className="text-xs font-medium text-slate/60 block mb-1">First Name</label>
                 <input
                   type="text"
                   name="first_name"
@@ -65,11 +65,11 @@ const RegisterPage = () => {
                   value={formData.first_name}
                   onChange={handleChange}
                   placeholder="John"
-                  className="w-full rounded-lg border border-slate-200 px-4 py-3.5 text-sm text-[#172033] outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
+                  className="w-full rounded-lg border border-warmwhite/60 px-4 py-3.5 text-sm text-navy outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-slate-300 block mb-1">Last Name</label>
+                <label className="text-xs font-medium text-slate/60 block mb-1">Last Name</label>
                 <input
                   type="text"
                   name="last_name"
@@ -77,15 +77,15 @@ const RegisterPage = () => {
                   value={formData.last_name}
                   onChange={handleChange}
                   placeholder="Doe"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-800/60 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+                  className="w-full px-4 py-2.5 rounded-xl bg-charcoal/60 border border-charcoal text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-charcoal/50"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-slate-300 block mb-1">Username</label>
+              <label className="text-xs font-medium text-slate/60 block mb-1">Username</label>
               <div className="relative">
-                <UserIcon className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <UserIcon className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate/80" />
                 <input
                   type="text"
                   name="username"
@@ -93,15 +93,15 @@ const RegisterPage = () => {
                   value={formData.username}
                   onChange={handleChange}
                   placeholder="johndoe_shop"
-                  className="w-full rounded-lg border border-slate-200 py-3.5 pl-11 pr-4 text-sm text-[#172033] outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
+                  className="w-full rounded-lg border border-warmwhite/60 py-3.5 pl-11 pr-4 text-sm text-navy outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-slate-300 block mb-1">Email Address</label>
+              <label className="text-xs font-medium text-slate/60 block mb-1">Email Address</label>
               <div className="relative">
-                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <Mail className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate/80" />
                 <input
                   type="email"
                   name="email"
@@ -109,15 +109,15 @@ const RegisterPage = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john@shopgenie.ai"
-                  className="w-full rounded-lg border border-slate-200 py-3.5 pl-11 pr-4 text-sm text-[#172033] outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
+                  className="w-full rounded-lg border border-warmwhite/60 py-3.5 pl-11 pr-4 text-sm text-navy outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-slate-300 block mb-1">Password</label>
+              <label className="text-xs font-medium text-slate/60 block mb-1">Password</label>
               <div className="relative">
-                <Lock className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                <Lock className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate/80" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
@@ -125,28 +125,28 @@ const RegisterPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Enter your password"
-                  className="w-full rounded-lg border border-slate-200 py-3.5 pl-11 pr-12 text-sm text-[#172033] outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
+                  className="w-full rounded-lg border border-warmwhite/60 py-3.5 pl-11 pr-12 text-sm text-navy outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
                 />
-                <button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-[#2563EB]">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>
+                <button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? 'Hide password' : 'Show password'} className="absolute right-4 top-1/2 -translate-y-1/2 text-slate/80 hover:text-amber">{showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}</button>
               </div>
             </div>
 
             {!isCustomer && <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div>
-                <label className="text-xs font-medium text-slate-300 block mb-1">Shop Name</label>
+                <label className="text-xs font-medium text-slate/60 block mb-1">Shop Name</label>
                 <input
                   type="text"
                   name="shop_name"
                   value={formData.shop_name}
                   onChange={handleChange}
                   placeholder="Green Valley Mart"
-                  className="w-full rounded-lg border border-slate-200 px-4 py-3.5 text-sm text-[#172033] outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
+                  className="w-full rounded-lg border border-warmwhite/60 px-4 py-3.5 text-sm text-navy outline-none focus:border-[#2563EB] focus:ring-4 focus:ring-sky-100"
                 />
               </div>
               <div>
-                <label className="text-xs font-medium text-slate-300 block mb-1">Role Access</label>
+                <label className="text-xs font-medium text-slate/60 block mb-1">Role Access</label>
                 <input type="hidden" name="role" value="SHOP_OWNER" />
-                <div className="flex h-[50px] items-center rounded-lg border border-slate-200 bg-slate-50 px-4 text-sm text-[#172033]">Shop Owner</div>
+                <div className="flex h-[50px] items-center rounded-lg border border-warmwhite/60 bg-warmwhite px-4 text-sm text-navy">Shop Owner</div>
               </div>
             </div>}
 
@@ -159,7 +159,7 @@ const RegisterPage = () => {
             </button>
           </form>
           </div>
-          <div className="border-t border-slate-200 px-6 py-6 text-center text-sm text-slate-500 sm:px-12">Already have an account? <NavLink to="/customer/login" className="font-semibold text-[#2563EB] hover:text-[#6C3BFF]">Sign in</NavLink></div>
+          <div className="border-t border-warmwhite/60 px-6 py-6 text-center text-sm text-slate sm:px-12">Already have an account? <NavLink to="/customer/login" className="font-semibold text-amber hover:text-amber">Sign in</NavLink></div>
         </div>
       </section>
     </div>
@@ -167,3 +167,6 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
+
+
+

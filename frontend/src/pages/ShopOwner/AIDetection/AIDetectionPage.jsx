@@ -80,13 +80,13 @@ const AIDetectionPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber/10 border border-amber/30 text-cyan-400 text-xs font-semibold mb-2">
             <Cpu className="w-3.5 h-3.5" /> OpenCV + YOLOv8 Neural Vision
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight text-charcoal dark:text-white">
             AI Computer Vision Product Detection
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
+          <p className="text-slate dark:text-slate/80 text-xs mt-1">
             Automated image scanning, object recognition, bounding box localization, and metadata auto-filling.
           </p>
         </div>
@@ -95,12 +95,12 @@ const AIDetectionPage = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Image Upload & Canvas Preview */}
         <div className="lg:col-span-7 space-y-4">
-          <GlassCard className="space-y-4 border-slate-800">
-            <h3 className="font-bold text-slate-100 text-sm flex items-center gap-2">
+          <GlassCard className="space-y-4 border-charcoal">
+            <h3 className="font-bold text-slate/60 text-sm flex items-center gap-2">
               <Scan className="w-4 h-4 text-cyan-400" /> Image Input Feed
             </h3>
 
-            <div className="relative w-full h-80 rounded-2xl bg-slate-900 border-2 border-dashed border-slate-700 overflow-hidden flex items-center justify-center group">
+            <div className="relative w-full h-80 rounded-2xl bg-charcoal border-2 border-dashed border-charcoal overflow-hidden flex items-center justify-center group">
               {imagePreview ? (
                 <div className="relative w-full h-full">
                   <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
@@ -116,7 +116,7 @@ const AIDetectionPage = () => {
                         height: `${detectionResult.bounding_box.height}%`,
                       }}
                     >
-                      <span className="bg-cyan-500 text-slate-950 px-2 py-0.5 rounded-md text-[10px] font-extrabold font-mono shadow-md">
+                      <span className="bg-amber text-slate-950 px-2 py-0.5 rounded-md text-[10px] font-extrabold font-mono shadow-md">
                         {detectionResult.detected_label} ({detectionResult.confidence_score}%)
                       </span>
                     </div>
@@ -124,8 +124,8 @@ const AIDetectionPage = () => {
                 </div>
               ) : (
                 <div className="text-center p-6 space-y-3">
-                  <Upload className="w-10 h-10 text-slate-500 mx-auto" />
-                  <p className="text-xs text-slate-400">Drag & drop product image or click to upload</p>
+                  <Upload className="w-10 h-10 text-slate mx-auto" />
+                  <p className="text-xs text-slate/80">Drag & drop product image or click to upload</p>
                 </div>
               )}
 
@@ -139,13 +139,13 @@ const AIDetectionPage = () => {
 
             {/* Quick Sample Selector */}
             <div className="space-y-2">
-              <span className="text-xs text-slate-400 font-medium">Or select a sample product image:</span>
+              <span className="text-xs text-slate/80 font-medium">Or select a sample product image:</span>
               <div className="grid grid-cols-4 gap-3">
                 {sampleDemoImages.map((s, idx) => (
                   <button
                     key={idx}
                     onClick={() => handleSelectSample(s)}
-                    className="p-1 rounded-xl border border-slate-800 hover:border-cyan-400 overflow-hidden bg-slate-900 group transition-all"
+                    className="p-1 rounded-xl border border-charcoal hover:border-cyan-400 overflow-hidden bg-charcoal group transition-all"
                   >
                     <img src={s.url} alt={s.name} className="w-full h-16 object-cover rounded-lg group-hover:scale-105 transition-transform" />
                   </button>
@@ -175,31 +175,31 @@ const AIDetectionPage = () => {
 
         {/* AI Results & Metadata */}
         <div className="lg:col-span-5 space-y-4">
-          <GlassCard className="space-y-4 border-slate-800 min-h-[420px] flex flex-col justify-between">
+          <GlassCard className="space-y-4 border-charcoal min-h-[420px] flex flex-col justify-between">
             <div>
-              <h3 className="font-bold text-slate-100 text-sm flex items-center gap-2 border-b border-slate-800 pb-3">
+              <h3 className="font-bold text-slate/60 text-sm flex items-center gap-2 border-b border-charcoal pb-3">
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" /> AI Detection Results
               </h3>
 
               {!detectionResult ? (
-                <div className="text-center py-16 text-slate-500 text-xs">
+                <div className="text-center py-16 text-slate text-xs">
                   Upload an image and run AI Detection to view bounding boxes and metadata output.
                 </div>
               ) : (
                 <div className="space-y-4 pt-4 text-xs">
                   {/* Confidence Score Bar */}
-                  <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2">
+                  <div className="p-4 rounded-2xl bg-charcoal/80 border border-charcoal space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-slate-400">Identified Item</span>
+                      <span className="text-slate/80">Identified Item</span>
                       <span className="font-bold text-white text-sm">{detectionResult.detected_label}</span>
                     </div>
                     
                     <div className="space-y-1">
                       <div className="flex justify-between text-[11px]">
-                        <span className="text-slate-400">Confidence Match</span>
+                        <span className="text-slate/80">Confidence Match</span>
                         <span className="font-mono text-cyan-400 font-bold">{detectionResult.confidence_score}%</span>
                       </div>
-                      <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                      <div className="w-full h-2 rounded-full bg-charcoal overflow-hidden">
                         <div
                           className="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full transition-all duration-1000"
                           style={{ width: `${detectionResult.confidence_score}%` }}
@@ -210,21 +210,21 @@ const AIDetectionPage = () => {
 
                   {/* Product Metadata Breakdown */}
                   {detectionResult.product && (
-                    <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800 space-y-2">
-                      <h4 className="font-bold text-slate-200">Catalog Record Match:</h4>
-                      <div className="flex justify-between text-slate-400">
+                    <div className="p-4 rounded-2xl bg-charcoal/60 border border-charcoal space-y-2">
+                      <h4 className="font-bold text-slate/60">Catalog Record Match:</h4>
+                      <div className="flex justify-between text-slate/80">
                         <span>SKU Code:</span>
                         <span className="font-mono text-indigo-400">{detectionResult.product.sku}</span>
                       </div>
-                      <div className="flex justify-between text-slate-400">
+                      <div className="flex justify-between text-slate/80">
                         <span>Category:</span>
                         <span className="text-white">{detectionResult.product.category_name}</span>
                       </div>
-                      <div className="flex justify-between text-slate-400">
+                      <div className="flex justify-between text-slate/80">
                         <span>Listed Price:</span>
                         <span className="font-mono text-cyan-400 font-bold">${detectionResult.product.price}</span>
                       </div>
-                      <div className="flex justify-between text-slate-400">
+                      <div className="flex justify-between text-slate/80">
                         <span>Current Stock:</span>
                         <span className="text-emerald-400 font-bold">{detectionResult.product.stock_quantity} units</span>
                       </div>
@@ -232,9 +232,9 @@ const AIDetectionPage = () => {
                   )}
 
                   {/* Model Diagnostics */}
-                  <div className="p-3 rounded-xl bg-slate-900/40 border border-slate-800 text-[10px] text-slate-400 space-y-1">
-                    <p>Engine: <span className="text-slate-200 font-mono">{detectionResult.ai_engine}</span></p>
-                    <p>Inference Time: <span className="text-slate-200 font-mono">{detectionResult.processing_time_ms} ms</span></p>
+                  <div className="p-3 rounded-xl bg-charcoal/40 border border-charcoal text-[10px] text-slate/80 space-y-1">
+                    <p>Engine: <span className="text-slate/60 font-mono">{detectionResult.ai_engine}</span></p>
+                    <p>Inference Time: <span className="text-slate/60 font-mono">{detectionResult.processing_time_ms} ms</span></p>
                   </div>
                 </div>
               )}
@@ -243,7 +243,7 @@ const AIDetectionPage = () => {
             {detectionResult && (
               <button
                 onClick={() => addToast('Product details auto-filled into inventory catalog!', 'success')}
-                className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center justify-center gap-2 mt-4"
+                className="w-full py-3 rounded-xl bg-charcoal hover:bg-charcoal text-white font-bold text-xs flex items-center justify-center gap-2 mt-4"
               >
                 <span>Auto-Fill Store Catalog Form</span>
                 <ArrowRight className="w-4 h-4" />
@@ -257,3 +257,5 @@ const AIDetectionPage = () => {
 };
 
 export default AIDetectionPage;
+
+

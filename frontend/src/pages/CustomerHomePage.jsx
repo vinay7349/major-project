@@ -322,54 +322,54 @@ const CustomerHomePage = () => {
   ].filter(Boolean);
 
   return (
-    <div className="bg-[#f6f1ea] pb-24 text-slate-900 transition-colors duration-300 dark:bg-[#0d1320] dark:text-slate-100">
+    <div className="bg-warmwhite pb-24 text-navy transition-colors duration-300 dark:bg-navy dark:text-slate/60">
       <main className="mx-auto max-w-7xl px-4 pb-8 pt-6 sm:px-6 lg:px-8">
-        <section className="relative overflow-hidden rounded-[28px] border border-stone-200/80 bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.16),transparent_30%),linear-gradient(135deg,#fffdf9_0%,#f7f2eb_42%,#f3efe9_100%)] p-5 shadow-[0_12px_28px_rgba(15,23,42,0.06)] dark:border-slate-800 dark:bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.12),transparent_30%),linear-gradient(135deg,#0f172a_0%,#111827_46%,#0d1320_100%)] sm:p-7 lg:p-8">
-          <div className="absolute -right-12 -top-8 h-40 w-40 rounded-full bg-amber-500/15 blur-3xl dark:bg-amber-500/10" />
+        <section className="relative overflow-hidden rounded-[28px] border border-warmwhite/60/80 bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.16),transparent_30%),linear-gradient(135deg,#fffdf9_0%,#f7f2eb_42%,#f3efe9_100%)] p-5 shadow-[0_12px_28px_rgba(15,23,42,0.06)] dark:border-charcoal dark:bg-[radial-gradient(circle_at_top_left,_rgba(245,158,11,0.12),transparent_30%),linear-gradient(135deg,#0f172a_0%,#111827_46%,#0d1320_100%)] sm:p-7 lg:p-8">
+          <div className="absolute -right-12 -top-8 h-40 w-40 rounded-full bg-amber/15 blur-3xl dark:bg-amber/10" />
           <div className="absolute bottom-4 left-10 h-32 w-32 rounded-full bg-orange-500/10 blur-3xl dark:bg-orange-400/10" />
 
           <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-amber-700 dark:text-amber-300">
+              <div className="inline-flex items-center gap-2 rounded-full border border-amber/20 bg-amber/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.18em] text-amber dark:text-amber-300">
                 <Sparkles className="h-3.5 w-3.5" />
                 Local discovery
               </div>
-              <h1 className="mt-4 text-3xl font-extrabold tracking-[-0.05em] text-slate-900 dark:text-white sm:text-4xl">
+              <h1 className="mt-4 text-3xl font-extrabold tracking-[-0.05em] text-navy dark:text-white sm:text-4xl">
                 Shop local. Find it nearby.
               </h1>
-              <p className="mt-2 max-w-lg text-sm text-slate-600 dark:text-slate-300 sm:text-base">
+              <p className="mt-2 max-w-lg text-sm text-slate dark:text-slate/60 sm:text-base">
                 Search products, compare nearby stores, and discover what’s freshest in your area.
               </p>
             </div>
 
-            <div className="flex items-center gap-3 self-start rounded-2xl border border-stone-200 bg-white/75 p-3 shadow-sm shadow-stone-200/40 backdrop-blur-xl dark:border-slate-700 dark:bg-slate-900/75 dark:shadow-none">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/12 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">
+            <div className="flex items-center gap-3 self-start rounded-2xl border border-warmwhite/60 bg-white/75 p-3 shadow-sm shadow-stone-200/40 backdrop-blur-xl dark:border-charcoal dark:bg-charcoal/75 dark:shadow-none">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber/12 text-amber dark:bg-amber/10 dark:text-amber-300">
                 <MapPin className="h-5 w-5" />
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500 dark:text-slate-400">Current area</p>
-                <p className="mt-1 text-sm font-semibold text-slate-800 dark:text-slate-100">Downtown Sector 4</p>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">Within 2.5 km</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate dark:text-slate/80">Current area</p>
+                <p className="mt-1 text-sm font-semibold text-charcoal dark:text-slate/60">Downtown Sector 4</p>
+                <p className="text-[11px] text-slate dark:text-slate/80">Within 2.5 km</p>
               </div>
             </div>
           </div>
 
           <div className="relative z-10 mt-6">
             <div className="relative flex items-center">
-              <Search className="pointer-events-none absolute left-4 h-5 w-5 text-slate-400" />
+              <Search className="pointer-events-none absolute left-4 h-5 w-5 text-slate/80" />
               <input
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products, brands, or categories..."
-                className="h-14 w-full rounded-2xl border border-stone-200 bg-white/80 pl-12 pr-24 text-sm text-slate-800 shadow-sm shadow-stone-200/40 outline-none transition-all placeholder:text-slate-400 focus:border-amber-500 focus:ring-4 focus:ring-amber-500/10 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-100 dark:shadow-none dark:placeholder:text-slate-500"
+                className="h-14 w-full rounded-2xl border border-warmwhite/60 bg-white/80 pl-12 pr-24 text-sm text-charcoal shadow-sm shadow-stone-200/40 outline-none transition-all placeholder:text-slate/80 focus:border-amber focus:ring-4 focus:ring-amber/10 dark:border-charcoal dark:bg-charcoal/80 dark:text-slate/60 dark:shadow-none dark:placeholder:text-slate"
               />
               <div className="absolute right-3 flex items-center gap-2">
                 {search && (
                   <button
                     type="button"
                     onClick={() => setSearch('')}
-                    className="flex h-8 w-8 items-center justify-center rounded-xl text-slate-500 transition-colors hover:bg-stone-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white"
+                    className="flex h-8 w-8 items-center justify-center rounded-xl text-slate transition-colors hover:bg-warmwhite hover:text-charcoal dark:text-slate/80 dark:hover:bg-charcoal dark:hover:text-white"
                     aria-label="Clear search"
                   >
                     <X className="h-4 w-4" />
@@ -378,9 +378,9 @@ const CustomerHomePage = () => {
                 <button
                   type="button"
                   onClick={() => setIsFilterOpen(true)}
-                  className="hidden items-center gap-1.5 rounded-xl border border-stone-200 bg-[#fffaf2] px-3 py-2 text-[11px] font-semibold text-slate-700 transition-colors hover:bg-stone-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 lg:flex"
+                  className="hidden items-center gap-1.5 rounded-xl border border-warmwhite/60 bg-warmwhite px-3 py-2 text-[11px] font-semibold text-charcoal transition-colors hover:bg-warmwhite dark:border-charcoal dark:bg-charcoal dark:text-slate/60 lg:flex"
                 >
-                  <SlidersHorizontal className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                  <SlidersHorizontal className="h-3.5 w-3.5 text-amber dark:text-amber-400" />
                   Filters
                 </button>
               </div>
@@ -393,8 +393,8 @@ const CustomerHomePage = () => {
               onClick={() => setSelectedCategory('all')}
               className={`shrink-0 rounded-2xl px-4 py-2.5 text-xs font-semibold transition-all ${
                 selectedCategory === 'all'
-                  ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900'
-                  : 'border border-stone-200 bg-white/70 text-slate-600 hover:border-stone-300 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:text-white'
+                  ? 'bg-charcoal text-white shadow-sm dark:bg-white dark:text-navy'
+                  : 'border border-warmwhite/60 bg-white/70 text-slate hover:border-warmwhite/60 hover:text-navy dark:border-charcoal dark:bg-charcoal/80 dark:text-slate/60 dark:hover:text-white'
               }`}
             >
               All
@@ -406,8 +406,8 @@ const CustomerHomePage = () => {
                 onClick={() => setSelectedCategory(cat.name)}
                 className={`shrink-0 rounded-2xl px-4 py-2.5 text-xs font-semibold transition-all ${
                   selectedCategory === cat.name
-                    ? 'bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900'
-                    : 'border border-stone-200 bg-white/70 text-slate-600 hover:border-stone-300 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-300 dark:hover:text-white'
+                    ? 'bg-charcoal text-white shadow-sm dark:bg-white dark:text-navy'
+                    : 'border border-warmwhite/60 bg-white/70 text-slate hover:border-warmwhite/60 hover:text-navy dark:border-charcoal dark:bg-charcoal/80 dark:text-slate/60 dark:hover:text-white'
                 }`}
               >
                 {cat.name}
@@ -418,17 +418,17 @@ const CustomerHomePage = () => {
 
         <section className="mt-8 flex flex-col gap-6 lg:grid lg:grid-cols-12">
           <aside className="hidden lg:col-span-3 lg:block">
-            <div className="rounded-[24px] border border-stone-200 bg-white/80 p-5 shadow-[0_8px_24px_rgba(15,23,42,0.05)] backdrop-blur-xl dark:border-slate-800 dark:bg-slate-900/70">
-              <div className="flex items-center justify-between border-b border-stone-200 pb-3 dark:border-slate-700">
+            <div className="rounded-[24px] border border-warmwhite/60 bg-white/80 p-5 shadow-[0_8px_24px_rgba(15,23,42,0.05)] backdrop-blur-xl dark:border-charcoal dark:bg-charcoal/70">
+              <div className="flex items-center justify-between border-b border-warmwhite/60 pb-3 dark:border-charcoal">
                 <div className="flex items-center gap-2">
-                  <Filter className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Filters</h3>
+                  <Filter className="h-4 w-4 text-amber dark:text-amber-400" />
+                  <h3 className="text-xs font-bold uppercase tracking-[0.18em] text-slate dark:text-slate/80">Filters</h3>
                 </div>
                 {(selectedCategory !== 'all' || onlyInStock || selectedShop !== 'all' || maxPrice < 50 || minRating > 0 || search) && (
                   <button
                     type="button"
                     onClick={handleResetFilters}
-                    className="flex items-center gap-1 text-[11px] font-semibold text-amber-700 transition-colors hover:text-amber-600 dark:text-amber-300"
+                    className="flex items-center gap-1 text-[11px] font-semibold text-amber transition-colors hover:text-amber dark:text-amber-300"
                   >
                     <RefreshCw className="h-3 w-3" />
                     Reset
@@ -438,19 +438,19 @@ const CustomerHomePage = () => {
 
               <div className="mt-5 space-y-5">
                 <div>
-                  <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Categories</label>
+                  <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-slate dark:text-slate/80">Categories</label>
                   <div className="space-y-1.5">
                     <button
                       type="button"
                       onClick={() => setSelectedCategory('all')}
                       className={`flex w-full items-center justify-between rounded-2xl px-3 py-2 text-xs font-medium transition-colors ${
                         selectedCategory === 'all'
-                          ? 'bg-amber-500/10 text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/20'
-                          : 'text-slate-600 hover:bg-stone-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                          ? 'bg-amber/10 text-amber ring-1 ring-amber-200 dark:bg-amber/10 dark:text-amber-300 dark:ring-amber/20'
+                          : 'text-slate hover:bg-warmwhite dark:text-slate/60 dark:hover:bg-charcoal'
                       }`}
                     >
                       <span>All categories</span>
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500">{products.length}</span>
+                      <span className="text-[10px] text-slate/80 dark:text-slate">{products.length}</span>
                     </button>
                     {categories.map((cat) => (
                       <button
@@ -459,8 +459,8 @@ const CustomerHomePage = () => {
                         onClick={() => setSelectedCategory(cat.name)}
                         className={`flex w-full items-center rounded-2xl px-3 py-2 text-left text-xs font-medium transition-colors ${
                           selectedCategory === cat.name
-                            ? 'bg-amber-500/10 text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/20'
-                            : 'text-slate-600 hover:bg-stone-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                            ? 'bg-amber/10 text-amber ring-1 ring-amber-200 dark:bg-amber/10 dark:text-amber-300 dark:ring-amber/20'
+                            : 'text-slate hover:bg-warmwhite dark:text-slate/60 dark:hover:bg-charcoal'
                         }`}
                       >
                         {cat.name}
@@ -471,8 +471,8 @@ const CustomerHomePage = () => {
 
                 <div>
                   <div className="mb-2 flex items-center justify-between">
-                    <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Max price</label>
-                    <span className="text-xs font-semibold text-amber-700 dark:text-amber-300">₹{maxPrice}</span>
+                    <label className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate dark:text-slate/80">Max price</label>
+                    <span className="text-xs font-semibold text-amber dark:text-amber-300">₹{maxPrice}</span>
                   </div>
                   <input
                     type="range"
@@ -481,26 +481,26 @@ const CustomerHomePage = () => {
                     step="1"
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(Number(e.target.value))}
-                    className="h-2 w-full cursor-pointer appearance-none rounded-full bg-stone-200 accent-amber-500 dark:bg-slate-700"
+                    className="h-2 w-full cursor-pointer appearance-none rounded-full bg-warmwhite accent-amber dark:bg-charcoal"
                   />
-                  <div className="mt-2 flex justify-between text-[10px] text-slate-400 dark:text-slate-500">
+                  <div className="mt-2 flex justify-between text-[10px] text-slate/80 dark:text-slate">
                     <span>₹1</span>
                     <span>₹25</span>
                     <span>₹50+</span>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between rounded-2xl border border-stone-200 bg-stone-50 p-3 dark:border-slate-700 dark:bg-slate-800/80">
+                <div className="flex items-center justify-between rounded-2xl border border-warmwhite/60 bg-warmwhite p-3 dark:border-charcoal dark:bg-charcoal/80">
                   <div>
-                    <p className="text-xs font-semibold text-slate-800 dark:text-slate-100">In stock only</p>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400">Hide sold-out items</p>
+                    <p className="text-xs font-semibold text-charcoal dark:text-slate/60">In stock only</p>
+                    <p className="text-[10px] text-slate dark:text-slate/80">Hide sold-out items</p>
                   </div>
                   <button
                     type="button"
                     aria-label="Toggle in-stock filter"
                     onClick={() => setOnlyInStock(!onlyInStock)}
                     className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                      onlyInStock ? 'bg-amber-500' : 'bg-slate-300 dark:bg-slate-600'
+                      onlyInStock ? 'bg-amber' : 'bg-slate dark:bg-charcoal'
                     }`}
                   >
                     <span
@@ -512,7 +512,7 @@ const CustomerHomePage = () => {
                 </div>
 
                 <div>
-                  <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Min rating</label>
+                  <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-slate dark:text-slate/80">Min rating</label>
                   <div className="grid grid-cols-4 gap-2">
                     {[0, 4.0, 4.5, 4.8].map((rating) => (
                       <button
@@ -521,8 +521,8 @@ const CustomerHomePage = () => {
                         onClick={() => setMinRating(rating)}
                         className={`rounded-xl border px-2 py-2 text-[11px] font-semibold transition-colors ${
                           minRating === rating
-                            ? 'border-amber-400 bg-amber-500/10 text-amber-700 dark:text-amber-300'
-                            : 'border-stone-200 bg-white text-slate-500 hover:bg-stone-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300'
+                            ? 'border-amber-400 bg-amber/10 text-amber dark:text-amber-300'
+                            : 'border-warmwhite/60 bg-white text-slate hover:bg-warmwhite dark:border-charcoal dark:bg-charcoal dark:text-slate/60'
                         }`}
                       >
                         {rating === 0 ? 'All' : `${rating}★`}
@@ -533,16 +533,16 @@ const CustomerHomePage = () => {
 
                 {shops.length > 0 && (
                   <div>
-                    <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Nearby shop</label>
-                    <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white dark:border-slate-700 dark:bg-slate-900">
+                    <label className="mb-2 block text-[10px] font-bold uppercase tracking-[0.18em] text-slate dark:text-slate/80">Nearby shop</label>
+                    <div className="overflow-hidden rounded-2xl border border-warmwhite/60 bg-white dark:border-charcoal dark:bg-charcoal">
                       <div className="space-y-1.5 p-2">
                         <button
                           type="button"
                           onClick={() => setSelectedShop('all')}
                           className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs transition-colors ${
                             selectedShop === 'all'
-                              ? 'bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-300'
-                              : 'text-slate-600 hover:bg-stone-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                              ? 'bg-amber/10 text-amber ring-1 ring-amber/20 dark:text-amber-300'
+                              : 'text-slate hover:bg-warmwhite dark:text-slate/60 dark:hover:bg-charcoal'
                           }`}
                         >
                           <span>All nearby shops</span>
@@ -554,12 +554,12 @@ const CustomerHomePage = () => {
                             onClick={() => setSelectedShop(s.name)}
                             className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-xs transition-colors ${
                               selectedShop === s.name
-                                ? 'bg-amber-500/10 text-amber-700 ring-1 ring-amber-500/20 dark:text-amber-300'
-                                : 'text-slate-600 hover:bg-stone-100 dark:text-slate-300 dark:hover:bg-slate-800'
+                                ? 'bg-amber/10 text-amber ring-1 ring-amber/20 dark:text-amber-300'
+                                : 'text-slate hover:bg-warmwhite dark:text-slate/60 dark:hover:bg-charcoal'
                             }`}
                           >
                             <span className="truncate">{s.name}</span>
-                            <span className="ml-2 shrink-0 text-[10px] text-slate-400">{s.distance_km || 1.0} km</span>
+                            <span className="ml-2 shrink-0 text-[10px] text-slate/80">{s.distance_km || 1.0} km</span>
                           </button>
                         ))}
                       </div>
@@ -571,14 +571,14 @@ const CustomerHomePage = () => {
           </aside>
 
           <div className="lg:col-span-9">
-            <div className="mb-5 flex flex-col gap-3 border-b border-stone-200 pb-4 sm:flex-row sm:items-center sm:justify-between dark:border-slate-800">
+            <div className="mb-5 flex flex-col gap-3 border-b border-warmwhite/60 pb-4 sm:flex-row sm:items-center sm:justify-between dark:border-charcoal">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-amber/10 text-amber dark:bg-amber/10 dark:text-amber-300">
                   <Package className="h-5 w-5" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold tracking-[-0.04em] text-slate-900 dark:text-white">Products near you</h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">{filteredProducts.length} products</p>
+                  <h2 className="text-xl font-bold tracking-[-0.04em] text-navy dark:text-white">Products near you</h2>
+                  <p className="text-xs text-slate dark:text-slate/80">{filteredProducts.length} products</p>
                 </div>
               </div>
 
@@ -586,18 +586,18 @@ const CustomerHomePage = () => {
                 <button
                   type="button"
                   onClick={() => setIsFilterOpen(true)}
-                  className="flex items-center gap-1.5 rounded-2xl border border-stone-200 bg-white px-3 py-2 text-[11px] font-semibold text-slate-600 lg:hidden dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                  className="flex items-center gap-1.5 rounded-2xl border border-warmwhite/60 bg-white px-3 py-2 text-[11px] font-semibold text-slate lg:hidden dark:border-charcoal dark:bg-charcoal dark:text-slate/60"
                 >
-                  <SlidersHorizontal className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                  <SlidersHorizontal className="h-3.5 w-3.5 text-amber dark:text-amber-400" />
                   Filters
                 </button>
 
-                <div className="flex items-center gap-2 rounded-2xl border border-stone-200 bg-white px-2.5 py-2 text-xs text-slate-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200">
-                  <ArrowUpDown className="h-3.5 w-3.5 text-slate-400" />
+                <div className="flex items-center gap-2 rounded-2xl border border-warmwhite/60 bg-white px-2.5 py-2 text-xs text-slate dark:border-charcoal dark:bg-charcoal dark:text-slate/60">
+                  <ArrowUpDown className="h-3.5 w-3.5 text-slate/80" />
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="bg-transparent pr-1 text-xs font-medium text-slate-700 outline-none dark:text-slate-200"
+                    className="bg-transparent pr-1 text-xs font-medium text-charcoal outline-none dark:text-slate/60"
                   >
                     <option value="relevance">Relevance</option>
                     <option value="price-low">Price: low to high</option>
@@ -616,7 +616,7 @@ const CustomerHomePage = () => {
                     key={chip.label}
                     type="button"
                     onClick={chip.onRemove}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-stone-200 bg-white px-2.5 py-1.5 text-[11px] font-medium text-slate-700 transition-colors hover:border-stone-300 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-warmwhite/60 bg-white px-2.5 py-1.5 text-[11px] font-medium text-charcoal transition-colors hover:border-warmwhite/60 dark:border-charcoal dark:bg-charcoal dark:text-slate/60"
                   >
                     <span>{chip.label}</span>
                     <X className="h-3 w-3" />
@@ -629,11 +629,11 @@ const CustomerHomePage = () => {
               {loading ? (
                 <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                   {[1, 2, 3, 4, 5, 6].map((i) => (
-                    <div key={i} className="animate-pulse rounded-[26px] border border-stone-200 bg-white p-3 dark:border-slate-800 dark:bg-slate-900">
-                      <div className="h-44 w-full rounded-[18px] bg-stone-200 dark:bg-slate-800" />
-                      <div className="mt-3 h-3 w-1/3 rounded-full bg-stone-200 dark:bg-slate-800" />
-                      <div className="mt-2 h-5 w-2/3 rounded-full bg-stone-200 dark:bg-slate-800" />
-                      <div className="mt-3 h-7 w-1/3 rounded-full bg-stone-200 dark:bg-slate-800" />
+                    <div key={i} className="animate-pulse rounded-[26px] border border-warmwhite/60 bg-white p-3 dark:border-charcoal dark:bg-charcoal">
+                      <div className="h-44 w-full rounded-[18px] bg-warmwhite dark:bg-charcoal" />
+                      <div className="mt-3 h-3 w-1/3 rounded-full bg-warmwhite dark:bg-charcoal" />
+                      <div className="mt-2 h-5 w-2/3 rounded-full bg-warmwhite dark:bg-charcoal" />
+                      <div className="mt-3 h-7 w-1/3 rounded-full bg-warmwhite dark:bg-charcoal" />
                     </div>
                   ))}
                 </div>
@@ -647,10 +647,10 @@ const CustomerHomePage = () => {
                     return (
                       <article
                         key={product.id}
-                        className="group flex flex-col justify-between rounded-[26px] border border-stone-200 bg-white p-3.5 shadow-[0_8px_24px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-amber-300 hover:shadow-[0_16px_30px_rgba(245,158,11,0.08)] dark:border-slate-800 dark:bg-slate-900 dark:shadow-none"
+                        className="group flex flex-col justify-between rounded-[26px] border border-warmwhite/60 bg-white p-3.5 shadow-[0_8px_24px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-amber-300 hover:shadow-[0_16px_30px_rgba(245,158,11,0.08)] dark:border-charcoal dark:bg-charcoal dark:shadow-none"
                       >
                         <div>
-                          <div className="relative overflow-hidden rounded-[20px] bg-stone-100 dark:bg-slate-800">
+                          <div className="relative overflow-hidden rounded-[20px] bg-warmwhite dark:bg-charcoal">
                             <img
                               src={imageUrl}
                               alt={product.name}
@@ -660,7 +660,7 @@ const CustomerHomePage = () => {
                               }}
                             />
 
-                            <span className="absolute left-2.5 top-2.5 rounded-full border border-white/30 bg-white/80 px-2 py-1 text-[10px] font-semibold text-slate-700 backdrop-blur-sm dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200">
+                            <span className="absolute left-2.5 top-2.5 rounded-full border border-white/30 bg-white/80 px-2 py-1 text-[10px] font-semibold text-charcoal backdrop-blur-sm dark:border-charcoal dark:bg-charcoal/80 dark:text-slate/60">
                               {product.category_name || product.category || 'General'}
                             </span>
 
@@ -669,8 +669,8 @@ const CustomerHomePage = () => {
                               onClick={() => toggleCompare(product)}
                               className={`absolute right-2.5 top-2.5 flex items-center gap-1 rounded-full px-2 py-1 text-[10px] font-semibold backdrop-blur-sm transition-colors ${
                                 isCompared
-                                  ? 'bg-amber-500 text-white'
-                                  : 'bg-slate-900/75 text-white hover:bg-slate-900'
+                                  ? 'bg-amber text-white'
+                                  : 'bg-charcoal/75 text-white hover:bg-charcoal'
                               }`}
                               title="Compare product"
                             >
@@ -680,48 +680,48 @@ const CustomerHomePage = () => {
                           </div>
 
                           <div className="mt-3">
-                            <div className="flex items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+                            <div className="flex items-center justify-between gap-2 text-[11px] text-slate dark:text-slate/80">
                               <span className="flex items-center gap-1.5 truncate">
-                                <Store className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                                <Store className="h-3.5 w-3.5 text-amber dark:text-amber-400" />
                                 <span className="truncate">{product.shop_name || 'Genie Partner Shop'}</span>
                               </span>
-                              <span className="flex items-center gap-1 text-amber-500 dark:text-amber-300">
+                              <span className="flex items-center gap-1 text-amber dark:text-amber-300">
                                 <Star className="h-3.5 w-3.5 fill-current" />
                                 {product.rating || '4.8'}
                               </span>
                             </div>
 
-                            <h3 className="mt-2 text-base font-semibold tracking-[-0.03em] text-slate-900 dark:text-white">
+                            <h3 className="mt-2 text-base font-semibold tracking-[-0.03em] text-navy dark:text-white">
                               {product.name}
                             </h3>
                           </div>
                         </div>
 
-                        <div className="mt-4 border-t border-stone-200 pt-3 dark:border-slate-700">
+                        <div className="mt-4 border-t border-warmwhite/60 pt-3 dark:border-charcoal">
                           <div className="flex items-center justify-between gap-2">
                             <div>
-                              <span className="text-[11px] text-slate-500 dark:text-slate-400">Price</span>
-                              <div className="mt-0.5 text-2xl font-extrabold tracking-[-0.05em] text-slate-900 dark:text-white">
+                              <span className="text-[11px] text-slate dark:text-slate/80">Price</span>
+                              <div className="mt-0.5 text-2xl font-extrabold tracking-[-0.05em] text-navy dark:text-white">
                                 ₹{Number(product.price || 0).toFixed(2)}
                               </div>
                             </div>
 
                             {isAvailable ? (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300">
+                              <span className="inline-flex items-center gap-1 rounded-full bg-mutedgreen/10 px-2 py-1 text-[10px] font-semibold text-mutedgreen dark:text-emerald-300">
                                 <CheckCircle className="h-3 w-3" />
                                 In stock
                               </span>
                             ) : (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-rose-500/10 px-2 py-1 text-[10px] font-semibold text-rose-700 dark:text-rose-300">
+                              <span className="inline-flex items-center gap-1 rounded-full bg-red/10 px-2 py-1 text-[10px] font-semibold text-red dark:text-rose-300">
                                 <AlertTriangle className="h-3 w-3" />
                                 Sold out
                               </span>
                             )}
                           </div>
 
-                          <div className="mt-3 flex items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
+                          <div className="mt-3 flex items-center justify-between gap-2 text-[11px] text-slate dark:text-slate/80">
                             <span className="flex items-center gap-1.5">
-                              <MapPin className="h-3.5 w-3.5 text-slate-400" />
+                              <MapPin className="h-3.5 w-3.5 text-slate/80" />
                               {product.distance_km || 0.6} km away
                             </span>
                           </div>
@@ -729,7 +729,7 @@ const CustomerHomePage = () => {
                           <button
                             type="button"
                             onClick={() => setSelectedProduct(product)}
-                            className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-slate-700 dark:bg-amber-500 dark:text-slate-950 dark:hover:bg-amber-400"
+                            className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-charcoal px-4 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-charcoal dark:bg-amber dark:text-slate-950 dark:hover:bg-amber-400"
                           >
                             <Eye className="h-3.5 w-3.5" />
                             View product
@@ -740,18 +740,18 @@ const CustomerHomePage = () => {
                   })}
                 </div>
               ) : (
-                <div className="rounded-[26px] border border-stone-200 bg-white p-12 text-center shadow-[0_8px_24px_rgba(15,23,42,0.04)] dark:border-slate-800 dark:bg-slate-900">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-700 dark:text-amber-300">
+                <div className="rounded-[26px] border border-warmwhite/60 bg-white p-12 text-center shadow-[0_8px_24px_rgba(15,23,42,0.04)] dark:border-charcoal dark:bg-charcoal">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber/10 text-amber dark:text-amber-300">
                     <ShoppingBag className="h-8 w-8" />
                   </div>
-                  <h3 className="mt-4 text-xl font-bold text-slate-900 dark:text-white">No products match your search yet.</h3>
-                  <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+                  <h3 className="mt-4 text-xl font-bold text-navy dark:text-white">No products match your search yet.</h3>
+                  <p className="mt-2 text-sm text-slate dark:text-slate/80">
                     Try a new search, reset filters, or browse all nearby categories.
                   </p>
                   <button
                     type="button"
                     onClick={handleResetFilters}
-                    className="mt-5 rounded-2xl bg-slate-900 px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-slate-700 dark:bg-amber-500 dark:text-slate-950 dark:hover:bg-amber-400"
+                    className="mt-5 rounded-2xl bg-charcoal px-5 py-2.5 text-xs font-semibold text-white transition-colors hover:bg-charcoal dark:bg-amber dark:text-slate-950 dark:hover:bg-amber-400"
                   >
                     Explore all categories
                   </button>
@@ -761,11 +761,11 @@ const CustomerHomePage = () => {
           </div>
         </section>
 
-        <section className="mt-16 border-t border-stone-200 pt-10 dark:border-slate-800">
+        <section className="mt-16 border-t border-warmwhite/60 pt-10 dark:border-charcoal">
           <div className="flex items-end justify-between gap-3">
             <div>
-              <h2 className="text-2xl font-bold tracking-[-0.05em] text-slate-900 dark:text-white">Shops near you</h2>
-              <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Find local stores and check what’s available before you visit.</p>
+              <h2 className="text-2xl font-bold tracking-[-0.05em] text-navy dark:text-white">Shops near you</h2>
+              <p className="mt-1 text-sm text-slate dark:text-slate/80">Find local stores and check what’s available before you visit.</p>
             </div>
           </div>
 
@@ -773,10 +773,10 @@ const CustomerHomePage = () => {
             {loading ? (
               <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="animate-pulse rounded-[26px] border border-stone-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-                    <div className="h-12 w-12 rounded-2xl bg-stone-200 dark:bg-slate-800" />
-                    <div className="mt-4 h-5 w-2/3 rounded-full bg-stone-200 dark:bg-slate-800" />
-                    <div className="mt-2 h-4 w-1/2 rounded-full bg-stone-200 dark:bg-slate-800" />
+                  <div key={i} className="animate-pulse rounded-[26px] border border-warmwhite/60 bg-white p-5 dark:border-charcoal dark:bg-charcoal">
+                    <div className="h-12 w-12 rounded-2xl bg-warmwhite dark:bg-charcoal" />
+                    <div className="mt-4 h-5 w-2/3 rounded-full bg-warmwhite dark:bg-charcoal" />
+                    <div className="mt-2 h-4 w-1/2 rounded-full bg-warmwhite dark:bg-charcoal" />
                   </div>
                 ))}
               </div>
@@ -785,7 +785,7 @@ const CustomerHomePage = () => {
                 {shops.map((shop) => (
                   <article
                     key={shop.id}
-                    className="rounded-[26px] border border-stone-200 bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-stone-300 dark:border-slate-800 dark:bg-slate-900 dark:shadow-none"
+                    className="rounded-[26px] border border-warmwhite/60 bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-warmwhite/60 dark:border-charcoal dark:bg-charcoal dark:shadow-none"
                   >
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
@@ -793,23 +793,23 @@ const CustomerHomePage = () => {
                           🏪
                         </div>
                         <div>
-                          <h3 className="text-base font-semibold text-slate-900 dark:text-white">{shop.name}</h3>
-                          <p className="text-[11px] text-slate-500 dark:text-slate-400">{shop.category || 'General Store'}</p>
+                          <h3 className="text-base font-semibold text-navy dark:text-white">{shop.name}</h3>
+                          <p className="text-[11px] text-slate dark:text-slate/80">{shop.category || 'General Store'}</p>
                         </div>
                       </div>
 
-                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-500/10 px-2 py-1 text-[10px] font-semibold text-amber-700 dark:text-amber-300">
+                      <span className="inline-flex items-center gap-1 rounded-full bg-amber/10 px-2 py-1 text-[10px] font-semibold text-amber dark:text-amber-300">
                         <Star className="h-3 w-3 fill-current" />
                         {shop.rating || '4.8'}
                       </span>
                     </div>
 
-                    <div className="mt-4 space-y-2 border-t border-stone-200 pt-4 text-xs text-slate-600 dark:border-slate-700 dark:text-slate-300">
+                    <div className="mt-4 space-y-2 border-t border-warmwhite/60 pt-4 text-xs text-slate dark:border-charcoal dark:text-slate/60">
                       <p className="flex items-center gap-2">
-                        <MapPin className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                        <MapPin className="h-3.5 w-3.5 text-amber dark:text-amber-400" />
                         <span>{shop.address || 'Market Street, Sector 4'}</span>
                       </p>
-                      <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
+                      <div className="flex items-center justify-between text-slate dark:text-slate/80">
                         <span>{shop.distance_km || 1.2} km away</span>
                         <span>{shop.available_products_count || 125} products</span>
                       </div>
@@ -818,21 +818,21 @@ const CustomerHomePage = () => {
                     <button
                       type="button"
                       onClick={() => setSelectedShopModal(shop)}
-                      className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-2.5 text-xs font-semibold text-slate-700 transition-colors hover:border-stone-300 hover:bg-stone-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                      className="mt-5 flex w-full items-center justify-center gap-2 rounded-2xl border border-warmwhite/60 bg-warmwhite px-4 py-2.5 text-xs font-semibold text-charcoal transition-colors hover:border-warmwhite/60 hover:bg-warmwhite dark:border-charcoal dark:bg-charcoal dark:text-slate/60 dark:hover:bg-charcoal"
                     >
-                      <Store className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" />
+                      <Store className="h-3.5 w-3.5 text-amber dark:text-amber-400" />
                       View store
                     </button>
                   </article>
                 ))}
               </div>
             ) : (
-              <div className="rounded-[26px] border border-stone-200 bg-white p-12 text-center dark:border-slate-800 dark:bg-slate-900">
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-700 dark:text-amber-300">
+              <div className="rounded-[26px] border border-warmwhite/60 bg-white p-12 text-center dark:border-charcoal dark:bg-charcoal">
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber/10 text-amber dark:text-amber-300">
                   <MapPin className="h-8 w-8" />
                 </div>
-                <h3 className="mt-4 text-xl font-bold text-slate-900 dark:text-white">No nearby shops available yet.</h3>
-                <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">We are expanding our local inventory coverage in your area.</p>
+                <h3 className="mt-4 text-xl font-bold text-navy dark:text-white">No nearby shops available yet.</h3>
+                <p className="mt-2 text-sm text-slate dark:text-slate/80">We are expanding our local inventory coverage in your area.</p>
               </div>
             )}
           </div>
@@ -840,15 +840,15 @@ const CustomerHomePage = () => {
       </main>
 
       {compareList.length > 0 && (
-        <div className="fixed bottom-4 left-4 right-4 z-40 mx-auto max-w-3xl rounded-[24px] border border-amber-300/50 bg-white/95 p-4 shadow-[0_12px_32px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-amber-500/30 dark:bg-slate-900/95">
+        <div className="fixed bottom-4 left-4 right-4 z-40 mx-auto max-w-3xl rounded-[24px] border border-amber-300/50 bg-white/95 p-4 shadow-[0_12px_32px_rgba(15,23,42,0.12)] backdrop-blur-xl dark:border-amber/30 dark:bg-charcoal/95">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500 text-sm font-bold text-white">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber text-sm font-bold text-white">
                 {compareList.length}
               </div>
               <div>
-                <p className="text-xs font-bold text-slate-900 dark:text-white">Compare products ({compareList.length}/3)</p>
-                <p className="hidden text-[11px] text-slate-500 dark:text-slate-400 sm:block">{compareList.map((p) => p.name).join(', ')}</p>
+                <p className="text-xs font-bold text-navy dark:text-white">Compare products ({compareList.length}/3)</p>
+                <p className="hidden text-[11px] text-slate dark:text-slate/80 sm:block">{compareList.map((p) => p.name).join(', ')}</p>
               </div>
             </div>
 
@@ -856,14 +856,14 @@ const CustomerHomePage = () => {
               <button
                 type="button"
                 onClick={() => setCompareList([])}
-                className="rounded-xl border border-stone-200 bg-stone-50 px-3 py-2 text-xs font-medium text-slate-600 transition-colors hover:bg-stone-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300"
+                className="rounded-xl border border-warmwhite/60 bg-warmwhite px-3 py-2 text-xs font-medium text-slate transition-colors hover:bg-warmwhite dark:border-charcoal dark:bg-charcoal dark:text-slate/60"
               >
                 Clear
               </button>
               <button
                 type="button"
                 onClick={() => setIsCompareModalOpen(true)}
-                className="flex items-center gap-1.5 rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-slate-700 dark:bg-amber-500 dark:text-slate-950 dark:hover:bg-amber-400"
+                className="flex items-center gap-1.5 rounded-xl bg-charcoal px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-charcoal dark:bg-amber dark:text-slate-950 dark:hover:bg-amber-400"
               >
                 <ArrowLeftRight className="h-4 w-4" />
                 Compare specs
@@ -921,3 +921,6 @@ const CustomerHomePage = () => {
 };
 
 export default CustomerHomePage;
+
+
+

@@ -75,7 +75,8 @@ export const debounce = (func, delay) => {
  * Get stock status label + CSS class
  */
 export const getStockStatus = (qty, minLevel) => {
-  if (qty === 0) return { label: 'OUT OF STOCK', className: 'text-rose-500 bg-rose-500/10 border-rose-500/30' };
-  if (qty <= minLevel) return { label: 'LOW STOCK', className: 'text-amber-400 bg-amber-500/10 border-amber-500/30' };
-  return { label: 'IN STOCK', className: 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30' };
+  if (qty === 0) return { label: 'OUT OF STOCK', className: 'text-red bg-red/10 border-red/30' };
+  if (qty <= minLevel) return { label: 'LOW STOCK', className: 'text-amber-400 bg-amber/10 border-amber/30' };
+  return { label: 'IN STOCK', className: 'text-emerald-400 bg-mutedgreen/10 border-mutedgreen/30' };
 };
+

@@ -18,15 +18,15 @@ const LocationSelector = () => {
   };
 
   return (
-    <div className="flex cursor-pointer items-center gap-2 rounded-xl border border-stone-200 bg-white/80 px-3 py-2 text-sm text-slate-700 hover:border-stone-300 hover:bg-white transition-colors dark:border-slate-700 dark:bg-slate-900/80 dark:text-slate-200">
-      <MapPin className="h-4 w-4 text-amber-500 dark:text-amber-400 shrink-0" />
+    <div className="flex cursor-pointer items-center gap-2 rounded-xl border border-warmwhite/60 bg-white/80 px-3 py-2 text-sm text-charcoal hover:border-warmwhite/60 hover:bg-white transition-colors dark:border-charcoal dark:bg-charcoal/80 dark:text-slate/60">
+      <MapPin className="h-4 w-4 text-amber dark:text-amber-400 shrink-0" />
       <span className="font-medium whitespace-nowrap">{areaName || 'Location'}</span>
-      <span className="text-[11px] text-slate-500 dark:text-slate-400">{radius} km</span>
-      <ChevronsUpDown className="h-3.5 w-3.5 text-slate-400" />
+      <span className="text-[11px] text-slate dark:text-slate/80">{radius} km</span>
+      <ChevronsUpDown className="h-3.5 w-3.5 text-slate/80" />
       {/* For simplicity, clicking triggers geolocation */}
       <button
         onClick={handleUseMyLocation}
-        className="ml-2 text-xs text-amber-600 underline"
+        className="ml-2 text-xs text-amber underline"
         title="Use My Location"
       >
         Use My Location
@@ -36,3 +36,5 @@ const LocationSelector = () => {
 };
 
 export default LocationSelector;
+
+

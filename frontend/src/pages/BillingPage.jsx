@@ -137,10 +137,10 @@ const BillingPage = () => {
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight text-charcoal dark:text-white">
             Smart Billing System & POS Terminal
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
+          <p className="text-slate dark:text-slate/80 text-xs mt-1">
             Barcode scanning, live total calculations, and QR invoice generation.
           </p>
         </div>
@@ -158,13 +158,13 @@ const BillingPage = () => {
         <div className="lg:col-span-7 space-y-4">
           <GlassCard className="p-4 space-y-4">
             <div className="relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-slate/80 absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search items by name, SKU or barcode to add..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-11 pr-4 py-2.5 rounded-xl bg-slate-900/60 border border-slate-800 text-xs text-white placeholder-slate-400 focus:outline-none"
+                className="w-full pl-11 pr-4 py-2.5 rounded-xl bg-charcoal/60 border border-charcoal text-xs text-white placeholder-slate-400 focus:outline-none"
               />
             </div>
 
@@ -173,7 +173,7 @@ const BillingPage = () => {
                 <div
                   key={p.id}
                   onClick={() => addToCart(p)}
-                  className="p-3 rounded-2xl bg-slate-900/60 hover:bg-indigo-600/20 border border-slate-800 hover:border-indigo-500/50 transition-all cursor-pointer group flex flex-col justify-between"
+                  className="p-3 rounded-2xl bg-charcoal/60 hover:bg-charcoal/20 border border-charcoal hover:border-charcoal/50 transition-all cursor-pointer group flex flex-col justify-between"
                 >
                   <div className="space-y-1">
                     <img
@@ -181,14 +181,14 @@ const BillingPage = () => {
                       alt={p.name}
                       className="w-full h-24 object-cover rounded-xl mb-2"
                     />
-                    <h4 className="font-bold text-slate-100 text-xs truncate group-hover:text-indigo-400 transition-colors">
+                    <h4 className="font-bold text-slate/60 text-xs truncate group-hover:text-indigo-400 transition-colors">
                       {p.name}
                     </h4>
-                    <p className="text-[10px] text-slate-400 font-mono">{p.sku}</p>
+                    <p className="text-[10px] text-slate/80 font-mono">{p.sku}</p>
                   </div>
-                  <div className="flex justify-between items-center mt-3 pt-2 border-t border-slate-800">
+                  <div className="flex justify-between items-center mt-3 pt-2 border-t border-charcoal">
                     <span className="font-bold font-mono text-cyan-400 text-xs">${parseFloat(p.price).toFixed(2)}</span>
-                    <span className="text-[10px] text-slate-400">{p.stock_quantity} left</span>
+                    <span className="text-[10px] text-slate/80">{p.stock_quantity} left</span>
                   </div>
                 </div>
               ))}
@@ -198,8 +198,8 @@ const BillingPage = () => {
 
         {/* Right: Checkout Cart & Order Calculation */}
         <div className="lg:col-span-5 space-y-4">
-          <GlassCard className="space-y-4 border-slate-800">
-            <h3 className="font-bold text-slate-100 text-sm flex items-center justify-between">
+          <GlassCard className="space-y-4 border-charcoal">
+            <h3 className="font-bold text-slate/60 text-sm flex items-center justify-between">
               <span className="flex items-center gap-2">
                 <Receipt className="w-4 h-4 text-indigo-400" /> Current Order Cart
               </span>
@@ -209,17 +209,17 @@ const BillingPage = () => {
             {/* Cart Items List */}
             <div className="space-y-2 max-h-60 overflow-y-auto pr-1 text-xs">
               {cart.length === 0 ? (
-                <p className="text-slate-400 italic text-center py-8">Cart is empty. Select products on left.</p>
+                <p className="text-slate/80 italic text-center py-8">Cart is empty. Select products on left.</p>
               ) : (
                 cart.map((item) => (
-                  <div key={item.product_id} className="p-3 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between">
+                  <div key={item.product_id} className="p-3 rounded-xl bg-charcoal/60 border border-charcoal flex items-center justify-between">
                     <div>
-                      <h4 className="font-bold text-slate-200">{item.product_name}</h4>
-                      <p className="text-[10px] text-slate-400 font-mono">${item.unit_price.toFixed(2)} each</p>
+                      <h4 className="font-bold text-slate/60">{item.product_name}</h4>
+                      <p className="text-[10px] text-slate/80 font-mono">${item.unit_price.toFixed(2)} each</p>
                     </div>
 
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1 bg-slate-800 rounded-lg p-1">
+                      <div className="flex items-center gap-1 bg-charcoal rounded-lg p-1">
                         <button onClick={() => updateCartQty(item.product_id, -1)} className="p-1 hover:text-rose-400">
                           <Minus className="w-3 h-3" />
                         </button>
@@ -244,20 +244,20 @@ const BillingPage = () => {
                 placeholder="Customer Name"
                 value={customerName}
                 onChange={(e) => setCustomerName(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white"
+                className="px-3 py-2 rounded-xl bg-charcoal border border-charcoal text-white"
               />
               <input
                 type="text"
                 placeholder="Phone Number"
                 value={customerPhone}
                 onChange={(e) => setCustomerPhone(e.target.value)}
-                className="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-white"
+                className="px-3 py-2 rounded-xl bg-charcoal border border-charcoal text-white"
               />
             </div>
 
             {/* Payment Method */}
             <div>
-              <label className="text-[11px] text-slate-400 font-medium block mb-1.5">Payment Method</label>
+              <label className="text-[11px] text-slate/80 font-medium block mb-1.5">Payment Method</label>
               <div className="grid grid-cols-3 gap-2 text-xs">
                 {['CASH', 'CARD', 'UPI'].map((method) => (
                   <button
@@ -266,8 +266,8 @@ const BillingPage = () => {
                     onClick={() => setPaymentMethod(method)}
                     className={`py-2 rounded-xl font-bold border transition-all ${
                       paymentMethod === method
-                        ? 'bg-indigo-600 border-indigo-500 text-white shadow-lg'
-                        : 'bg-slate-900 border-slate-800 text-slate-400 hover:text-slate-200'
+                        ? 'bg-charcoal border-charcoal text-white shadow-lg'
+                        : 'bg-charcoal border-charcoal text-slate/80 hover:text-slate/60'
                     }`}
                   >
                     {method}
@@ -277,26 +277,26 @@ const BillingPage = () => {
             </div>
 
             {/* Subtotal Calculations */}
-            <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-2 text-xs">
-              <div className="flex justify-between text-slate-400">
+            <div className="p-4 rounded-2xl bg-charcoal/80 border border-charcoal space-y-2 text-xs">
+              <div className="flex justify-between text-slate/80">
                 <span>Subtotal</span>
                 <span className="font-mono">${subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-slate-400">
+              <div className="flex justify-between text-slate/80">
                 <span>Tax (8%)</span>
                 <span className="font-mono">${tax.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between items-center text-slate-400">
+              <div className="flex justify-between items-center text-slate/80">
                 <span>Discount ($)</span>
                 <input
                   type="number"
                   min="0"
                   value={discount}
                   onChange={(e) => setDiscount(e.target.value)}
-                  className="w-20 px-2 py-1 rounded-lg bg-slate-800 border border-slate-700 text-right font-mono text-white"
+                  className="w-20 px-2 py-1 rounded-lg bg-charcoal border border-charcoal text-right font-mono text-white"
                 />
               </div>
-              <div className="flex justify-between text-base font-extrabold text-cyan-400 border-t border-slate-800 pt-2">
+              <div className="flex justify-between text-base font-extrabold text-cyan-400 border-t border-charcoal pt-2">
                 <span>Total Amount</span>
                 <span className="font-mono">${total.toFixed(2)}</span>
               </div>
@@ -315,14 +315,14 @@ const BillingPage = () => {
       </div>
 
       {/* Orders History Table */}
-      <GlassCard className="border-slate-800 space-y-4">
-        <h3 className="font-bold text-slate-100 text-sm flex items-center gap-2">
+      <GlassCard className="border-charcoal space-y-4">
+        <h3 className="font-bold text-slate/60 text-sm flex items-center gap-2">
           <History className="w-4 h-4 text-cyan-400" /> Recent Sales History & Invoices
         </h3>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-slate-900/60 border-b border-slate-800 text-slate-400 uppercase font-semibold">
+            <thead className="bg-charcoal/60 border-b border-charcoal text-slate/80 uppercase font-semibold">
               <tr>
                 <th className="p-3">Invoice #</th>
                 <th className="p-3">Customer</th>
@@ -332,21 +332,21 @@ const BillingPage = () => {
                 <th className="p-3 text-right">Invoice</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800 text-slate-300">
+            <tbody className="divide-y divide-slate-800 text-slate/60">
               {orders.slice(0, 8).map((ord) => (
-                <tr key={ord.id} className="hover:bg-slate-800/40">
+                <tr key={ord.id} className="hover:bg-charcoal/40">
                   <td className="p-3 font-mono font-bold text-indigo-400">#{ord.order_number}</td>
-                  <td className="p-3 text-slate-200">{ord.customer_name}</td>
+                  <td className="p-3 text-slate/60">{ord.customer_name}</td>
                   <td className="p-3 font-semibold text-xs">{ord.payment_method}</td>
                   <td className="p-3 font-mono font-bold text-cyan-400">${parseFloat(ord.total_amount).toFixed(2)}</td>
-                  <td className="p-3 text-slate-400">{new Date(ord.created_at || Date.now()).toLocaleDateString()}</td>
+                  <td className="p-3 text-slate/80">{new Date(ord.created_at || Date.now()).toLocaleDateString()}</td>
                   <td className="p-3 text-right">
                     <button
                       onClick={() => {
                         setActiveInvoice(ord);
                         setShowInvoiceModal(true);
                       }}
-                      className="px-3 py-1 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold"
+                      className="px-3 py-1 rounded-xl bg-charcoal hover:bg-charcoal text-slate/60 font-semibold"
                     >
                       View Invoice
                     </button>
@@ -375,3 +375,5 @@ const BillingPage = () => {
 };
 
 export default BillingPage;
+
+

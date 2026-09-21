@@ -4,7 +4,7 @@ import CustomerDiscoveryHeader from '../components/CustomerDiscoveryHeader';
 
 const CustomerLayout = () => {
   return (
-    <div className="min-h-screen bg-[#f6f1ea] text-slate-900 transition-colors duration-300 dark:bg-[#0d1320] dark:text-slate-100">
+    <div className="min-h-screen bg-warmwhite text-navy transition-colors duration-300 dark:bg-navy dark:text-slate/60">
       <CustomerDiscoveryHeader />
       <div className="flex-1">
         <Outlet />
@@ -14,3 +14,5 @@ const CustomerLayout = () => {
 };
 
 export default CustomerLayout;
+
+

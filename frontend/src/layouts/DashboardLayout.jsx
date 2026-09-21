@@ -9,7 +9,7 @@ const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+    <div className="flex min-h-screen bg-warmwhite dark:bg-navy text-navy dark:text-slate/60 font-sans transition-colors duration-300">
       <Sidebar
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
@@ -32,3 +32,4 @@ const DashboardLayout = () => {
 };
 
 export default DashboardLayout;
+

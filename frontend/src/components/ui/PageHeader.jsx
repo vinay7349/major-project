@@ -5,11 +5,11 @@ import React from 'react';
  */
 const PageHeader = ({ title, subtitle, badge, badgeColor = 'indigo', children }) => {
   const colorMap = {
-    indigo: 'bg-indigo-500/10 border-indigo-500/30 text-indigo-400',
-    cyan: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-400',
-    purple: 'bg-purple-500/10 border-purple-500/30 text-purple-400',
-    rose: 'bg-rose-500/10 border-rose-500/30 text-rose-400',
-    emerald: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
+    indigo: 'bg-charcoal/10 border-charcoal/30 text-indigo-400',
+    cyan: 'bg-amber/10 border-amber/30 text-cyan-400',
+    purple: 'bg-charcoal/10 border-charcoal/30 text-purple-400',
+    rose: 'bg-red/10 border-red/30 text-rose-400',
+    emerald: 'bg-mutedgreen/10 border-mutedgreen/30 text-emerald-400',
   };
 
   return (
@@ -20,11 +20,11 @@ const PageHeader = ({ title, subtitle, badge, badgeColor = 'indigo', children })
             {badge}
           </div>
         )}
-        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-800 dark:text-white leading-tight">
+        <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight text-charcoal dark:text-white leading-tight">
           {title}
         </h1>
         {subtitle && (
-          <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
+          <p className="text-slate dark:text-slate/80 text-xs leading-relaxed">
             {subtitle}
           </p>
         )}
@@ -40,3 +40,6 @@ const PageHeader = ({ title, subtitle, badge, badgeColor = 'indigo', children })
 };
 
 export default PageHeader;
+
+
+
