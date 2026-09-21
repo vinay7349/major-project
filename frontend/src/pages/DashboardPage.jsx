@@ -91,10 +91,10 @@ const DashboardPage = () => {
       {/* Top Banner Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight text-charcoal dark:text-white">
             Store Overview Dashboard
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
+          <p className="text-slate dark:text-slate/80 text-xs mt-1">
             Real-time sales monitoring, inventory alerts, and predictive AI insights.
           </p>
         </div>
@@ -102,7 +102,7 @@ const DashboardPage = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={fetchDashboardData}
-            className="p-2.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-indigo-500 transition-all text-xs font-semibold flex items-center gap-2"
+            className="p-2.5 rounded-xl bg-white dark:bg-charcoal border border-warmwhite/60 dark:border-charcoal text-slate dark:text-slate/60 hover:text-charcoal transition-all text-xs font-semibold flex items-center gap-2"
           >
             <RefreshCw className="w-4 h-4" /> Refresh
           </button>
@@ -120,16 +120,16 @@ const DashboardPage = () => {
         <GlassCard className="relative overflow-hidden">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Today's Sales</p>
-              <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2 font-mono">
+              <p className="text-xs font-semibold text-slate dark:text-slate/80 uppercase tracking-wider">Today's Sales</p>
+              <h2 className="text-3xl font-extrabold text-navy dark:text-white mt-2 font-mono">
                 ${overview.today_sales.toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </h2>
-              <div className="flex items-center gap-1 text-[11px] font-semibold text-emerald-500 mt-2">
+              <div className="flex items-center gap-1 text-[11px] font-semibold text-mutedgreen mt-2">
                 <ArrowUpRight className="w-3.5 h-3.5" />
                 <span>+14.2% vs yesterday ({overview.today_orders_count} orders)</span>
               </div>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-500 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-2xl bg-charcoal/10 border border-charcoal/30 text-charcoal flex items-center justify-center">
               <DollarSign className="w-6 h-6" />
             </div>
           </div>
@@ -138,16 +138,16 @@ const DashboardPage = () => {
         <GlassCard className="relative overflow-hidden">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Monthly Revenue</p>
-              <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2 font-mono">
+              <p className="text-xs font-semibold text-slate dark:text-slate/80 uppercase tracking-wider">Monthly Revenue</p>
+              <h2 className="text-3xl font-extrabold text-navy dark:text-white mt-2 font-mono">
                 ${overview.monthly_revenue.toLocaleString(undefined, { minimumFractionDigits: 2 })}
               </h2>
-              <div className="flex items-center gap-1 text-[11px] font-semibold text-emerald-500 mt-2">
+              <div className="flex items-center gap-1 text-[11px] font-semibold text-mutedgreen mt-2">
                 <TrendingUp className="w-3.5 h-3.5" />
                 <span>Target 88% Achieved</span>
               </div>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-500 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-2xl bg-amber/10 border border-amber/30 text-amber flex items-center justify-center">
               <TrendingUp className="w-6 h-6" />
             </div>
           </div>
@@ -156,32 +156,32 @@ const DashboardPage = () => {
         <GlassCard className="relative overflow-hidden">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Total Products</p>
-              <h2 className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2 font-mono">
+              <p className="text-xs font-semibold text-slate dark:text-slate/80 uppercase tracking-wider">Total Products</p>
+              <h2 className="text-3xl font-extrabold text-navy dark:text-white mt-2 font-mono">
                 {overview.total_products}
               </h2>
               <NavLink to="/products" className="text-[11px] font-semibold text-indigo-400 hover:underline mt-2 block">
                 Manage Catalog &rarr;
               </NavLink>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-purple-500/10 border border-purple-500/30 text-purple-500 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-2xl bg-charcoal/10 border border-charcoal/30 text-charcoal flex items-center justify-center">
               <Package className="w-6 h-6" />
             </div>
           </div>
         </GlassCard>
 
-        <GlassCard className="relative overflow-hidden border-rose-500/30">
+        <GlassCard className="relative overflow-hidden border-red/30">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Low Stock Warning</p>
-              <h2 className="text-3xl font-extrabold text-rose-500 mt-2 font-mono">
+              <p className="text-xs font-semibold text-slate dark:text-slate/80 uppercase tracking-wider">Low Stock Warning</p>
+              <h2 className="text-3xl font-extrabold text-red mt-2 font-mono">
                 {overview.low_stock_products} Items
               </h2>
               <NavLink to="/inventory" className="text-[11px] font-semibold text-rose-400 hover:underline mt-2 block">
                 Restock Needed &rarr;
               </NavLink>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-500 flex items-center justify-center">
+            <div className="w-12 h-12 rounded-2xl bg-red/10 border border-red/30 text-red flex items-center justify-center">
               <AlertTriangle className="w-6 h-6 animate-bounce" />
             </div>
           </div>
@@ -194,10 +194,10 @@ const DashboardPage = () => {
         <GlassCard className="lg:col-span-2 space-y-6">
           <div className="flex justify-between items-center">
             <div>
-              <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Weekly Revenue Breakdown</h3>
-              <p className="text-xs text-slate-400">Sales performance over the past 7 days</p>
+              <h3 className="text-lg font-bold text-charcoal dark:text-slate/60">Weekly Revenue Breakdown</h3>
+              <p className="text-xs text-slate/80">Sales performance over the past 7 days</p>
             </div>
-            <span className="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold">
+            <span className="px-3 py-1 rounded-full bg-charcoal/10 border border-charcoal/30 text-indigo-400 text-xs font-semibold">
               Live Feed
             </span>
           </div>
@@ -225,8 +225,8 @@ const DashboardPage = () => {
         {/* Category Share Pie Chart */}
         <GlassCard className="space-y-6">
           <div>
-            <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Category Share</h3>
-            <p className="text-xs text-slate-400">Revenue split across top product categories</p>
+            <h3 className="text-lg font-bold text-charcoal dark:text-slate/60">Category Share</h3>
+            <p className="text-xs text-slate/80">Revenue split across top product categories</p>
           </div>
 
           <div className="h-56 w-full flex items-center justify-center">
@@ -257,9 +257,9 @@ const DashboardPage = () => {
               <div key={idx} className="flex justify-between items-center text-xs">
                 <div className="flex items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }}></div>
-                  <span className="text-slate-600 dark:text-slate-300 font-medium">{item.name}</span>
+                  <span className="text-slate dark:text-slate/60 font-medium">{item.name}</span>
                 </div>
-                <span className="font-mono font-bold text-slate-800 dark:text-slate-100">${item.value}</span>
+                <span className="font-mono font-bold text-charcoal dark:text-slate/60">${item.value}</span>
               </div>
             ))}
           </div>
@@ -267,19 +267,19 @@ const DashboardPage = () => {
       </div>
 
       {/* AI Sales Forecast Card */}
-      <GlassCard className="bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-900 border-indigo-500/30 space-y-4">
+      <GlassCard className="bg-gradient-to-r from-indigo-950/40 via-purple-950/30 to-slate-900 border-charcoal/30 space-y-4">
         <div className="flex items-center gap-2 text-indigo-400 font-bold text-sm">
           <Sparkles className="w-5 h-5 text-cyan-400 animate-spin" />
           <span>AI Predictive Machine Learning Sales Forecast</span>
         </div>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate/80">
           Estimated upcoming daily sales revenue based on historic order momentum and seasonality.
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-7 gap-4 pt-2">
           {(ai_sales_prediction || []).map((pred, i) => (
-            <div key={i} className="p-3 rounded-2xl bg-slate-900/80 border border-slate-800 text-center">
-              <span className="text-[11px] font-semibold text-slate-400 block">{pred.day}</span>
+            <div key={i} className="p-3 rounded-2xl bg-charcoal/80 border border-charcoal text-center">
+              <span className="text-[11px] font-semibold text-slate/80 block">{pred.day}</span>
               <span className="text-base font-extrabold text-cyan-400 font-mono block mt-1">
                 ${pred.predicted_revenue}
               </span>
@@ -293,3 +293,6 @@ const DashboardPage = () => {
 };
 
 export default DashboardPage;
+
+
+

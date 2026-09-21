@@ -103,10 +103,10 @@ const ProductsPage = () => {
       {/* Header & Actions */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-slate-800 dark:text-white">
+          <h1 className="text-3xl font-extrabold tracking-tight text-charcoal dark:text-white">
             Product Catalog & SKU Management
           </h1>
-          <p className="text-slate-500 dark:text-slate-400 text-xs mt-1">
+          <p className="text-slate dark:text-slate/80 text-xs mt-1">
             Manage store inventory items, pricing, barcodes, and stock levels.
           </p>
         </div>
@@ -138,20 +138,20 @@ const ProductsPage = () => {
       {/* Filter Bar */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-slate-400 absolute left-4 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate/80 absolute left-4 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search by product name, SKU or barcode..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+            className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-charcoal border border-warmwhite/60 dark:border-charcoal text-xs text-charcoal dark:text-slate/60 focus:outline-none focus:ring-2 focus:ring-charcoal/50"
           />
         </div>
 
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
-          className="px-4 py-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-800 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/50"
+          className="px-4 py-3 rounded-xl bg-white dark:bg-charcoal border border-warmwhite/60 dark:border-charcoal text-xs text-charcoal dark:text-slate/60 focus:outline-none focus:ring-2 focus:ring-charcoal/50"
         >
           <option value="">All Categories</option>
           {categories.map((c) => (
@@ -164,10 +164,10 @@ const ProductsPage = () => {
       {loading ? (
         <TableSkeleton />
       ) : (
-        <GlassCard className="p-0 overflow-hidden border-slate-200 dark:border-slate-800">
+        <GlassCard className="p-0 overflow-hidden border-warmwhite/60 dark:border-charcoal">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-slate-100 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
+              <thead className="bg-warmwhite dark:bg-charcoal/80 border-b border-warmwhite/60 dark:border-charcoal text-slate dark:text-slate/80 font-semibold uppercase tracking-wider">
                 <tr>
                   <th className="p-4">Product Info</th>
                   <th className="p-4">SKU / Barcode</th>
@@ -177,46 +177,46 @@ const ProductsPage = () => {
                   <th className="p-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-slate-700 dark:text-slate-300">
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800 text-charcoal dark:text-slate/60">
                 {products.length === 0 ? (
                   <tr>
-                    <td colSpan="6" className="p-8 text-center text-slate-400">
+                    <td colSpan="6" className="p-8 text-center text-slate/80">
                       No products found. Click "Add New Product" to create one.
                     </td>
                   </tr>
                 ) : (
                   products.map((p) => (
-                    <tr key={p.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors">
+                    <tr key={p.id} className="hover:bg-warmwhite dark:hover:bg-charcoal/40 transition-colors">
                       <td className="p-4 flex items-center gap-3">
                         <img
                           src={p.image_url || 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80'}
                           alt={p.name}
-                          className="w-10 h-10 rounded-xl object-cover border border-slate-700/50"
+                          className="w-10 h-10 rounded-xl object-cover border border-charcoal/50"
                         />
                         <div>
-                          <p className="font-bold text-slate-900 dark:text-slate-100">{p.name}</p>
-                          <p className="text-[10px] text-slate-400 truncate max-w-[200px]">{p.description}</p>
+                          <p className="font-bold text-navy dark:text-slate/60">{p.name}</p>
+                          <p className="text-[10px] text-slate/80 truncate max-w-[200px]">{p.description}</p>
                         </div>
                       </td>
                       <td className="p-4 font-mono text-[11px]">
                         <p className="font-semibold text-indigo-400">{p.sku}</p>
-                        <p className="text-slate-400 flex items-center gap-1 cursor-pointer" onClick={() => setShowBarcodeModal(p)}>
+                        <p className="text-slate/80 flex items-center gap-1 cursor-pointer" onClick={() => setShowBarcodeModal(p)}>
                           <Barcode className="w-3.5 h-3.5" /> {p.barcode || 'N/A'}
                         </p>
                       </td>
                       <td className="p-4">
-                        <span className="px-2.5 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 font-medium text-[10px]">
+                        <span className="px-2.5 py-1 rounded-full bg-charcoal/10 border border-charcoal/30 text-indigo-400 font-medium text-[10px]">
                           {p.category_name || 'General'}
                         </span>
                       </td>
-                      <td className="p-4 font-mono font-bold text-slate-900 dark:text-slate-100">
+                      <td className="p-4 font-mono font-bold text-navy dark:text-slate/60">
                         ${parseFloat(p.price).toFixed(2)}
                       </td>
                       <td className="p-4">
                         <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold inline-flex items-center gap-1 ${
                           p.stock_quantity <= p.min_stock_level
-                            ? 'bg-rose-500/10 border border-rose-500/30 text-rose-500'
-                            : 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-400'
+                            ? 'bg-red/10 border border-red/30 text-red'
+                            : 'bg-mutedgreen/10 border border-mutedgreen/30 text-emerald-400'
                         }`}>
                           {p.stock_quantity <= p.min_stock_level ? (
                             <AlertCircle className="w-3 h-3" />
@@ -230,13 +230,13 @@ const ProductsPage = () => {
                         <div className="flex justify-end gap-2">
                           <button
                             onClick={() => openEditModal(p)}
-                            className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:text-indigo-400 transition-colors"
+                            className="p-2 rounded-xl bg-warmwhite dark:bg-charcoal hover:text-indigo-400 transition-colors"
                           >
                             <Edit3 className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(p.id)}
-                            className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:text-rose-500 transition-colors"
+                            className="p-2 rounded-xl bg-warmwhite dark:bg-charcoal hover:text-red transition-colors"
                           >
                             <Trash2 className="w-4 h-4" />
                           </button>
@@ -253,105 +253,105 @@ const ProductsPage = () => {
 
       {/* Add / Edit Product Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md">
-          <div className="glass-card max-w-lg w-full rounded-3xl p-6 relative border border-slate-700/50 shadow-2xl">
-            <button onClick={() => setShowAddModal(false)} className="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/70 backdrop-blur-md">
+          <div className="glass-card max-w-lg w-full rounded-3xl p-6 relative border border-charcoal/50 shadow-2xl">
+            <button onClick={() => setShowAddModal(false)} className="absolute top-4 right-4 text-slate/80 hover:text-white">
               <X className="w-5 h-5" />
             </button>
-            <h3 className="text-xl font-bold text-slate-100 mb-4">
+            <h3 className="text-xl font-bold text-slate/60 mb-4">
               {editingProduct ? 'Edit Product' : 'Add New Product'}
             </h3>
 
             <form onSubmit={handleSaveProduct} className="space-y-4 text-xs">
               <div>
-                <label className="text-slate-300 font-medium block mb-1">Product Title</label>
+                <label className="text-slate/60 font-medium block mb-1">Product Title</label>
                 <input
                   type="text"
                   required
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Organic Almond Milk 1L"
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white"
+                  className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-slate-300 font-medium block mb-1">SKU Code</label>
+                  <label className="text-slate/60 font-medium block mb-1">SKU Code</label>
                   <input
                     type="text"
                     required
                     value={formData.sku}
                     onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono"
+                    className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white font-mono"
                   />
                 </div>
                 <div>
-                  <label className="text-slate-300 font-medium block mb-1">Barcode Number</label>
+                  <label className="text-slate/60 font-medium block mb-1">Barcode Number</label>
                   <input
                     type="text"
                     value={formData.barcode}
                     onChange={(e) => setFormData({ ...formData, barcode: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white font-mono"
+                    className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white font-mono"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-slate-300 font-medium block mb-1">Retail Price ($)</label>
+                  <label className="text-slate/60 font-medium block mb-1">Retail Price ($)</label>
                   <input
                     type="number"
                     step="0.01"
                     required
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white"
+                    className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white"
                   />
                 </div>
                 <div>
-                  <label className="text-slate-300 font-medium block mb-1">Cost Price ($)</label>
+                  <label className="text-slate/60 font-medium block mb-1">Cost Price ($)</label>
                   <input
                     type="number"
                     step="0.01"
                     value={formData.cost_price}
                     onChange={(e) => setFormData({ ...formData, cost_price: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white"
+                    className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-slate-300 font-medium block mb-1">Stock Quantity</label>
+                  <label className="text-slate/60 font-medium block mb-1">Stock Quantity</label>
                   <input
                     type="number"
                     required
                     value={formData.stock_quantity}
                     onChange={(e) => setFormData({ ...formData, stock_quantity: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white"
+                    className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white"
                   />
                 </div>
                 <div>
-                  <label className="text-slate-300 font-medium block mb-1">Low Stock Threshold</label>
+                  <label className="text-slate/60 font-medium block mb-1">Low Stock Threshold</label>
                   <input
                     type="number"
                     required
                     value={formData.min_stock_level}
                     onChange={(e) => setFormData({ ...formData, min_stock_level: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white"
+                    className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-slate-300 font-medium block mb-1">Image URL</label>
+                <label className="text-slate/60 font-medium block mb-1">Image URL</label>
                 <input
                   type="url"
                   value={formData.image_url}
                   onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                   placeholder="https://..."
-                  className="w-full px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-white"
+                  className="w-full px-4 py-2.5 rounded-xl bg-charcoal border border-charcoal text-white"
                 />
               </div>
 
@@ -368,13 +368,13 @@ const ProductsPage = () => {
 
       {/* Barcode Viewer Modal */}
       {showBarcodeModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-md">
-          <div className="glass-card max-w-sm w-full rounded-3xl p-6 relative border border-slate-700 text-center">
-            <button onClick={() => setShowBarcodeModal(null)} className="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/70 backdrop-blur-md">
+          <div className="glass-card max-w-sm w-full rounded-3xl p-6 relative border border-charcoal text-center">
+            <button onClick={() => setShowBarcodeModal(null)} className="absolute top-4 right-4 text-slate/80 hover:text-white">
               <X className="w-5 h-5" />
             </button>
             <h3 className="text-lg font-bold text-white mb-2">{showBarcodeModal.name}</h3>
-            <p className="text-xs text-slate-400 font-mono mb-4">{showBarcodeModal.barcode}</p>
+            <p className="text-xs text-slate/80 font-mono mb-4">{showBarcodeModal.barcode}</p>
 
             <div className="bg-white p-4 rounded-2xl flex items-center justify-center shadow-inner mb-4">
               <img
@@ -394,3 +394,6 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
+
+
+

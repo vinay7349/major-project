@@ -102,6 +102,9 @@ export const communityAPI = {
   getReviews: (params) => api.get('/reviews/product-reviews/', { params }),
   createReview: (data) => api.post('/reviews/product-reviews/', data),
   getNearbyShops: () => api.get('/reviews/nearby-shops/'),
+  getPosts: () => api.get('/reviews/community-posts/'),
+  createPost: (data) => api.post('/reviews/community-posts/', data),
+  createComment: (data) => api.post('/reviews/community-comments/', data),
 };
 
 export default api;

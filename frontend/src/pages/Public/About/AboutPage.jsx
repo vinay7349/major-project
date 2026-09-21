@@ -35,7 +35,7 @@ function FlowArrow({ label, direction = 'down' }) {
 /* ─── Tech badge ─── */
 function TechBadge({ children }) {
   return (
-    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800/80 border border-slate-700/50 text-[11px] font-medium text-slate-300 tracking-wide">
+    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-charcoal/80 border border-charcoal/50 text-[11px] font-medium text-slate/60 tracking-wide">
       <Cpu className="w-3 h-3 text-amber-400/70" />
       {children}
     </span>
@@ -47,8 +47,8 @@ function FlowNode({ icon: Icon, label, highlight = false }) {
   return (
     <div className={`flex flex-col items-center gap-2 px-4 py-3 rounded-xl border transition-all ${
       highlight
-        ? 'bg-amber-500/10 border-amber-500/30 text-amber-400'
-        : 'bg-slate-800/50 border-slate-700/40 text-slate-300'
+        ? 'bg-amber/10 border-amber/30 text-amber-400'
+        : 'bg-charcoal/50 border-charcoal/40 text-slate/60'
     }`}>
       <Icon className="w-5 h-5" />
       <span className="text-[11px] font-medium text-center leading-tight whitespace-nowrap">{label}</span>
@@ -75,7 +75,7 @@ const AboutPage = () => {
       {/* ═══════════════════════════════════════
           SECTION 1 — HERO
          ═══════════════════════════════════════ */}
-      <section className="relative min-h-[92vh] flex items-center justify-center bg-[#080A19] overflow-hidden">
+      <section className="relative min-h-[92vh] flex items-center justify-center bg-navy overflow-hidden">
         {/* Background image with parallax */}
         <div
           className="absolute inset-0 opacity-30"
@@ -91,7 +91,7 @@ const AboutPage = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-[#080A19]/80 via-transparent to-[#080A19]/80" />
 
         {/* Subtle ambient glow */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-amber-500/5 blur-[120px]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-amber/5 blur-[120px]" />
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-6 py-20">
           <Reveal>
@@ -153,7 +153,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-base sm:text-lg text-slate-400 text-center max-w-3xl mx-auto leading-relaxed mb-16">
+            <p className="text-base sm:text-lg text-slate/80 text-center max-w-3xl mx-auto leading-relaxed mb-16">
               ShopGenie is a smart retail platform designed for small and local shops.
               It helps shop owners digitally manage their products, prices, inventory, and shop information
               while giving customers an easier way to discover products and find nearby shops.
@@ -183,16 +183,16 @@ const AboutPage = () => {
               },
             ]).map((item, i) => (
               <Reveal key={item.title} delay={i * 120}>
-                <div className="group relative bg-slate-900/60 border border-slate-800/70 rounded-2xl p-8 text-center hover:border-slate-700/80 transition-all duration-500 hover:-translate-y-1">
+                <div className="group relative bg-charcoal/60 border border-charcoal/70 rounded-2xl p-8 text-center hover:border-charcoal/80 transition-all duration-500 hover:-translate-y-1">
                   <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 ${
-                    item.color === 'amber' ? 'bg-amber-500/10 text-amber-400' :
+                    item.color === 'amber' ? 'bg-amber/10 text-amber-400' :
                     item.color === 'blue' ? 'bg-blue-500/10 text-blue-400' :
-                    'bg-emerald-500/10 text-emerald-400'
+                    'bg-mutedgreen/10 text-emerald-400'
                   }`}>
                     <item.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-sm font-bold text-white/90 tracking-[0.2em] mb-3">{item.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+                  <p className="text-sm text-slate/80 leading-relaxed">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -212,7 +212,7 @@ const AboutPage = () => {
             </h2>
           </Reveal>
           <Reveal delay={100}>
-            <p className="text-slate-400 text-center max-w-2xl mx-auto mb-16">
+            <p className="text-slate/80 text-center max-w-2xl mx-auto mb-16">
               ShopGenie bridges the gap between shop owners and customers with digital tools built for local retail.
             </p>
           </Reveal>
@@ -220,7 +220,7 @@ const AboutPage = () => {
           <div className="grid md:grid-cols-2 gap-8">
             {/* Customers card */}
             <Reveal delay={0}>
-              <div className="relative group bg-gradient-to-br from-slate-900/80 to-slate-900/40 border border-slate-800/60 rounded-3xl p-8 sm:p-10 overflow-hidden hover:border-blue-500/20 transition-all duration-500">
+              <div className="relative group bg-gradient-to-br from-slate-900/80 to-slate-900/40 border border-charcoal/60 rounded-3xl p-8 sm:p-10 overflow-hidden hover:border-blue-500/20 transition-all duration-500">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-blue-500/5 rounded-full blur-[80px]" />
                 <div className="relative">
                   <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 mb-6">
@@ -230,7 +230,7 @@ const AboutPage = () => {
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 leading-snug">
                     Finding a product shouldn't mean visiting multiple shops.
                   </h3>
-                  <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate/80 leading-relaxed">
                     Customers may not know which nearby shop has a required product, whether it is currently
                     available, or what price it is offered at. ShopGenie makes this information easier to
                     discover through a digital product and shop discovery platform.
@@ -241,17 +241,17 @@ const AboutPage = () => {
 
             {/* Shop Owners card */}
             <Reveal delay={150}>
-              <div className="relative group bg-gradient-to-br from-slate-900/80 to-slate-900/40 border border-slate-800/60 rounded-3xl p-8 sm:p-10 overflow-hidden hover:border-amber-500/20 transition-all duration-500">
-                <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/5 rounded-full blur-[80px]" />
+              <div className="relative group bg-gradient-to-br from-slate-900/80 to-slate-900/40 border border-charcoal/60 rounded-3xl p-8 sm:p-10 overflow-hidden hover:border-amber/20 transition-all duration-500">
+                <div className="absolute top-0 right-0 w-48 h-48 bg-amber/5 rounded-full blur-[80px]" />
                 <div className="relative">
-                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 mb-6">
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber/10 border border-amber/20 mb-6">
                     <Store className="w-3.5 h-3.5 text-amber-400" />
                     <span className="text-xs font-semibold text-amber-400 tracking-wide">SHOP OWNERS</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 leading-snug">
                     Managing a local shop should be simple.
                   </h3>
-                  <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate/80 leading-relaxed">
                     Small retailers may rely on manual processes or conventional computer-based management
                     for products, prices, inventory, and shop information. ShopGenie provides a more
                     convenient way to manage everyday retail information through a connected platform.
@@ -282,7 +282,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-base sm:text-lg text-slate-400 text-center max-w-3xl mx-auto leading-relaxed mb-12">
+            <p className="text-base sm:text-lg text-slate/80 text-center max-w-3xl mx-auto leading-relaxed mb-12">
               Many small and local shops cannot easily adopt expensive, complex, or hardware-heavy retail
               management systems. Managing products, prices, and inventory through conventional systems can
               be difficult and may require additional devices or continuous dependence on a laptop or desktop.
@@ -296,7 +296,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={200}>
-            <p className="text-base sm:text-lg text-slate-400 text-center max-w-3xl mx-auto leading-relaxed mb-16">
+            <p className="text-base sm:text-lg text-slate/80 text-center max-w-3xl mx-auto leading-relaxed mb-16">
               With a convenient mobile-first management experience, shop owners can manage their shop,
               products, prices, inventory, and availability more easily. The platform brings essential
               retail tools together in one simple and connected system, designed with the practical needs
@@ -327,16 +327,16 @@ const AboutPage = () => {
               },
             ].map((item, i) => (
               <Reveal key={item.title} delay={i * 120}>
-                <div className="group relative bg-slate-900/60 border border-slate-800/70 rounded-2xl p-8 text-center hover:border-slate-700/80 transition-all duration-500 hover:-translate-y-1">
+                <div className="group relative bg-charcoal/60 border border-charcoal/70 rounded-2xl p-8 text-center hover:border-charcoal/80 transition-all duration-500 hover:-translate-y-1">
                   <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-6 ${
-                    item.color === 'amber' ? 'bg-amber-500/10 text-amber-400' :
+                    item.color === 'amber' ? 'bg-amber/10 text-amber-400' :
                     item.color === 'blue' ? 'bg-blue-500/10 text-blue-400' :
-                    'bg-emerald-500/10 text-emerald-400'
+                    'bg-mutedgreen/10 text-emerald-400'
                   }`}>
                     <item.icon className="w-6 h-6" />
                   </div>
                   <h3 className="text-sm font-bold text-white/90 tracking-[0.2em] mb-3">{item.title}</h3>
-                  <p className="text-sm text-slate-400 leading-relaxed">{item.desc}</p>
+                  <p className="text-sm text-slate/80 leading-relaxed">{item.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -357,7 +357,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-base sm:text-lg text-slate-400 text-center max-w-3xl mx-auto leading-relaxed mb-16">
+            <p className="text-base sm:text-lg text-slate/80 text-center max-w-3xl mx-auto leading-relaxed mb-16">
               ShopGenie's AI-assisted vision system uses camera-based product recognition to identify
               registered products based on their visual appearance. The recognized product can then be matched
               with the corresponding product information maintained by the shop.
@@ -385,17 +385,17 @@ const AboutPage = () => {
                 return (
                   <div key={i} className={`flex items-center gap-4 px-5 py-4 rounded-xl border transition-all ${
                     step.highlight
-                      ? 'bg-amber-500/8 border-amber-500/20'
-                      : 'bg-slate-900/40 border-slate-800/40'
+                      ? 'bg-amber/8 border-amber/20'
+                      : 'bg-charcoal/40 border-charcoal/40'
                   }`}>
                     <div className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${
-                      step.highlight ? 'bg-amber-500/15 text-amber-400' : 'bg-slate-800/60 text-slate-400'
+                      step.highlight ? 'bg-amber/15 text-amber-400' : 'bg-charcoal/60 text-slate/80'
                     }`}>
                       <step.icon className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-white">{step.label}</p>
-                      <p className="text-xs text-slate-500">{step.desc}</p>
+                      <p className="text-xs text-slate">{step.desc}</p>
                     </div>
                   </div>
                 );
@@ -426,7 +426,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-base sm:text-lg text-slate-400 text-center max-w-3xl mx-auto leading-relaxed mb-16">
+            <p className="text-base sm:text-lg text-slate/80 text-center max-w-3xl mx-auto leading-relaxed mb-16">
               ShopGenie gives customers a digital window into local retail. Search for a product,
               explore its details, check availability and price, and discover nearby shops where it is available.
             </p>
@@ -435,26 +435,26 @@ const AboutPage = () => {
           {/* Customer UI Mockup */}
           <Reveal delay={200}>
             <div className="max-w-lg mx-auto">
-              <div className="bg-slate-900/80 border border-slate-800/60 rounded-3xl overflow-hidden shadow-2xl shadow-black/20">
+              <div className="bg-charcoal/80 border border-charcoal/60 rounded-3xl overflow-hidden shadow-2xl shadow-black/20">
                 {/* Search bar */}
                 <div className="px-5 pt-5 pb-3">
-                  <div className="flex items-center gap-3 bg-slate-800/60 border border-slate-700/40 rounded-xl px-4 py-3">
-                    <Search className="w-4 h-4 text-slate-500" />
+                  <div className="flex items-center gap-3 bg-charcoal/60 border border-charcoal/40 rounded-xl px-4 py-3">
+                    <Search className="w-4 h-4 text-slate" />
                     <span className="text-sm text-white/80">Milk 500ml</span>
                   </div>
                 </div>
 
                 {/* Product card */}
                 <div className="px-5 pb-3">
-                  <div className="bg-slate-800/40 border border-slate-700/30 rounded-2xl p-5">
+                  <div className="bg-charcoal/40 border border-charcoal/30 rounded-2xl p-5">
                     <div className="flex items-start justify-between mb-3">
                       <div>
                         <h4 className="text-base font-bold text-white">Milk 500ml</h4>
-                        <p className="text-xs text-slate-500 mt-0.5">Dairy · Fresh</p>
+                        <p className="text-xs text-slate mt-0.5">Dairy · Fresh</p>
                       </div>
                       <span className="text-xl font-extrabold text-amber-400">₹30</span>
                     </div>
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-mutedgreen/10 border border-mutedgreen/20">
                       <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                       <span className="text-[11px] font-semibold text-emerald-400">Available</span>
                     </div>
@@ -463,19 +463,19 @@ const AboutPage = () => {
 
                 {/* Nearby shops */}
                 <div className="px-5 pb-5">
-                  <p className="text-[11px] font-semibold text-slate-500 tracking-wider mb-3 px-1">NEARBY SHOPS</p>
+                  <p className="text-[11px] font-semibold text-slate tracking-wider mb-3 px-1">NEARBY SHOPS</p>
                   {([
                     { name: 'ABC General Store', price: '₹30', dist: '0.8 km' },
                     { name: 'Sri Stores', price: '₹32', dist: '1.2 km' },
                   ]).map((shop) => (
-                    <div key={shop.name} className="flex items-center justify-between bg-slate-800/30 border border-slate-700/20 rounded-xl px-4 py-3 mb-2 last:mb-0">
+                    <div key={shop.name} className="flex items-center justify-between bg-charcoal/30 border border-charcoal/20 rounded-xl px-4 py-3 mb-2 last:mb-0">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-amber-500/10 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-lg bg-amber/10 flex items-center justify-center">
                           <Store className="w-4 h-4 text-amber-400" />
                         </div>
                         <div>
                           <p className="text-sm font-semibold text-white">{shop.name}</p>
-                          <p className="text-[11px] text-slate-500">{shop.dist}</p>
+                          <p className="text-[11px] text-slate">{shop.dist}</p>
                         </div>
                       </div>
                       <div className="text-right">
@@ -493,7 +493,7 @@ const AboutPage = () => {
               {/* CTA */}
               <Reveal delay={300}>
                 <div className="text-center mt-8">
-                  <a href="/customer" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm font-semibold hover:bg-amber-500/20 transition-all duration-300">
+                  <a href="/customer" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber/10 border border-amber/20 text-amber-400 text-sm font-semibold hover:bg-amber/20 transition-all duration-300">
                     Explore Products <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
@@ -516,7 +516,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-base sm:text-lg text-slate-400 text-center max-w-3xl mx-auto leading-relaxed mb-16">
+            <p className="text-base sm:text-lg text-slate/80 text-center max-w-3xl mx-auto leading-relaxed mb-16">
               Shop owners can add and manage their shop information, products, prices, inventory, and
               availability through the ShopGenie application or web interface. The mobile-first approach
               makes everyday management more convenient without requiring constant dependence on a laptop or desktop.
@@ -526,16 +526,16 @@ const AboutPage = () => {
           {/* Mobile dashboard mockup */}
           <Reveal delay={200}>
             <div className="max-w-sm mx-auto">
-              <div className="bg-slate-900/80 border border-slate-800/60 rounded-[2rem] overflow-hidden shadow-2xl shadow-black/30 p-1">
+              <div className="bg-charcoal/80 border border-charcoal/60 rounded-[2rem] overflow-hidden shadow-2xl shadow-black/30 p-1">
                 {/* Phone notch */}
                 <div className="flex justify-center py-2">
-                  <div className="w-24 h-1.5 rounded-full bg-slate-700/50" />
+                  <div className="w-24 h-1.5 rounded-full bg-charcoal/50" />
                 </div>
 
                 <div className="px-5 pb-6 pt-2">
                   {/* App header */}
                   <div className="flex items-center gap-2 mb-5">
-                    <div className="w-7 h-7 rounded-lg bg-white text-[#080A19] flex items-center justify-center font-bold text-xs">G</div>
+                    <div className="w-7 h-7 rounded-lg bg-white text-navy flex items-center justify-center font-bold text-xs">G</div>
                     <span className="text-sm font-bold text-white">ShopGenie</span>
                   </div>
 
@@ -550,9 +550,9 @@ const AboutPage = () => {
                       { label: 'Low Stock', value: '10', color: 'text-amber-400' },
                       { label: 'Unavailable', value: '6', color: 'text-red-400' },
                     ]).map((stat) => (
-                      <div key={stat.label} className="bg-slate-800/50 border border-slate-700/30 rounded-xl p-3.5">
+                      <div key={stat.label} className="bg-charcoal/50 border border-charcoal/30 rounded-xl p-3.5">
                         <p className={`text-2xl font-extrabold ${stat.color}`}>{stat.value}</p>
-                        <p className="text-[11px] text-slate-500 mt-1">{stat.label}</p>
+                        <p className="text-[11px] text-slate mt-1">{stat.label}</p>
                       </div>
                     ))}
                   </div>
@@ -564,9 +564,9 @@ const AboutPage = () => {
                       { label: 'Inventory', icon: Box },
                       { label: 'Shop Profile', icon: Store },
                     ]).map((btn) => (
-                      <div key={btn.label} className="flex-1 flex flex-col items-center gap-1.5 bg-slate-800/40 border border-slate-700/30 rounded-xl py-3 px-2">
+                      <div key={btn.label} className="flex-1 flex flex-col items-center gap-1.5 bg-charcoal/40 border border-charcoal/30 rounded-xl py-3 px-2">
                         <btn.icon className="w-4 h-4 text-amber-400" />
-                        <span className="text-[10px] text-slate-400 text-center leading-tight">{btn.label}</span>
+                        <span className="text-[10px] text-slate/80 text-center leading-tight">{btn.label}</span>
                       </div>
                     ))}
                   </div>
@@ -590,7 +590,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-slate-400 text-center max-w-2xl mx-auto mb-16">
+            <p className="text-slate/80 text-center max-w-2xl mx-auto mb-16">
               ShopGenie brings together customers, shop owners, and AI technology on a single connected platform.
             </p>
           </Reveal>
@@ -621,27 +621,27 @@ const AboutPage = () => {
               },
             ]).map((card, i) => (
               <Reveal key={card.title} delay={i * 120}>
-                <div className={`relative bg-slate-900/60 border border-slate-800/60 rounded-2xl p-8 text-center overflow-hidden transition-all duration-500 hover:-translate-y-1 ${
+                <div className={`relative bg-charcoal/60 border border-charcoal/60 rounded-2xl p-8 text-center overflow-hidden transition-all duration-500 hover:-translate-y-1 ${
                   card.color === 'blue' ? 'hover:border-blue-500/20' :
-                  card.color === 'amber' ? 'hover:border-amber-500/20' :
-                  'hover:border-emerald-500/20'
+                  card.color === 'amber' ? 'hover:border-amber/20' :
+                  'hover:border-mutedgreen/20'
                 }`}>
                   <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full blur-[60px] ${
                     card.color === 'blue' ? 'bg-blue-500/8' :
-                    card.color === 'amber' ? 'bg-amber-500/8' :
-                    'bg-emerald-500/8'
+                    card.color === 'amber' ? 'bg-amber/8' :
+                    'bg-mutedgreen/8'
                   }`} />
                   <div className="relative">
-                    <p className="text-[11px] font-semibold text-slate-500 tracking-wider mb-4">{card.subtitle}</p>
+                    <p className="text-[11px] font-semibold text-slate tracking-wider mb-4">{card.subtitle}</p>
                     <div className={`inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-5 ${
                       card.color === 'blue' ? 'bg-blue-500/10 text-blue-400' :
-                      card.color === 'amber' ? 'bg-amber-500/10 text-amber-400' :
-                      'bg-emerald-500/10 text-emerald-400'
+                      card.color === 'amber' ? 'bg-amber/10 text-amber-400' :
+                      'bg-mutedgreen/10 text-emerald-400'
                     }`}>
                       <card.icon className="w-6 h-6" />
                     </div>
                     <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
-                    <p className="text-sm text-slate-400 leading-relaxed">{card.desc}</p>
+                    <p className="text-sm text-slate/80 leading-relaxed">{card.desc}</p>
                   </div>
                 </div>
               </Reveal>
@@ -650,14 +650,14 @@ const AboutPage = () => {
 
           {/* Architecture connection diagram */}
           <Reveal delay={200}>
-            <div className="bg-slate-900/40 border border-slate-800/40 rounded-2xl p-8 sm:p-10">
+            <div className="bg-charcoal/40 border border-charcoal/40 rounded-2xl p-8 sm:p-10">
               <div className="flex flex-col items-center gap-2 max-w-sm mx-auto">
                 {/* Top: Customer Website */}
                 <FlowNode icon={Globe} label="Customer Website" />
                 <FlowArrow direction="down" />
 
                 {/* Middle: API */}
-                <div className="px-6 py-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-center">
+                <div className="px-6 py-3 rounded-xl bg-amber/10 border border-amber/20 text-center">
                   <p className="text-sm font-bold text-amber-400">Django REST API</p>
                   <p className="text-[11px] text-amber-400/50 mt-0.5">ShopGenie Data</p>
                 </div>
@@ -692,7 +692,7 @@ const AboutPage = () => {
          ═══════════════════════════════════════ */}
       <section className="relative bg-gradient-to-b from-[#0f1220] to-[#0c0f1a] py-24 sm:py-32 overflow-hidden">
         {/* Ambient glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/5 rounded-full blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber/5 rounded-full blur-[100px]" />
 
         <div className="relative max-w-4xl mx-auto px-6 text-center">
           <Reveal>
@@ -702,7 +702,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={150}>
-            <p className="text-base sm:text-lg text-slate-400 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg text-slate/80 leading-relaxed max-w-3xl mx-auto">
               We envision a future where local shops are digitally connected, easier to manage,
               and easier for customers to discover. ShopGenie aims to bring practical AI and digital
               tools to everyday retail without making local businesses dependent on complicated systems.
@@ -715,10 +715,10 @@ const AboutPage = () => {
       {/* ═══════════════════════════════════════
           SECTION 10 — FINAL CTA
          ═══════════════════════════════════════ */}
-      <section className="relative bg-[#080A19] py-24 sm:py-32 overflow-hidden">
+      <section className="relative bg-navy py-24 sm:py-32 overflow-hidden">
         {/* Ambient background */}
         <div className="absolute inset-0">
-          <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-amber-500/5 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 left-1/4 w-[500px] h-[300px] bg-amber/5 rounded-full blur-[120px]" />
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[250px] bg-orange-500/5 rounded-full blur-[100px]" />
         </div>
 
@@ -733,7 +733,7 @@ const AboutPage = () => {
           </Reveal>
 
           <Reveal delay={100}>
-            <p className="text-base sm:text-lg text-slate-400 max-w-2xl mx-auto mb-10">
+            <p className="text-base sm:text-lg text-slate/80 max-w-2xl mx-auto mb-10">
               ShopGenie brings local retailers and customers closer through smart retail technology.
             </p>
           </Reveal>
@@ -742,7 +742,7 @@ const AboutPage = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="/customer"
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 hover:from-amber-400 hover:to-orange-400 transition-all duration-300 active:scale-[0.97]"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-semibold text-sm shadow-lg shadow-amber/20 hover:shadow-amber/30 hover:from-amber-400 hover:to-orange-400 transition-all duration-300 active:scale-[0.97]"
               >
                 For Customers — Find Products
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -764,3 +764,6 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+
+
+

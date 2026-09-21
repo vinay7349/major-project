@@ -4,14 +4,14 @@ import { useAuth } from '../../context/AuthContext';
 
 /**
  * ProtectedRoute – wraps routes that require authentication.
- * Redirects unauthenticated users to /login with return URL state.
+ * Redirects unauthenticated users to /customer/login with return URL state.
  */
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { isAuthenticated, user } = useAuth();
   const location = useLocation();
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/customer/login" state={{ from: location }} replace />;
   }
 
   if (allowedRoles && user?.role && !allowedRoles.includes(user.role)) {
@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
         <div className="space-y-3">
           <div className="text-4xl">🔒</div>
           <h2 className="text-xl font-bold text-white">Access Restricted</h2>
-          <p className="text-sm text-slate-400">
+          <p className="text-sm text-slate/80">
             Your role ({user.role}) does not have permission to access this module.
           </p>
         </div>
@@ -32,3 +32,4 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 };
 
 export default ProtectedRoute;
+

@@ -67,13 +67,6 @@ WSGI_APPLICATION = 'shopgenie.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-if os.getenv('DB_ENGINE', 'sqlite').lower() in {'postgres', 'postgresql'}:
-    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('POSTGRES_DB', 'shopgenie'),
         'USER': os.getenv('POSTGRES_USER', 'postgres'),
@@ -85,6 +78,7 @@ if os.getenv('DB_ENGINE', 'sqlite').lower() in {'postgres', 'postgresql'}:
             'sslmode': os.getenv('POSTGRES_SSLMODE', 'prefer'),
         },
     }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},

@@ -12,12 +12,12 @@ const EmptyState = ({
 }) => {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-6 text-center space-y-4">
-      <div className="w-16 h-16 rounded-3xl bg-slate-100 dark:bg-slate-800/60 flex items-center justify-center">
-        <Icon className="w-8 h-8 text-slate-400" />
+      <div className="w-16 h-16 rounded-3xl bg-warmwhite dark:bg-charcoal/60 flex items-center justify-center">
+        <Icon className="w-8 h-8 text-slate/80" />
       </div>
       <div className="space-y-1">
-        <h3 className="text-base font-bold text-slate-700 dark:text-slate-200">{title}</h3>
-        <p className="text-xs text-slate-400 max-w-xs leading-relaxed">{description}</p>
+        <h3 className="text-base font-bold text-charcoal dark:text-slate/60">{title}</h3>
+        <p className="text-xs text-slate/80 max-w-xs leading-relaxed">{description}</p>
       </div>
       {action && <div className="pt-2">{action}</div>}
     </div>
@@ -25,3 +25,4 @@ const EmptyState = ({
 };
 
 export default EmptyState;
+

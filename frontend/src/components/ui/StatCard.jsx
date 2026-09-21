@@ -10,8 +10,8 @@ const StatCard = ({
   value,
   sub,
   icon: Icon,
-  iconColor = 'text-indigo-500',
-  iconBg = 'bg-indigo-500/10 border-indigo-500/30',
+  iconColor = 'text-charcoal',
+  iconBg = 'bg-charcoal/10 border-charcoal/30',
   trend,
   trendUp = true,
   borderHighlight,
@@ -20,21 +20,21 @@ const StatCard = ({
     <GlassCard className={`relative overflow-hidden ${borderHighlight ? `border-${borderHighlight}-500/30` : ''}`}>
       <div className="flex items-center justify-between">
         <div className="space-y-2 flex-1 min-w-0 pr-4">
-          <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider truncate">
+          <p className="text-xs font-semibold text-slate dark:text-slate/80 uppercase tracking-wider truncate">
             {title}
           </p>
-          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white font-mono leading-tight">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-navy dark:text-white font-mono leading-tight">
             {value}
           </h2>
           {(sub || trend) && (
             <div className="flex items-center gap-1.5">
               {trend && (
-                <span className={`flex items-center gap-0.5 text-[11px] font-bold ${trendUp ? 'text-emerald-500' : 'text-rose-500'}`}>
+                <span className={`flex items-center gap-0.5 text-[11px] font-bold ${trendUp ? 'text-mutedgreen' : 'text-red'}`}>
                   {trendUp ? <ArrowUpRight className="w-3.5 h-3.5" /> : <ArrowDownRight className="w-3.5 h-3.5" />}
                   {trend}
                 </span>
               )}
-              {sub && <span className="text-[11px] text-slate-400">{sub}</span>}
+              {sub && <span className="text-[11px] text-slate/80">{sub}</span>}
             </div>
           )}
         </div>
@@ -50,3 +50,6 @@ const StatCard = ({
 };
 
 export default StatCard;
+
+
+

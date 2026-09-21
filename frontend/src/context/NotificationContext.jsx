@@ -28,19 +28,19 @@ export const NotificationProvider = ({ children }) => {
             key={toast.id}
             className={`pointer-events-auto flex items-start p-4 rounded-2xl backdrop-blur-xl border shadow-2xl transition-all duration-300 animate-slide-in ${
               toast.type === 'success'
-                ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-800 dark:text-emerald-200'
+                ? 'bg-mutedgreen/10 border-mutedgreen/30 text-mutedgreen dark:text-emerald-200'
                 : toast.type === 'error'
-                ? 'bg-rose-500/10 border-rose-500/30 text-rose-800 dark:text-rose-200'
-                : 'bg-indigo-500/10 border-indigo-500/30 text-indigo-800 dark:text-indigo-200'
+                ? 'bg-red/10 border-red/30 text-red dark:text-rose-200'
+                : 'bg-charcoal/10 border-charcoal/30 text-charcoal dark:text-indigo-200'
             }`}
           >
             <div className="mr-3 mt-0.5">
               {toast.type === 'success' ? (
-                <CheckCircle className="w-5 h-5 text-emerald-500" />
+                <CheckCircle className="w-5 h-5 text-mutedgreen" />
               ) : toast.type === 'error' ? (
-                <AlertCircle className="w-5 h-5 text-rose-500" />
+                <AlertCircle className="w-5 h-5 text-red" />
               ) : (
-                <Info className="w-5 h-5 text-indigo-500" />
+                <Info className="w-5 h-5 text-charcoal" />
               )}
             </div>
             <div className="flex-1">
@@ -49,7 +49,7 @@ export const NotificationProvider = ({ children }) => {
             </div>
             <button
               onClick={() => removeToast(toast.id)}
-              className="ml-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1"
+              className="ml-2 text-slate/80 hover:text-slate dark:hover:text-slate/60 p-1"
             >
               <X className="w-4 h-4" />
             </button>
@@ -60,4 +60,24 @@ export const NotificationProvider = ({ children }) => {
   );
 };
 
-export const useToast = () => useContext(NotificationContext);
+export const useToast = () => {
+  const context = useContext(NotificationContext);
+  if (!context) {
+    return {
+      addToast: () => {},
+      removeToast: () => {},
+      success: () => {},
+      error: () => {},
+      info: () => {},
+    };
+  }
+  return {
+    ...context,
+    success: (msg, title) => context.addToast(msg, 'success', title),
+    error: (msg, title) => context.addToast(msg, 'error', title),
+    info: (msg, title) => context.addToast(msg, 'info', title),
+  };
+};
+
+
+

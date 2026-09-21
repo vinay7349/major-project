@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { CartProvider } from './context/CartContext';
+import { WishlistProvider } from './context/WishlistContext';
+import { LocationProvider } from './context/LocationContext';
 import { ThemeProvider } from './context/ThemeContext';
 import { NotificationProvider } from './context/NotificationContext';
 import ProtectedRoute from './components/common/ProtectedRoute';
@@ -13,23 +16,28 @@ import CustomerLayout from './layouts/CustomerLayout';
 import LandingPage from './pages/Public/Landing/LandingPage';
 import AboutPage from './pages/Public/About/AboutPage';
 import FeaturesPage from './pages/Public/Features/FeaturesPage';
-import LoginPage from './pages/Public/Login/LoginPage';
 import RegisterPage from './pages/Public/Register/RegisterPage';
 import ForgotPasswordPage from './pages/Public/ForgotPassword/ForgotPasswordPage';
 
 // Customer pages
 import CustomerLoginPage from './pages/Customer/Login/CustomerLoginPage';
-import CustomerHomePage from './pages/Customer/ProductSearch/CustomerHomePage';
+import ProductDiscoveryPage from './pages/Customer/ProductSearch/ProductDiscoveryPage';
+import ProductDiscoveryPageV2 from './pages/Customer/ProductSearch/ProductDiscoveryPageV2';
 import CustomerProfilePage from './pages/Customer/Profile/CustomerProfilePage';
+import SavedPage from './pages/Customer/Profile/SavedPage';
+import CartPage from './pages/Customer/Profile/CartPage';
 
 // Shop Owner pages
-import DashboardPage from './pages/ShopOwner/Dashboard/DashboardPage';
+import ShopOwnerApp from './pages/ShopOwner/ShopOwnerApp';
+import ShopOwnerLoginPage from './pages/ShopOwner/ShopOwnerLoginPage';
+import ShopOwnerDashboardPage from './pages/ShopOwner/DashboardPage';
 import ProductsPage from './pages/ShopOwner/Products/ProductsPage';
 import InventoryPage from './pages/ShopOwner/Inventory/InventoryPage';
-import BillingPage from './pages/ShopOwner/Billing/BillingPage';
-import AIDetectionPage from './pages/ShopOwner/AIDetection/AIDetectionPage';
-import RecommendationsPage from './pages/ShopOwner/Recommendations/RecommendationsPage';
+import SalesPage from './pages/ShopOwner/Sales/SalesPage';
 import AnalyticsPage from './pages/ShopOwner/Analytics/AnalyticsPage';
+import ShopProfilePage from './pages/ShopOwner/ShopProfile/ShopProfilePage';
+import AppConnectionPage from './pages/ShopOwner/AppConnection/AppConnectionPage';
+import UpdatesPage from './pages/ShopOwner/Updates/UpdatesPage';
 import NotificationsPage from './pages/ShopOwner/Notifications/NotificationsPage';
 import ProfilePage from './pages/ShopOwner/Profile/ProfilePage';
 import SettingsPage from './pages/ShopOwner/Settings/SettingsPage';
@@ -43,14 +51,16 @@ function App() {
     <ThemeProvider>
       <NotificationProvider>
         <AuthProvider>
-          <BrowserRouter>
+        <CartProvider>
+          <WishlistProvider>
+            <LocationProvider>
+              <BrowserRouter>
             <Routes>
               {/* Public Routes with Landing Header & Navbar */}
               <Route path="/" element={<MainLayout />}>
                 <Route index element={<LandingPage />} />
                 <Route path="about" element={<AboutPage />} />
                 <Route path="features" element={<FeaturesPage />} />
-                <Route path="login" element={<LoginPage />} />
                 <Route path="register" element={<RegisterPage />} />
                 <Route path="forgot-password" element={<ForgotPasswordPage />} />
               </Route>
@@ -58,10 +68,32 @@ function App() {
               {/* Dedicated Customer Portal Gateway */}
               <Route path="/customer/login" element={<CustomerLoginPage />} />
 
+              {/* Dedicated Shop Owner Login Gateway */}
+              <Route path="/shop-owner/login" element={<ShopOwnerLoginPage />} />
+
               {/* Dedicated Customer Portal Routes with Customer Header Layout */}
               <Route path="/customer" element={<CustomerLayout />}>
-                <Route index element={<CustomerHomePage />} />
+                <Route index element={<ProductDiscoveryPageV2 />} />
                 <Route path="profile" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><CustomerProfilePage /></ProtectedRoute>} />
+                <Route path="saved" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><SavedPage /></ProtectedRoute>} />
+                <Route path="cart" element={<ProtectedRoute allowedRoles={['CUSTOMER']}><CartPage /></ProtectedRoute>} />
+              </Route>
+
+              {/* Dedicated Shop Owner Portal Routes */}
+              <Route path="/shop-owner" element={<ShopOwnerApp />}>
+                <Route index element={<Navigate to="/shop-owner/dashboard" replace />} />
+                <Route path="dashboard" element={<ShopOwnerDashboardPage />} />
+                <Route path="products" element={<ProductsPage />} />
+                <Route path="inventory" element={<InventoryPage />} />
+                <Route path="sales" element={<SalesPage />} />
+                <Route path="analytics" element={<AnalyticsPage />} />
+                <Route path="shop" element={<ShopProfilePage />} />
+                <Route path="app-connection" element={<AppConnectionPage />} />
+                <Route path="updates" element={<UpdatesPage />} />
+                <Route path="settings" element={<SettingsPage />} />
+                <Route path="profile" element={<ProfilePage />} />
+                <Route path="notifications" element={<NotificationsPage />} />
+                <Route path="nearby-shops" element={<NearbyShopsPage />} />
               </Route>
 
               {/* Protected Dashboard Routes */}
@@ -73,17 +105,17 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route path="dashboard" element={<DashboardPage />} />
-                <Route path="products" element={<ProductsPage />} />
-                <Route path="inventory" element={<InventoryPage />} />
-                <Route path="billing" element={<BillingPage />} />
-                <Route path="ai-detection" element={<AIDetectionPage />} />
-                <Route path="recommendations" element={<RecommendationsPage />} />
-                <Route path="analytics" element={<AnalyticsPage />} />
-                <Route path="notifications" element={<NotificationsPage />} />
-                <Route path="profile" element={<ProfilePage />} />
-                <Route path="settings" element={<SettingsPage />} />
-                <Route path="nearby-shops" element={<NearbyShopsPage />} />
+                <Route path="dashboard" element={<Navigate to="/shop-owner/dashboard" replace />} />
+                <Route path="products" element={<Navigate to="/shop-owner/products" replace />} />
+                <Route path="inventory" element={<Navigate to="/shop-owner/inventory" replace />} />
+                <Route path="billing" element={<Navigate to="/shop-owner/billing" replace />} />
+                <Route path="ai-detection" element={<Navigate to="/shop-owner/ai-detection" replace />} />
+                <Route path="recommendations" element={<Navigate to="/shop-owner/recommendations" replace />} />
+                <Route path="analytics" element={<Navigate to="/shop-owner/analytics" replace />} />
+                <Route path="notifications" element={<Navigate to="/shop-owner/notifications" replace />} />
+                <Route path="profile" element={<Navigate to="/shop-owner/profile" replace />} />
+                <Route path="settings" element={<Navigate to="/shop-owner/settings" replace />} />
+                <Route path="nearby-shops" element={<Navigate to="/shop-owner/nearby-shops" replace />} />
                 <Route path="admin-panel" element={
                   <ProtectedRoute allowedRoles={['ADMIN']}>
                     <AdminPanelPage />
@@ -94,8 +126,11 @@ function App() {
               {/* Fallback redirect */}
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
-          </BrowserRouter>
-        </AuthProvider>
+              </BrowserRouter>
+            </LocationProvider>
+          </WishlistProvider>
+        </CartProvider>
+      </AuthProvider>
       </NotificationProvider>
     </ThemeProvider>
   );
