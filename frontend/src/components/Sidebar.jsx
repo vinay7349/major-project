@@ -35,19 +35,19 @@ const Sidebar = ({ isOpen, onClose, isVoiceOpen, setIsVoiceOpen }) => {
       <div
         aria-hidden="true"
         onClick={onClose}
-        className={`lg:hidden fixed inset-0 z-40 bg-navy/50 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
+        className={`lg:hidden fixed inset-0 z-40 bg-overlay backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}
       />
-      <aside className={`fixed lg:sticky top-0 left-0 z-50 w-64 bg-white/70 dark:bg-charcoal/80 backdrop-blur-xl border-r border-warmwhite/60 dark:border-charcoal/80 flex flex-col justify-between h-screen transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <aside className={`fixed lg:sticky top-0 left-0 z-50 w-64 bg-surface/95 dark:bg-surface-dark/95 backdrop-blur-sm border-r border-border dark:border-border-dark flex flex-col justify-between h-screen transition-transform duration-300 ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
       <div>
         {/* Brand Logo */}
-        <div className="p-6 flex items-center justify-between border-b border-warmwhite/60 dark:border-charcoal/60">
+        <div className="p-6 flex items-center justify-between border-b border-border dark:border-border-dark">
           <NavLink to="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-400 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-charcoal/30">
+            <div className="w-10 h-10 rounded-button bg-gradient-to-tr from-accent to-accent-light flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-accent/30">
               G
             </div>
             <div>
-              <h1 className="font-extrabold text-base tracking-tight gradient-text">ShopGenie AI</h1>
-              <p className="text-[10px] text-slate/80 font-medium">Smart Retail Assistant</p>
+              <h1 className="font-extrabold text-base tracking-tight text-text-primary dark:text-text-dark">ShopGenie AI</h1>
+              <p className="text-[10px] text-text-muted dark:text-text-mutedDark font-medium">Smart Retail Assistant</p>
             </div>
           </NavLink>
         </div>
@@ -62,10 +62,10 @@ const Sidebar = ({ isOpen, onClose, isVoiceOpen, setIsVoiceOpen }) => {
                 to={item.path}
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `flex items-center justify-between px-4 py-3 rounded-2xl text-sm font-medium transition-all duration-200 group ${
+                  `flex items-center justify-between px-4 py-3 rounded-button text-sm font-medium transition-all duration-200 group ${
                     isActive
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg shadow-charcoal/25 font-semibold'
-                      : 'text-slate dark:text-slate/80 hover:bg-warmwhite dark:hover:bg-charcoal/60 hover:text-navy dark:hover:text-slate/60'
+                      ? 'bg-gradient-to-r from-accent to-accent-light text-white shadow-lg shadow-accent/25 font-semibold'
+                      : 'text-text-muted dark:text-text-mutedDark hover:bg-background dark:hover:bg-background-dark hover:text-text-primary dark:hover:text-text-dark'
                   }`
                 }
               >
@@ -74,7 +74,7 @@ const Sidebar = ({ isOpen, onClose, isVoiceOpen, setIsVoiceOpen }) => {
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
-                  <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-gradient-to-r from-cyan-400 to-indigo-500 text-white shadow-sm">
+                  <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-gradient-to-r from-accent to-accent-light text-white shadow-sm">
                     {item.badge}
                   </span>
                 )}
@@ -85,12 +85,12 @@ const Sidebar = ({ isOpen, onClose, isVoiceOpen, setIsVoiceOpen }) => {
       </div>
 
       {/* Voice Assistant Floating Action Trigger */}
-      <div className="p-4 border-t border-warmwhite/60 dark:border-charcoal/60">
+      <div className="p-4 border-t border-border dark:border-border-dark">
         <button
           onClick={() => setIsVoiceOpen(true)}
-          className="w-full gradient-btn-primary py-3 px-4 rounded-2xl flex items-center justify-center gap-2.5 shadow-xl font-semibold text-sm group"
+          className="w-full btn-primary py-3 px-4 rounded-button flex items-center justify-center gap-2.5 shadow-xl font-semibold text-sm group"
         >
-          <Bot className="w-5 h-5 animate-pulse text-cyan-300" />
+          <Bot className="w-5 h-5 animate-pulse text-accent-300" />
           <span>Launch AI Voice</span>
         </button>
       </div>

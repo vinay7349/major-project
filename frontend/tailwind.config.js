@@ -8,6 +8,38 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Hosaflow-inspired color palette
+        background: {
+          DEFAULT: '#F9F9F9',
+          dark: '#0A0A0A',
+        },
+        surface: {
+          DEFAULT: '#FFFFFF',
+          dark: '#141414',
+        },
+        text: {
+          primary: '#1A1A1A',
+          muted: '#6B6B6B',
+          dark: '#F5F5F5',
+          mutedDark: '#A0A0A0',
+        },
+        accent: {
+          DEFAULT: '#C89B6B',
+          hover: '#A67C52',
+          light: '#E8C9A8',
+        },
+        border: {
+          DEFAULT: '#E0E0E0',
+          dark: '#2A2A2A',
+        },
+        overlay: {
+          DEFAULT: 'rgba(0, 0, 0, 0.5)',
+          light: 'rgba(0, 0, 0, 0.4)',
+          dark: 'rgba(0, 0, 0, 0.6)',
+        },
+        error: '#E53935',
+        success: '#2E7D32',
+        // Legacy colors for compatibility
         navy: {
           DEFAULT: '#0F172A',
           50: '#f0f4fa',
@@ -109,9 +141,20 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Geist', 'ui-sans-serif', 'system-ui', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
+        sans: ['Inter', 'Roboto', 'ui-sans-serif', 'system-ui', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'],
       },
       fontSize: {
+        // Hosaflow typography scale
+        'h1': ['56px', { lineHeight: '64px', fontWeight: '700', letterSpacing: '-0.02em' }],
+        'h2': ['40px', { lineHeight: '48px', fontWeight: '600' }],
+        'h3': ['28px', { lineHeight: '36px', fontWeight: '600' }],
+        'body': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+        'small': ['14px', { lineHeight: '18px', fontWeight: '500' }],
+        // Responsive versions
+        'h1-responsive': ['clamp(32px, 5vw, 56px)', { lineHeight: 'clamp(40px, 5vw, 64px)', fontWeight: '700', letterSpacing: '-0.02em' }],
+        'h2-responsive': ['clamp(28px, 4vw, 40px)', { lineHeight: 'clamp(36px, 4vw, 48px)', fontWeight: '600' }],
+        'h3-responsive': ['clamp(24px, 3vw, 28px)', { lineHeight: 'clamp(32px, 3vw, 36px)', fontWeight: '600' }],
+        // Legacy for compatibility
         'heading-xl': ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.1', fontWeight: '700', letterSpacing: '-0.02em' }],
         'heading-lg': ['clamp(1.875rem, 3vw, 2.5rem)', { lineHeight: '1.15', fontWeight: '700', letterSpacing: '-0.02em' }],
         'heading-md': ['clamp(1.5rem, 2.5vw, 2rem)', { lineHeight: '1.2', fontWeight: '700', letterSpacing: '-0.01em' }],
@@ -122,6 +165,16 @@ export default {
         'caption': ['0.75rem', { lineHeight: '1.5', fontWeight: '500' }],
       },
       spacing: {
+        // Hosaflow 8px base unit spacing scale
+        '8': '8px',
+        '16': '16px',
+        '24': '24px',
+        '32': '32px',
+        '48': '48px',
+        '64': '64px',
+        '80': '80px',
+        '120': '120px',
+        // Legacy for compatibility
         'space-1': '0.25rem',
         'space-2': '0.5rem',
         'space-3': '0.75rem',
@@ -134,6 +187,12 @@ export default {
         'space-16': '4rem',
       },
       borderRadius: {
+        // Hosaflow radii
+        'card': '12px',
+        'button': '6px',
+        'input': '4px',
+        'avatar': '50%',
+        // Legacy for compatibility
         'radius-sm': '0.375rem',
         'radius-md': '0.5rem',
         'radius-lg': '0.75rem',
@@ -142,6 +201,12 @@ export default {
         'radius-full': '9999px',
       },
       boxShadow: {
+        // Hosaflow shadows
+        'card': '0 2px 8px rgba(0,0,0,0.08)',
+        'card-hover': '0 4px 12px rgba(0,0,0,0.12)',
+        'header': '0 1px 3px rgba(0,0,0,0.1)',
+        'modal': '0 12px 40px rgba(0,0,0,0.2)',
+        // Legacy for compatibility
         'shadow-sm': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
         'shadow': '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
         'shadow-md': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
