@@ -52,23 +52,23 @@ const ShopCard = ({ shop, onSelect, onFollow, isFollowed = false }) => {
   return (
     <div
       onClick={() => onSelect && onSelect(shop)}
-      className="group relative flex flex-col justify-between rounded-2xl border border-warmwhite/60 bg-white p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-warmwhite/60 hover:shadow-md dark:border-charcoal dark:bg-charcoal/90 dark:hover:border-charcoal cursor-pointer"
+      className="group relative flex flex-col justify-between card p-5 cursor-pointer"
     >
       <div>
         {/* Header row: category / status / rating */}
         <div className="flex items-center justify-between gap-2 pb-2">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="rounded-md bg-amber/10 px-2 py-0.5 text-[11px] font-semibold text-amber dark:text-amber-300 border border-amber/20">
+            <span className="rounded-md bg-accent/10 px-2 py-0.5 text-[11px] font-semibold text-accent dark:text-accent-300 border border-accent/20">
               {shop.category || 'Local Retail'}
             </span>
             <span
               className={`inline-flex items-center gap-1 rounded-md px-2 py-0.5 text-[11px] font-medium ${
                 isOpen
-                  ? 'bg-mutedgreen/10 text-mutedgreen dark:text-emerald-300'
-                  : 'bg-warmwhite text-slate dark:bg-charcoal dark:text-slate/80'
+                  ? 'bg-success/10 text-success dark:text-emerald-300'
+                  : 'bg-background text-text-muted dark:bg-background-dark dark:text-text-mutedDark'
               }`}
             >
-              <span className={`h-1.5 w-1.5 rounded-full ${isOpen ? 'bg-mutedgreen dark:bg-emerald-400' : 'bg-slate'}`} />
+              <span className={`h-1.5 w-1.5 rounded-full ${isOpen ? 'bg-success dark:bg-emerald-400' : 'bg-text-muted'}`} />
               {isOpen ? 'Open Now' : 'Closed'}
             </span>
           </div>
@@ -84,40 +84,40 @@ const ShopCard = ({ shop, onSelect, onFollow, isFollowed = false }) => {
 
         {/* Shop Name & Distance */}
         <div className="mt-1 flex items-baseline justify-between gap-2">
-          <h3 className="text-base font-bold tracking-tight text-navy group-hover:text-amber dark:text-white dark:group-hover:text-amber-400 transition-colors">
+          <h3 className="text-base font-bold tracking-tight text-text-primary dark:text-text-dark group-hover:text-accent transition-colors">
             {shop.name}
           </h3>
           {shop.distance_km != null && (
-            <span className="shrink-0 text-xs font-semibold text-charcoal dark:text-slate/60">
+            <span className="shrink-0 text-xs font-semibold text-text-muted dark:text-text-mutedDark">
               {Number(shop.distance_km).toFixed(1)} km
             </span>
           )}
         </div>
 
         {/* Address */}
-        <p className="mt-1.5 flex items-start gap-1.5 text-xs text-slate dark:text-slate/80 line-clamp-2">
-          <MapPin className="h-3.5 w-3.5 shrink-0 mt-0.5 text-slate/80" />
+        <p className="mt-1.5 flex items-start gap-1.5 text-xs text-text-muted dark:text-text-mutedDark line-clamp-2">
+          <MapPin className="h-3.5 w-3.5 shrink-0 mt-0.5 text-text-muted/80" />
           <span>{shop.address || 'Local neighborhood store'}</span>
         </p>
       </div>
 
       {/* Footer Info & Actions */}
-      <div className="mt-4 pt-3 border-t border-warmwhite/60 dark:border-charcoal/80">
-        <div className="flex items-center justify-between pb-3 text-xs text-slate dark:text-slate/80">
+      <div className="mt-4 pt-3 border-t border-border dark:border-border-dark">
+        <div className="flex items-center justify-between pb-3 text-xs text-text-muted dark:text-text-mutedDark">
           <span className="flex items-center gap-1">
-            <Store className="h-3.5 w-3.5 text-slate/80" />
+            <Store className="h-3.5 w-3.5 text-text-muted/80" />
             {productCount != null ? `${productCount} products listed` : 'Catalog available'}
           </span>
           <button
             onClick={handleFollow}
             className={`flex items-center gap-1 text-xs font-semibold transition-colors ${
               followed
-                ? 'text-red dark:text-rose-400'
-                : 'text-slate hover:text-charcoal dark:text-slate/80 dark:hover:text-white'
+                ? 'text-error dark:text-rose-400'
+                : 'text-text-muted hover:text-text-primary dark:text-text-mutedDark dark:hover:text-text-dark'
             }`}
             title={followed ? 'Unfollow shop' : 'Follow shop'}
           >
-            <Heart className={`h-3.5 w-3.5 ${followed ? 'fill-rose-500 text-red' : ''}`} />
+            <Heart className={`h-3.5 w-3.5 ${followed ? 'fill-rose-500 text-error' : ''}`} />
             {followed ? 'Following' : 'Follow'}
           </button>
         </div>
@@ -129,15 +129,15 @@ const ShopCard = ({ shop, onSelect, onFollow, isFollowed = false }) => {
               e.stopPropagation();
               onSelect && onSelect(shop);
             }}
-            className="flex items-center justify-center gap-1 rounded-xl bg-charcoal py-2 px-3 text-xs font-semibold text-white transition-colors hover:bg-charcoal dark:bg-amber dark:text-slate-950 dark:hover:bg-amber-400"
+            className="flex items-center justify-center gap-1 rounded-button bg-accent py-2 px-3 text-xs font-semibold text-white transition-colors hover:bg-accent-hover dark:bg-accent dark:text-white dark:hover:bg-accent-hover"
           >
             View Shop <ArrowRight className="h-3.5 w-3.5" />
           </button>
           <button
             onClick={handleDirections}
-            className="flex items-center justify-center gap-1 rounded-xl border border-warmwhite/60 py-2 px-3 text-xs font-semibold text-charcoal transition-colors hover:bg-warmwhite hover:border-warmwhite/60 dark:border-charcoal dark:text-slate/60 dark:hover:bg-charcoal"
+            className="flex items-center justify-center gap-1 rounded-button border border-border dark:border-border-dark py-2 px-3 text-xs font-semibold text-text-primary dark:text-text-dark transition-colors hover:bg-background dark:hover:bg-background-dark"
           >
-            <Navigation className="h-3.5 w-3.5 text-slate" /> Directions
+            <Navigation className="h-3.5 w-3.5 text-text-muted" /> Directions
           </button>
         </div>
       </div>

@@ -38,7 +38,7 @@ const LazyImg = ({ src, alt, className = '' }) => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   return (
-    <div className={`relative overflow-hidden bg-warmwhite/60 ${className}`}>
+    <div className={`relative overflow-hidden bg-background dark:bg-background-dark ${className}`}>
       {!error && (
         <img
           src={src}
@@ -50,8 +50,8 @@ const LazyImg = ({ src, alt, className = '' }) => {
         />
       )}
       {error && (
-        <div className="absolute inset-0 bg-gradient-to-br from-stone-100 to-stone-200 flex items-center justify-center">
-          <Package className="w-6 h-6 text-slate/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-background to-background-dark flex items-center justify-center">
+          <Package className="w-6 h-6 text-text-muted dark:text-text-mutedDark" />
         </div>
       )}
     </div>
@@ -61,8 +61,8 @@ const LazyImg = ({ src, alt, className = '' }) => {
 /* ── Section label badge ───────────────────────────────────── */
 const Label = ({ n, text }) => (
   <div className="flex items-center gap-3 mb-5">
-    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-mutedgreen dark:bg-mutedgreen text-white dark:text-[#101411] text-[11px] font-bold tracking-wide">{n}</span>
-    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-mutedgreen/80 dark:text-mutedgreen">{text}</span>
+    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-accent dark:bg-accent text-white dark:text-text-dark text-[11px] font-bold tracking-wide">{n}</span>
+    <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent/80 dark:text-accent">{text}</span>
   </div>
 );
 
@@ -71,7 +71,7 @@ const FeaturesPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={`bg-warmwhite dark:bg-charcoal text-navy dark:text-slate transition-colors duration-300`}>
+    <div className={`bg-background dark:bg-background-dark text-text-primary dark:text-text-dark transition-colors duration-300`}>
 
       {/* ──────────────────── HERO ──────────────────── */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
@@ -82,22 +82,22 @@ const FeaturesPage = () => {
             aria-hidden="true"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#f6f1ea] dark:from-[#101411] via-[#f6f1ea]/92 dark:via-[#101411]/92 to-[#f6f1ea]/30 dark:to-[#101411]/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f6f1ea] dark:from-[#101411] via-transparent to-[#f6f1ea]/40 dark:to-[#101411]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background dark:from-background-dark via-background/92 dark:via-background-dark/92 to-background/30 dark:to-background-dark/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background dark:from-background-dark via-transparent to-background/40 dark:to-background-dark/40" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12 py-24 w-full">
           <Reveal>
-            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-mutedgreen dark:text-mutedgreen mb-6">ShopGenie Features</p>
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-accent dark:text-accent mb-6">ShopGenie Features</p>
           </Reveal>
           <Reveal delay={100}>
-            <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-navy dark:text-white max-w-3xl">
+            <h1 className="text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.05] font-extrabold tracking-[-0.03em] text-text-primary dark:text-text-dark max-w-3xl">
               Everything local retail needs,{' '}
-              <span className="text-mutedgreen dark:text-mutedgreen">in one place.</span>
+              <span className="text-accent dark:text-accent">in one place.</span>
             </h1>
           </Reveal>
           <Reveal delay={200}>
-            <p className="mt-6 text-lg text-[#5a5a5a] dark:text-slate max-w-xl leading-relaxed">
+            <p className="mt-6 text-lg text-text-muted dark:text-text-mutedDark max-w-xl leading-relaxed">
               From smart inventory to AI-powered product discovery — ShopGenie gives shop owners and customers the tools they actually need.
             </p>
           </Reveal>
@@ -105,13 +105,13 @@ const FeaturesPage = () => {
             <div className="mt-10 flex flex-wrap gap-4">
               <button
                 onClick={() => navigate('/register?role=owner')}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-mutedgreen dark:bg-mutedgreen text-white dark:text-[#101411] text-sm font-semibold rounded-xl hover:bg-[#3a6b1e] dark:hover:bg-[#A3CD82] transition-all duration-300 shadow-lg shadow-[#2D5016]/20 hover:shadow-xl hover:shadow-[#2D5016]/25 active:scale-[0.97]"
+                className="inline-flex items-center gap-2 px-7 py-3.5 btn-primary text-white text-sm font-semibold rounded-button hover:opacity-90 transition-all duration-300 shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/25 active:scale-[0.97]"
               >
                 Get Started <ArrowRight className="w-4 h-4" />
               </button>
               <button
                 onClick={() => navigate('/about')}
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-[#2D2D2D]/15 dark:border-white/25 text-navy dark:text-slate text-sm font-semibold rounded-xl hover:bg-[#2D2D2D]/5 dark:hover:bg-white/10 transition-all duration-300"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-border dark:border-border-dark text-text-primary dark:text-text-dark text-sm font-semibold rounded-button hover:bg-background dark:hover:bg-background-dark transition-all duration-300"
               >
                 Learn More
               </button>
@@ -129,12 +129,12 @@ const FeaturesPage = () => {
           {/* Left — text + feature cards */}
           <div>
             <Reveal delay={80}>
-              <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-navy dark:text-white mb-4">
+              <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-text-primary dark:text-text-dark mb-4">
                 Run your shop <br className="hidden sm:block" />with clarity.
               </h2>
             </Reveal>
             <Reveal delay={140}>
-              <p className="text-[#6b6b6b] dark:text-slate leading-relaxed mb-10 max-w-md">
+              <p className="text-text-muted dark:text-text-mutedDark leading-relaxed mb-10 max-w-md">
                 Everything from stock counts to daily revenue — visible at a glance, manageable from anywhere.
               </p>
             </Reveal>
@@ -147,12 +147,12 @@ const FeaturesPage = () => {
                 { icon: Bell, title: 'Stock Alerts', desc: 'Real-time notifications for low stock and milestones.' },
               ]).map((f, i) => (
                 <Reveal key={i} delay={200 + i * 60}>
-                  <div className="group bg-white dark:bg-charcoal rounded-2xl p-5 border border-warmwhite/60 dark:border-white/10 hover:border-mutedgreen/20 dark:hover:border-mutedgreen/40 hover:shadow-lg hover:shadow-[#2D5016]/5 transition-all duration-300">
-                    <div className="w-10 h-10 rounded-xl bg-mutedgreen/8 dark:bg-mutedgreen/12 flex items-center justify-center mb-3 group-hover:bg-mutedgreen/14 dark:group-hover:bg-mutedgreen/20 transition-colors">
-                      <f.icon className="w-5 h-5 text-mutedgreen dark:text-mutedgreen" />
+                  <div className="group card p-5 border border-border dark:border-border-dark hover:border-accent/20 dark:hover:border-accent/40 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300">
+                    <div className="w-10 h-10 rounded-button bg-accent/8 dark:bg-accent/12 flex items-center justify-center mb-3 group-hover:bg-accent/14 dark:group-hover:bg-accent/20 transition-colors">
+                      <f.icon className="w-5 h-5 text-accent dark:text-accent" />
                     </div>
-                    <h3 className="font-bold text-sm text-navy dark:text-white mb-1">{f.title}</h3>
-                    <p className="text-xs text-[#777] dark:text-slate leading-relaxed">{f.desc}</p>
+                    <h3 className="font-bold text-sm text-text-primary dark:text-text-dark mb-1">{f.title}</h3>
+                    <p className="text-xs text-text-muted dark:text-text-mutedDark leading-relaxed">{f.desc}</p>
                   </div>
                 </Reveal>
               ))}
@@ -188,7 +188,7 @@ const FeaturesPage = () => {
 
 
       {/* ──────────────────── AI & IoT ──────────────────── */}
-      <section className="bg-warmwhite dark:bg-charcoal">
+      <section className="bg-background dark:bg-background-dark">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28">
           <Reveal><Label n="02" text="AI & IoT" /></Reveal>
 
@@ -200,13 +200,13 @@ const FeaturesPage = () => {
                 alt="ESP32-CAM circuit board"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#1a1a1a]/85 via-[#1a1a1a]/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-background-dark/85 via-background-dark/50 to-transparent" />
               <div className="absolute inset-0 flex items-end p-8 lg:p-12">
                 <div className="max-w-lg">
-                  <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-white mb-3">
+                  <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-text-primary dark:text-text-dark mb-3">
                     Computer vision,<br />built for retail.
                   </h2>
-                  <p className="text-white/70 text-sm leading-relaxed max-w-md">
+                  <p className="text-text-muted dark:text-text-mutedDark text-sm leading-relaxed max-w-md">
                     Real-time product detection on the shelf and edge-camera monitoring with ESP32-CAM — powered by OpenCV and YOLOv8.
                   </p>
                 </div>
@@ -223,12 +223,12 @@ const FeaturesPage = () => {
               { icon: Image, title: 'Training Data Pipeline', desc: 'Capture, label, and retrain models with your own product images.', clr: '#5a8d3a' },
             ]).map((f, i) => (
               <Reveal key={i} delay={150 + i * 70}>
-                <div className="group bg-white dark:bg-charcoal rounded-2xl p-6 border border-warmwhite/60 dark:border-white/10 hover:shadow-lg transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${f.clr}10` }}>
-                    <f.icon className="w-5 h-5" style={{ color: f.clr }} />
+                <div className="group card p-6 border border-border dark:border-border-dark hover:shadow-lg transition-all duration-300">
+                  <div className="w-11 h-11 rounded-button flex items-center justify-center mb-4 bg-accent/10">
+                    <f.icon className="w-5 h-5 text-accent" />
                   </div>
-                  <h3 className="font-bold text-[15px] text-navy dark:text-white mb-2">{f.title}</h3>
-                  <p className="text-xs text-[#777] dark:text-slate leading-relaxed">{f.desc}</p>
+                  <h3 className="font-bold text-[15px] text-text-primary dark:text-text-dark mb-2">{f.title}</h3>
+                  <p className="text-xs text-text-muted dark:text-text-mutedDark leading-relaxed">{f.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -241,12 +241,12 @@ const FeaturesPage = () => {
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28">
         <Reveal><Label n="03" text="Customer Discovery" /></Reveal>
         <Reveal delay={60}>
-          <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-navy dark:text-white mb-4 max-w-lg">
+          <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-text-primary dark:text-text-dark mb-4 max-w-lg">
             Find what you need,<br />right near you.
           </h2>
         </Reveal>
         <Reveal delay={120}>
-          <p className="text-[#6b6b6b] dark:text-slate leading-relaxed mb-12 max-w-xl">
+          <p className="text-text-muted dark:text-text-mutedDark leading-relaxed mb-12 max-w-xl">
             Customers search products, compare prices, check live availability, and discover nearby shops — all from their phone.
           </p>
         </Reveal>
@@ -260,21 +260,21 @@ const FeaturesPage = () => {
             { icon: Sparkles, title: 'Recommendations', desc: 'Frequently Bought Together suggestions.', img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=400&q=80' },
           ]).map((f, i) => (
             <Reveal key={i} delay={150 + i * 70}>
-              <div className="group bg-white dark:bg-charcoal rounded-2xl overflow-hidden border border-warmwhite/60 dark:border-white/10 hover:shadow-xl hover:shadow-[#2D5016]/5 hover:-translate-y-1 transition-all duration-300">
+              <div className="group card overflow-hidden border border-border dark:border-border-dark hover:shadow-xl hover:shadow-accent/5 hover:-translate-y-1 transition-all duration-300">
                 <div className="relative h-36 overflow-hidden">
                   <img
                     src={f.img}
                     alt={f.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-overlay/30 to-transparent" />
                 </div>
                 <div className="p-5">
-                  <div className="w-9 h-9 rounded-lg bg-mutedgreen/8 dark:bg-mutedgreen/12 flex items-center justify-center mb-3">
-                    <f.icon className="w-4 h-4 text-mutedgreen dark:text-mutedgreen" />
+                  <div className="w-9 h-9 rounded-button bg-accent/8 dark:bg-accent/12 flex items-center justify-center mb-3">
+                    <f.icon className="w-4 h-4 text-accent dark:text-accent" />
                   </div>
-                  <h3 className="font-bold text-[15px] text-navy dark:text-white mb-1">{f.title}</h3>
-                  <p className="text-xs text-[#777] dark:text-slate leading-relaxed">{f.desc}</p>
+                  <h3 className="font-bold text-[15px] text-text-primary dark:text-text-dark mb-1">{f.title}</h3>
+                  <p className="text-xs text-text-muted dark:text-text-mutedDark leading-relaxed">{f.desc}</p>
                 </div>
               </div>
             </Reveal>
@@ -284,11 +284,11 @@ const FeaturesPage = () => {
 
 
       {/* ──────────────────── SMART ASSISTANCE & SECURITY ──────────────────── */}
-      <section className="bg-white dark:bg-charcoal">
+      <section className="bg-background dark:bg-background-dark">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28">
           <Reveal><Label n="04" text="Smart Assistance & Security" /></Reveal>
           <Reveal delay={60}>
-            <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-navy dark:text-white mb-12 max-w-lg">
+            <h2 className="text-3xl lg:text-4xl font-extrabold tracking-[-0.02em] text-text-primary dark:text-text-dark mb-12 max-w-lg">
               Secure by default.<br />Easy to use.
             </h2>
           </Reveal>
@@ -301,12 +301,12 @@ const FeaturesPage = () => {
               { icon: Lock, title: 'Secure Authentication', desc: 'JWT session tokens, encrypted passwords, and full audit trail logging.', accent: '#5a8d3a' },
             ]).map((f, i) => (
               <Reveal key={i} delay={100 + i * 70}>
-                <div className="group flex flex-col h-full bg-warmwhite dark:bg-charcoal rounded-2xl p-6 border border-warmwhite/60 dark:border-white/10 hover:bg-warmwhite dark:hover:bg-charcoal hover:border-mutedgreen/15 dark:hover:border-mutedgreen/30 transition-all duration-300">
-                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style={{ backgroundColor: `${f.accent}10` }}>
-                    <f.icon className="w-5 h-5" style={{ color: f.accent }} />
+                <div className="group flex flex-col h-full card p-6 border border-border dark:border-border-dark hover:border-accent/15 dark:hover:border-accent/30 transition-all duration-300">
+                  <div className="w-11 h-11 rounded-button flex items-center justify-center mb-4 bg-accent/10">
+                    <f.icon className="w-5 h-5 text-accent" />
                   </div>
-                  <h3 className="font-bold text-[15px] text-navy dark:text-white mb-2">{f.title}</h3>
-                  <p className="text-xs text-[#777] dark:text-slate leading-relaxed flex-1">{f.desc}</p>
+                  <h3 className="font-bold text-[15px] text-text-primary dark:text-text-dark mb-2">{f.title}</h3>
+                  <p className="text-xs text-text-muted dark:text-text-mutedDark leading-relaxed flex-1">{f.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -318,22 +318,22 @@ const FeaturesPage = () => {
       {/* ──────────────────── CLOSING CTA ──────────────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28 text-center">
         <Reveal>
-          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-mutedgreen dark:text-mutedgreen mb-5">Built for Local Retail</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-accent dark:text-accent mb-5">Built for Local Retail</p>
         </Reveal>
         <Reveal delay={100}>
-          <h2 className="text-3xl lg:text-[2.75rem] font-extrabold tracking-[-0.03em] text-navy dark:text-white leading-tight max-w-3xl mx-auto mb-6">
+          <h2 className="text-3xl lg:text-[2.75rem] font-extrabold tracking-[-0.03em] text-text-primary dark:text-text-dark leading-tight max-w-3xl mx-auto mb-6">
             Built to make local retail simpler, smarter, and easier to discover.
           </h2>
         </Reveal>
         <Reveal delay={200}>
-          <p className="text-[#6b6b6b] dark:text-slate max-w-lg mx-auto mb-10 leading-relaxed">
+          <p className="text-text-muted dark:text-text-mutedDark max-w-lg mx-auto mb-10 leading-relaxed">
             Whether you run a neighbourhood shop or shop at one — ShopGenie makes the experience better for everyone.
           </p>
         </Reveal>
         <Reveal delay={300}>
           <button
             onClick={() => navigate('/register?role=owner')}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-mutedgreen dark:bg-mutedgreen text-white dark:text-[#101411] text-sm font-semibold rounded-xl hover:bg-[#3a6b1e] dark:hover:bg-[#A3CD82] transition-all duration-300 shadow-lg shadow-[#2D5016]/20 hover:shadow-xl hover:shadow-[#2D5016]/25 active:scale-[0.97]"
+            className="inline-flex items-center gap-2 px-8 py-4 btn-primary text-white text-sm font-semibold rounded-button hover:opacity-90 transition-all duration-300 shadow-lg shadow-accent/20 hover:shadow-xl hover:shadow-accent/25 active:scale-[0.97]"
           >
             Get Started <ArrowRight className="w-4 h-4" />
           </button>
