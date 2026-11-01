@@ -24,7 +24,13 @@ export const AuthProvider = ({ children }) => {
       return { success: true, user: userData };
     } catch (err) {
       console.error('Login error:', err);
-      // Demo fallback if backend server isn't running yet
+      // Demo fallback only allowed in local development and NEVER in production builds
+      const isDemoAllowed = !import.meta.env.PROD && import.meta.env.VITE_DISABLE_DEMO_AUTH !== 'true';
+      if (!isDemoAllowed) {
+        const errorMsg = err.response?.data?.detail || err.response?.data?.message || 'Login failed. Invalid credentials or backend unavailable.';
+        return { success: false, error: errorMsg };
+      }
+
       const demoUser = {
         id: 1,
         username: username || 'shopowner',
