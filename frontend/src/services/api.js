@@ -31,7 +31,7 @@ api.interceptors.response.use(
       const refreshToken = localStorage.getItem('shopgenie_refresh_token');
       if (refreshToken) {
         try {
-          const res = await axios.post(`${API_BASE_URL}/accounts/token/refresh/`, { refresh: refreshToken });
+          const res = await axios.post(`${API_BASE_URL}/auth/refresh/`, { refresh: refreshToken });
           if (res.data.access) {
             localStorage.setItem('shopgenie_access_token', res.data.access);
             originalRequest.headers.Authorization = `Bearer ${res.data.access}`;
@@ -50,8 +50,13 @@ api.interceptors.response.use(
 
 // Modular API Client Methods
 export const authAPI = {
-  login: (credentials) => api.post('/accounts/login/', credentials),
-  register: (data) => api.post('/accounts/register/', data),
+  login: (credentials) => api.post('/auth/login/', credentials),
+  register: (data) => api.post(
+    data.role === 'CUSTOMER' ? '/auth/register/customer/' : '/auth/register/owner/',
+    data
+  ),
+  verifyEmail: (data) => api.post('/auth/email-verification/confirm/', data),
+  resendVerification: (data) => api.post('/auth/email-verification/resend/', data),
   getProfile: () => api.get('/accounts/profile/'),
   updateProfile: (data) => api.patch('/accounts/profile/', data),
   forgotPassword: (email) => api.post('/accounts/forgot-password/', { email }),

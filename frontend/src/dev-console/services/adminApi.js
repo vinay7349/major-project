@@ -53,6 +53,8 @@ export const adminApi = {
   getUser: (id) => adminAxios.get(`admin/users/${id}/`),
   updateUser: (id, data) => adminAxios.patch(`admin/users/${id}/`, data),
   resetWorkerCode: (id) => adminAxios.post(`admin/users/${id}/reset-code/`),
+  resendUserVerification: (id) => adminAxios.post(`admin/users/${id}/resend-verification/`),
+  verifyUserEmail: (id) => adminAxios.post(`admin/users/${id}/verify-email/`, { confirm: true }),
 
   // Products
   getProducts: (params) => adminAxios.get('admin/products/', { params }),

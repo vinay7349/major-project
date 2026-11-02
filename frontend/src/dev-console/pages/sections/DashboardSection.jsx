@@ -166,9 +166,12 @@ const DashboardSection = ({ onNavigate }) => {
           </div>
           <div className="mt-4 flex items-baseline justify-between">
             <span className="text-3xl font-bold text-white tracking-tight">
-              {(data?.users?.owners || 0) + (data?.users?.workers || 0) + (data?.users?.customers || 0)}
+              {(data?.users?.owners || 0) +
+                (data?.users?.workers || 0) +
+                (data?.users?.customers || 0) +
+                (data?.users?.developers || 0)}
             </span>
-            <span className="text-xs font-mono text-slate-400">Total active users</span>
+            <span className="text-xs font-mono text-slate-400">Managed accounts</span>
           </div>
           <div className="mt-4 grid grid-cols-3 gap-2 pt-3 border-t border-slate-800/60 text-center">
             <div className="bg-slate-950/50 p-2 rounded-lg">
@@ -251,7 +254,7 @@ const DashboardSection = ({ onNavigate }) => {
             <ShieldCheck className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-bold text-white">{data?.users?.developers || 1}</div>
+            <div className="text-2xl font-bold text-white">{data?.users?.developers || 0}</div>
             <div className="text-xs text-slate-400">CLI Developers Provisioned</div>
           </div>
         </div>

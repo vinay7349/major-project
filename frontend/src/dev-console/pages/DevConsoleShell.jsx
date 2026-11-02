@@ -75,9 +75,9 @@ const DevConsoleShell = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans select-none">
+    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
       {/* Top Bar */}
-      <header className="h-16 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
+      <header className="min-h-16 shrink-0 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between sticky top-0 z-40">
         <div className="flex items-center space-x-3">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -144,9 +144,9 @@ const DevConsoleShell = () => {
       </header>
 
       {/* Main Workspace with Sidebar */}
-      <div className="flex-1 flex overflow-hidden">
+      <div className="min-h-0 flex-1 flex overflow-hidden">
         {/* Desktop Sidebar */}
-        <aside className="w-64 border-r border-slate-800 bg-slate-900/50 p-4 hidden md:flex flex-col justify-between">
+        <aside className="w-[16rem] shrink-0 border-r border-slate-800 bg-slate-900/50 p-4 hidden md:flex flex-col justify-between">
           <nav className="space-y-1">
             <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500 px-3 mb-2">
               Management Modules
@@ -165,7 +165,7 @@ const DevConsoleShell = () => {
                   }`}
                 >
                   <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                  <span>{item.label}</span>
+                  <span className="whitespace-nowrap">{item.label}</span>
                 </button>
               );
             })}
@@ -180,7 +180,7 @@ const DevConsoleShell = () => {
         {/* Mobile Flyout Menu */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-30 bg-black/60 backdrop-blur-sm md:hidden flex">
-            <div className="w-64 bg-slate-900 border-r border-slate-800 p-4 flex flex-col justify-between h-full animate-slide-in">
+            <div className="w-[16rem] shrink-0 bg-slate-900 border-r border-slate-800 p-4 flex flex-col justify-between h-full animate-slide-in">
               <nav className="space-y-1">
                 <div className="text-[10px] font-mono uppercase tracking-wider text-slate-500 px-3 mb-2">
                   Navigation
@@ -218,7 +218,7 @@ const DevConsoleShell = () => {
         )}
 
         {/* Section Viewport */}
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
+        <main className="min-h-0 min-w-0 flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">
           <div className="max-w-7xl mx-auto">
             {renderSection()}
           </div>

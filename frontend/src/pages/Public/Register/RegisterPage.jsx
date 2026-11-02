@@ -3,6 +3,8 @@ import { NavLink, useNavigate, useSearchParams } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock, User as UserIcon, Store } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { useToast } from '../../../context/NotificationContext';
+import { authAPI } from '../../../services/api';
+import HCaptchaWidget from '../../../components/HCaptchaWidget';
 
 const RegisterPage = () => {
   const [searchParams] = useSearchParams();
@@ -18,6 +20,14 @@ const RegisterPage = () => {
     phone_number: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [verificationPending, setVerificationPending] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
+  const [captchaToken, setCaptchaToken] = useState('');
+  const [showCaptcha, setShowCaptcha] = useState(false);
+  const [captchaGeneration, setCaptchaGeneration] = useState(0);
+  const [captchaError, setCaptchaError] = useState('');
+  const [verificationLoading, setVerificationLoading] = useState(false);
 
   const { register, loading } = useAuth();
   const { addToast } = useToast();
@@ -29,12 +39,63 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await register(formData);
+    if (!captchaToken) {
+      setShowCaptcha(true);
+      return;
+    }
+    const res = await register({ ...formData, captcha_token: captchaToken });
     if (res.success) {
-      addToast('Registration complete! Please sign in with your new account.', 'success', 'Account Created');
-      navigate('/customer/login');
+      setVerificationPending(true);
+      setCaptchaToken('');
+      setShowCaptcha(false);
+      setCaptchaError('');
+      setCaptchaGeneration((generation) => generation + 1);
+      addToast(
+        'If registration can be completed, check your inbox for a verification code.',
+        'success',
+        'Check your email'
+      );
     } else {
-      addToast('Registration error. Please check your form fields.', 'error');
+      setCaptchaToken('');
+      setShowCaptcha(false);
+      setCaptchaGeneration((generation) => generation + 1);
+      addToast('Registration could not be completed. Check your information and try again.', 'error');
+    }
+  };
+
+  const handleVerifyEmail = async (event) => {
+    event.preventDefault();
+    setVerificationLoading(true);
+    try {
+      await authAPI.verifyEmail({ email: formData.email, code: verificationCode });
+      setEmailVerified(true);
+      addToast('Email verified. You can now sign in.', 'success', 'Email verified');
+    } catch {
+      addToast('The verification code is invalid or expired.', 'error');
+    } finally {
+      setVerificationLoading(false);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    if (!captchaToken) {
+      setShowCaptcha(true);
+      return;
+    }
+    setVerificationLoading(true);
+    try {
+      await authAPI.resendVerification({
+        email: formData.email,
+        captcha_token: captchaToken,
+      });
+      addToast('If the account is eligible, a verification code will be sent.', 'success');
+    } catch {
+      addToast('The request could not be completed. Please try again later.', 'error');
+    } finally {
+      setVerificationLoading(false);
+      setCaptchaToken('');
+      setShowCaptcha(false);
+      setCaptchaGeneration((generation) => generation + 1);
     }
   };
 
@@ -127,7 +188,10 @@ const RegisterPage = () => {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form
+                onSubmit={verificationPending ? handleVerifyEmail : handleSubmit}
+                className="space-y-5"
+              >
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
                     <label className="block text-xs font-semibold text-text-primary dark:text-text-dark mb-1.5">First Name</label>
@@ -225,6 +289,7 @@ const RegisterPage = () => {
                         <input
                           type="text"
                           name="shop_name"
+                          required
                           value={formData.shop_name}
                           onChange={handleChange}
                           placeholder="Green Valley Mart"
@@ -242,13 +307,108 @@ const RegisterPage = () => {
                   </div>
                 )}
 
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full h-12 rounded-button btn-primary text-white text-xs sm:text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-accent/25 hover:shadow-xl disabled:opacity-50"
-                >
-                  {loading ? 'Creating Account...' : (isCustomer ? 'Create Customer Account' : 'Create Shop Account')}
-                </button>
+                {!verificationPending && !emailVerified && (
+                  <>
+                    {showCaptcha && (
+                      <div className="space-y-2">
+                        <HCaptchaWidget
+                          key={captchaGeneration}
+                          onToken={(token) => {
+                            setCaptchaToken(token);
+                            setShowCaptcha(false);
+                            setCaptchaError('');
+                          }}
+                          onError={(message) => {
+                            setCaptchaToken('');
+                            setShowCaptcha(false);
+                            setCaptchaError(message);
+                            setCaptchaGeneration((generation) => generation + 1);
+                          }}
+                        />
+                      </div>
+                    )}
+                    {captchaError && (
+                      <p role="alert" className="text-sm text-red-600">{captchaError}</p>
+                    )}
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full h-12 rounded-button btn-primary text-white text-xs sm:text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-accent/25 hover:shadow-xl disabled:opacity-50"
+                    >
+                      {loading ? 'Creating Account...' : (isCustomer ? 'Create Customer Account' : 'Create Shop Account')}
+                    </button>
+                  </>
+                )}
+                {verificationPending && !emailVerified && (
+                  <div className="space-y-4">
+                    <p className="text-sm text-text-muted dark:text-text-mutedDark">
+                      If registration can be completed, check your inbox for a verification code.
+                    </p>
+                    <label className="block text-xs font-semibold text-text-primary dark:text-text-dark">
+                      Email verification code
+                      <input
+                        type="text"
+                        inputMode="numeric"
+                        pattern="[0-9]{6}"
+                        maxLength={6}
+                        required
+                        value={verificationCode}
+                        onChange={(event) => setVerificationCode(event.target.value.replace(/\D/g, '').slice(0, 6))}
+                        className="mt-1.5 h-12 w-full rounded-input border border-border dark:border-border-dark bg-background dark:bg-background-dark px-4 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
+                      />
+                    </label>
+                    {showCaptcha && (
+                      <HCaptchaWidget
+                        key={captchaGeneration}
+                        onToken={(token) => {
+                          setCaptchaToken(token);
+                          setShowCaptcha(false);
+                          setCaptchaError('');
+                        }}
+                        onError={(message) => {
+                          setCaptchaToken('');
+                          setShowCaptcha(false);
+                          setCaptchaError(message);
+                          setCaptchaGeneration((generation) => generation + 1);
+                        }}
+                      />
+                    )}
+                    {captchaError && (
+                      <p role="alert" className="text-sm text-red-600">{captchaError}</p>
+                    )}
+                    <div className="flex flex-wrap gap-3">
+                      <button
+                        type="submit"
+                        disabled={verificationLoading}
+                        className="h-11 rounded-button btn-primary px-5 text-white text-sm font-bold disabled:opacity-50"
+                      >
+                        {verificationLoading ? 'Verifying...' : 'Verify email'}
+                      </button>
+                      <button
+                        type="button"
+                        disabled={verificationLoading}
+                        onClick={handleResendVerification}
+                        className="h-11 rounded-button border border-border px-5 text-sm font-semibold disabled:opacity-50"
+                      >
+                        Resend code
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {emailVerified && (
+                  <div className="space-y-3">
+                    <p className="text-sm text-text-muted dark:text-text-mutedDark">
+                      Email verified. Sign in to continue.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => navigate(isCustomer ? '/customer/login' : '/shop-owner/login')}
+                      className="w-full h-12 rounded-button btn-primary text-white text-sm font-bold"
+                    >
+                      Go to sign in
+                    </button>
+                  </div>
+                )}
               </form>
 
               <div className="pt-4 border-t border-border dark:border-border-dark text-center">
@@ -276,5 +436,3 @@ const RegisterPage = () => {
 };
 
 export default RegisterPage;
-
-

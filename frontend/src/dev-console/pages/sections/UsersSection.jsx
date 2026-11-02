@@ -109,6 +109,34 @@ const UsersSection = () => {
     });
   };
 
+  const handleResendVerification = (user) => {
+    setConfirmConfig({
+      isOpen: true,
+      title: `Resend verification to "${user.email}"?`,
+      message: 'A new verification code will be sent if this account is eligible. The response does not disclose eligibility.',
+      confirmText: 'Resend Code',
+      confirmVariant: 'primary',
+      action: async () => {
+        await adminApi.resendUserVerification(user.id);
+        await fetchUsers();
+      },
+    });
+  };
+
+  const handleVerifyEmail = (user) => {
+    setConfirmConfig({
+      isOpen: true,
+      title: `Manually verify "${user.email}"?`,
+      message: 'Confirm that the account holder’s email address has been verified through an approved offline process. This action is recorded in the audit log.',
+      confirmText: 'Verify Email',
+      confirmVariant: 'warning',
+      action: async () => {
+        await adminApi.verifyUserEmail(user.id);
+        await fetchUsers();
+      },
+    });
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -243,6 +271,21 @@ const UsersSection = () => {
                       >
                         {u.is_active ? 'ACTIVE' : 'DISABLED'}
                       </span>
+                      {['SHOP_OWNER', 'CUSTOMER'].includes(u.role) && (
+                        <div className={`mt-1 text-[9px] font-semibold ${
+                          u.is_email_verified
+                            ? 'text-emerald-400'
+                            : u.email_verification_required
+                            ? 'text-amber-400'
+                            : 'text-slate-400'
+                        }`}>
+                          {u.is_email_verified
+                            ? 'EMAIL VERIFIED'
+                            : u.email_verification_required
+                            ? 'VERIFICATION REQUIRED'
+                            : 'GRACE PERIOD'}
+                        </div>
+                      )}
                     </td>
                     <td className="px-4 py-3 text-right">
                       <div className="flex items-center justify-end space-x-2">
@@ -263,6 +306,25 @@ const UsersSection = () => {
                             <KeyRound className="w-3 h-3" />
                             <span>Reset PIN</span>
                           </button>
+                        )}
+
+                        {['SHOP_OWNER', 'CUSTOMER'].includes(u.role) && !u.is_email_verified && (
+                          <>
+                            <button
+                              onClick={() => handleResendVerification(u)}
+                              title="Send a verification code"
+                              className="px-2.5 py-1 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-300 border border-indigo-600/40 text-[11px] font-medium transition-colors cursor-pointer"
+                            >
+                              Resend
+                            </button>
+                            <button
+                              onClick={() => handleVerifyEmail(u)}
+                              title="Manually verify after offline confirmation"
+                              className="px-2.5 py-1 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-300 border border-emerald-600/40 text-[11px] font-medium transition-colors cursor-pointer"
+                            >
+                              Verify
+                            </button>
+                          </>
                         )}
 
                         {u.role !== 'DEVELOPER' && (
@@ -321,6 +383,23 @@ const UsersSection = () => {
                 <span className="text-slate-500 font-mono">EMAIL / IDENTIFIER:</span>
                 <div className="font-mono text-slate-200 mt-0.5">{viewUser.email}</div>
               </div>
+              {['SHOP_OWNER', 'CUSTOMER'].includes(viewUser.role) && (
+                <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                  <span className="text-slate-500 font-mono">EMAIL VERIFICATION:</span>
+                  <div className="font-semibold text-slate-200 mt-0.5">
+                    {viewUser.is_email_verified
+                      ? 'Verified'
+                      : viewUser.email_verification_required
+                      ? 'Required before access'
+                      : 'Existing account grace period'}
+                  </div>
+                  {viewUser.verified_at && (
+                    <div className="text-slate-500 mt-1">
+                      Verified {new Date(viewUser.verified_at).toLocaleString()}
+                    </div>
+                  )}
+                </div>
+              )}
 
               <div className="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
                 <span className="text-slate-500 font-mono">USERNAME:</span>

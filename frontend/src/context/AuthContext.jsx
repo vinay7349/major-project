@@ -13,7 +13,11 @@ export const AuthProvider = ({ children }) => {
   const login = async (username, password, requestedRole) => {
     setLoading(true);
     try {
-      const response = await authAPI.login({ username, password });
+      const response = await authAPI.login({
+        username,
+        password,
+        role: requestedRole === 'customer' ? 'CUSTOMER' : 'SHOP_OWNER',
+      });
       const { access, refresh, user: userData } = response.data;
 
       localStorage.setItem('shopgenie_access_token', access);
@@ -24,26 +28,10 @@ export const AuthProvider = ({ children }) => {
       return { success: true, user: userData };
     } catch (err) {
       console.error('Login error:', err);
-      // Demo fallback only allowed in local development and NEVER in production builds
-      const isDemoAllowed = !import.meta.env.PROD && import.meta.env.VITE_DISABLE_DEMO_AUTH !== 'true';
-      if (!isDemoAllowed) {
-        const errorMsg = err.response?.data?.detail || err.response?.data?.message || 'Login failed. Invalid credentials or backend unavailable.';
-        return { success: false, error: errorMsg };
-      }
-
-      const demoUser = {
-        id: 1,
-        username: username || 'shopowner',
-        email: 'owner@shopgenie.ai',
-        first_name: 'Alex',
-        last_name: 'Morgan',
-        role: requestedRole === 'customer' ? 'CUSTOMER' : 'SHOP_OWNER',
-        shop_name: requestedRole === 'customer' ? '' : 'Genie Mart Downtown'
-      };
-      localStorage.setItem('shopgenie_access_token', 'demo-access-token');
-      localStorage.setItem('shopgenie_user', JSON.stringify(demoUser));
-      setUser(demoUser);
-      return { success: true, user: demoUser, isDemo: true };
+      const errorMsg = err.response?.data?.detail
+        || err.response?.data?.message
+        || 'Login failed. Invalid credentials or backend unavailable.';
+      return { success: false, error: errorMsg };
     } finally {
       setLoading(false);
     }
@@ -53,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await authAPI.register(userData);
-      return { success: true, message: response.data.message };
+      return { success: true, message: response.data.detail };
     } catch (err) {
       console.error('Registration error:', err);
       return { success: false, error: err.response?.data || 'Registration failed' };
