@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { adminApi } from '../../services/adminApi';
 import ConfirmDialog from '../../components/ConfirmDialog';
+import { useToast } from '../../context/ToastContext';
 import {
   Users,
   Search,
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react';
 
 const UsersSection = () => {
+  const { info, error: toastError } = useToast();
   const [users, setUsers] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -32,6 +34,7 @@ const UsersSection = () => {
   // New Code display modal
   const [newCodeData, setNewCodeData] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
 
   // Confirm dialog
   const [confirmConfig, setConfirmConfig] = useState({
@@ -72,7 +75,7 @@ const UsersSection = () => {
 
   const handleToggleActive = (user) => {
     if (user.role === 'DEVELOPER') {
-      alert('Developer accounts are managed strictly via CLI.');
+      info('Developer accounts are managed strictly via the backend command line.');
       return;
     }
 
@@ -168,7 +171,7 @@ const UsersSection = () => {
           <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
           <input
             type="text"
-            placeholder="Search by email or username..."
+            placeholder="Search by account ID, email, name, or username..."
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -500,12 +503,20 @@ const UsersSection = () => {
         confirmText={confirmConfig.confirmText}
         confirmVariant={confirmConfig.confirmVariant}
         onConfirm={async () => {
-          if (confirmConfig.action) {
-            await confirmConfig.action();
+          setConfirmLoading(true);
+          try {
+            if (confirmConfig.action) {
+              await confirmConfig.action();
+            }
+            setConfirmConfig((current) => ({ ...current, isOpen: false }));
+          } catch (err) {
+            toastError(err.response?.data?.detail || 'The requested action failed.');
+          } finally {
+            setConfirmLoading(false);
           }
-          setConfirmConfig({ ...confirmConfig, isOpen: false });
         }}
         onCancel={() => setConfirmConfig({ ...confirmConfig, isOpen: false })}
+        loading={confirmLoading}
       />
     </div>
   );

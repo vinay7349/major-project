@@ -3,8 +3,15 @@ import { adminApi } from '../services/adminApi';
 
 const DevAuthContext = createContext(null);
 
-const DEFAULT_SESSION_MINUTES = parseInt(import.meta.env.VITE_ADMIN_SESSION_MINUTES || '30', 10);
-const IDLE_TIMEOUT_MS = DEFAULT_SESSION_MINUTES * 60 * 1000;
+const configuredSessionMinutes = Number.parseInt(
+  import.meta.env.VITE_ADMIN_SESSION_MINUTES || '30',
+  10
+);
+export const ADMIN_SESSION_MINUTES =
+  Number.isFinite(configuredSessionMinutes) && configuredSessionMinutes > 0
+    ? configuredSessionMinutes
+    : 30;
+const IDLE_TIMEOUT_MS = ADMIN_SESSION_MINUTES * 60 * 1000;
 
 export const DevAuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {

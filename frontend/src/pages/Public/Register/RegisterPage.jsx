@@ -4,7 +4,7 @@ import { Eye, EyeOff, Mail, Lock, User as UserIcon, Store } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { useToast } from '../../../context/NotificationContext';
 import { authAPI } from '../../../services/api';
-import HCaptchaWidget from '../../../components/HCaptchaWidget';
+import TurnstileWidget from '../../../components/TurnstileWidget';
 
 const RegisterPage = () => {
   const [searchParams] = useSearchParams();
@@ -13,6 +13,7 @@ const RegisterPage = () => {
     username: '',
     email: '',
     password: '',
+    password_confirm: '',
     first_name: '',
     last_name: '',
     role: isCustomer ? 'CUSTOMER' : 'SHOP_OWNER',
@@ -78,24 +79,16 @@ const RegisterPage = () => {
   };
 
   const handleResendVerification = async () => {
-    if (!captchaToken) {
-      setShowCaptcha(true);
-      return;
-    }
     setVerificationLoading(true);
     try {
       await authAPI.resendVerification({
         email: formData.email,
-        captcha_token: captchaToken,
       });
       addToast('If the account is eligible, a verification code will be sent.', 'success');
     } catch {
       addToast('The request could not be completed. Please try again later.', 'error');
     } finally {
       setVerificationLoading(false);
-      setCaptchaToken('');
-      setShowCaptcha(false);
-      setCaptchaGeneration((generation) => generation + 1);
     }
   };
 
@@ -304,6 +297,21 @@ const RegisterPage = () => {
                         Shop Owner
                       </div>
                     </div>
+                    <div>
+                      <label className="block text-xs font-semibold text-text-primary dark:text-text-dark mb-1.5">Confirm Password</label>
+                      <div className="relative">
+                        <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-text-muted dark:text-text-mutedDark" />
+                        <input
+                          type="password"
+                          name="password_confirm"
+                          required
+                          value={formData.password_confirm}
+                          onChange={handleChange}
+                          autoComplete="new-password"
+                          className="h-12 w-full rounded-input border border-border dark:border-border-dark bg-background dark:bg-background-dark pl-10 pr-4 text-xs sm:text-sm text-text-primary dark:text-text-dark outline-none focus:border-accent focus:ring-2 focus:ring-accent/15 transition-all shadow-sm"
+                        />
+                      </div>
+                    </div>
                   </div>
                 )}
 
@@ -311,8 +319,9 @@ const RegisterPage = () => {
                   <>
                     {showCaptcha && (
                       <div className="space-y-2">
-                        <HCaptchaWidget
+                        <TurnstileWidget
                           key={captchaGeneration}
+                          action="register"
                           onToken={(token) => {
                             setCaptchaToken(token);
                             setShowCaptcha(false);
@@ -357,25 +366,6 @@ const RegisterPage = () => {
                         className="mt-1.5 h-12 w-full rounded-input border border-border dark:border-border-dark bg-background dark:bg-background-dark px-4 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/15"
                       />
                     </label>
-                    {showCaptcha && (
-                      <HCaptchaWidget
-                        key={captchaGeneration}
-                        onToken={(token) => {
-                          setCaptchaToken(token);
-                          setShowCaptcha(false);
-                          setCaptchaError('');
-                        }}
-                        onError={(message) => {
-                          setCaptchaToken('');
-                          setShowCaptcha(false);
-                          setCaptchaError(message);
-                          setCaptchaGeneration((generation) => generation + 1);
-                        }}
-                      />
-                    )}
-                    {captchaError && (
-                      <p role="alert" className="text-sm text-red-600">{captchaError}</p>
-                    )}
                     <div className="flex flex-wrap gap-3">
                       <button
                         type="submit"

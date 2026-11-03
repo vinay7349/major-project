@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { adminApi } from '../../services/adminApi';
 import ConfirmDialog from '../../components/ConfirmDialog';
+import { useToast } from '../../context/ToastContext';
 import {
   Package,
   Tag,
@@ -17,12 +18,14 @@ import {
 } from 'lucide-react';
 
 const ProductsSection = () => {
+  const { success, error: toastError } = useToast();
   const [activeTab, setActiveTab] = useState('products'); // 'products' | 'offers'
 
   // Products state
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(0);
   const [prodLoading, setProdLoading] = useState(true);
+  const [prodError, setProdError] = useState(null);
   const [prodSearch, setProdSearch] = useState('');
   const [prodStatusFilter, setProdStatusFilter] = useState('');
   const [prodPage, setProdPage] = useState(1);
@@ -31,6 +34,8 @@ const ProductsSection = () => {
   const [offers, setOffers] = useState([]);
   const [totalOffers, setTotalOffers] = useState(0);
   const [offerLoading, setOfferLoading] = useState(false);
+  const [offerError, setOfferError] = useState(null);
+  const [offerSearch, setOfferSearch] = useState('');
   const [offerPage, setOfferPage] = useState(1);
 
   // Modals
@@ -38,6 +43,7 @@ const ProductsSection = () => {
   const [editProduct, setEditProduct] = useState(null);
   const [editFormData, setEditFormData] = useState({});
   const [editLoading, setEditLoading] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
 
   // Confirm Dialog
   const [confirmConfig, setConfirmConfig] = useState({
@@ -51,6 +57,7 @@ const ProductsSection = () => {
 
   const fetchProducts = useCallback(async () => {
     setProdLoading(true);
+    setProdError(null);
     try {
       const params = { page: prodPage };
       if (prodSearch) params.search = prodSearch;
@@ -65,7 +72,7 @@ const ProductsSection = () => {
         setTotalProducts(res.data.length);
       }
     } catch (err) {
-      console.error(err);
+      setProdError(err.response?.data?.detail || 'Failed to load products.');
     } finally {
       setProdLoading(false);
     }
@@ -73,8 +80,11 @@ const ProductsSection = () => {
 
   const fetchOffers = useCallback(async () => {
     setOfferLoading(true);
+    setOfferError(null);
     try {
-      const res = await adminApi.getOffers({ page: offerPage });
+      const params = { page: offerPage };
+      if (offerSearch) params.search = offerSearch;
+      const res = await adminApi.getOffers(params);
       if (res.data?.results) {
         setOffers(res.data.results);
         setTotalOffers(res.data.count);
@@ -83,11 +93,11 @@ const ProductsSection = () => {
         setTotalOffers(res.data.length);
       }
     } catch (err) {
-      console.error(err);
+      setOfferError(err.response?.data?.detail || 'Failed to load offers.');
     } finally {
       setOfferLoading(false);
     }
-  }, [offerPage]);
+  }, [offerPage, offerSearch]);
 
   useEffect(() => {
     if (activeTab === 'products') {
@@ -107,7 +117,8 @@ const ProductsSection = () => {
       confirmVariant: 'danger',
       action: async () => {
         await adminApi.archiveProduct(product.id);
-        fetchProducts();
+        success(`Product "${product.name}" archived.`);
+        await fetchProducts();
       },
     });
   };
@@ -124,7 +135,8 @@ const ProductsSection = () => {
       confirmVariant: nextState ? 'primary' : 'warning',
       action: async () => {
         await adminApi.updateOffer(offer.id, { is_active: nextState });
-        fetchOffers();
+        success(`Offer "${offer.title}" ${nextState ? 'activated' : 'deactivated'}.`);
+        await fetchOffers();
       },
     });
   };
@@ -135,10 +147,11 @@ const ProductsSection = () => {
     setEditLoading(true);
     try {
       await adminApi.updateProduct(editProduct.id, editFormData);
+      success(`Product "${editFormData.name}" updated.`);
       setEditProduct(null);
       fetchProducts();
     } catch (err) {
-      alert(err.response?.data?.detail || 'Failed to update product.');
+      toastError(err.response?.data?.detail || 'Failed to update product.');
     } finally {
       setEditLoading(false);
     }
@@ -192,7 +205,7 @@ const ProductsSection = () => {
               <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
               <input
                 type="text"
-                placeholder="Search products by title..."
+                placeholder="Search by product ID, name, category, brand, or barcode..."
                 value={prodSearch}
                 onChange={(e) => {
                   setProdSearch(e.target.value);
@@ -219,6 +232,12 @@ const ProductsSection = () => {
               </select>
             </div>
           </div>
+
+          {prodError && (
+            <div className="p-3 bg-rose-950/40 border border-rose-800/60 rounded-xl text-rose-300 text-xs">
+              {prodError}
+            </div>
+          )}
 
           {/* Products Table */}
           <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg">
@@ -337,8 +356,29 @@ const ProductsSection = () => {
         </div>
       ) : (
         /* Offers Table */
-        <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg">
-          <div className="overflow-x-auto">
+        <div className="space-y-4">
+          <div className="relative max-w-xl">
+            <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+            <input
+              type="text"
+              placeholder="Search by offer ID, title, or description..."
+              value={offerSearch}
+              onChange={(e) => {
+                setOfferSearch(e.target.value);
+                setOfferPage(1);
+              }}
+              className="w-full pl-9 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+          </div>
+
+          {offerError && (
+            <div className="p-3 bg-rose-950/40 border border-rose-800/60 rounded-xl text-rose-300 text-xs">
+              {offerError}
+            </div>
+          )}
+
+          <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden shadow-lg">
+            <div className="overflow-x-auto">
             <table className="w-full text-left text-xs text-slate-300">
               <thead className="bg-slate-950/80 text-slate-400 font-mono uppercase tracking-wider border-b border-slate-800">
                 <tr>
@@ -408,6 +448,7 @@ const ProductsSection = () => {
                 )}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
       )}
@@ -597,12 +638,20 @@ const ProductsSection = () => {
         confirmText={confirmConfig.confirmText}
         confirmVariant={confirmConfig.confirmVariant}
         onConfirm={async () => {
-          if (confirmConfig.action) {
-            await confirmConfig.action();
+          setConfirmLoading(true);
+          try {
+            if (confirmConfig.action) {
+              await confirmConfig.action();
+            }
+            setConfirmConfig((current) => ({ ...current, isOpen: false }));
+          } catch (err) {
+            toastError(err.response?.data?.detail || 'The requested action failed.');
+          } finally {
+            setConfirmLoading(false);
           }
-          setConfirmConfig({ ...confirmConfig, isOpen: false });
         }}
         onCancel={() => setConfirmConfig({ ...confirmConfig, isOpen: false })}
+        loading={confirmLoading}
       />
     </div>
   );

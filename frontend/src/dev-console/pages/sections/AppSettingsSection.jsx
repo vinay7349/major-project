@@ -196,7 +196,7 @@ const AppSettingsSection = () => {
       {saveSuccess && (
         <div className="p-4 bg-emerald-950/40 border border-emerald-800/60 rounded-xl text-emerald-300 text-sm flex items-center space-x-3">
           <CheckCircle className="w-5 h-5 flex-shrink-0 text-emerald-400" />
-          <span>Configuration published successfully to PostgreSQL database.</span>
+          <span>Configuration saved successfully to the database.</span>
         </div>
       )}
 

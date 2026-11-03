@@ -1,11 +1,18 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../../services/api';
+
+const adminApiBaseUrl = API_BASE_URL
+  ? `${API_BASE_URL.replace(/\/+$/, '')}/`
+  : '/api/';
 
 const adminAxios = axios.create({
-  baseURL: '/api/',
+  baseURL: adminApiBaseUrl,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+let refreshRequest = null;
 
 adminAxios.interceptors.request.use(
   (config) => {
@@ -20,14 +27,55 @@ adminAxios.interceptors.request.use(
 
 adminAxios.interceptors.response.use(
   (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
+  async (error) => {
+    const originalRequest = error.config;
+    if (error.response?.status !== 401 || !originalRequest || originalRequest._retry) {
+      return Promise.reject(error);
+    }
+
+    const refreshToken = sessionStorage.getItem('shopgenie_dev_refresh_token');
+    if (!refreshToken || originalRequest.url?.includes('auth/refresh/')) {
       sessionStorage.removeItem('shopgenie_dev_access_token');
       sessionStorage.removeItem('shopgenie_dev_refresh_token');
       sessionStorage.removeItem('shopgenie_dev_user');
       window.dispatchEvent(new CustomEvent('dev-auth-expired'));
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
+
+    originalRequest._retry = true;
+    try {
+      if (!refreshRequest) {
+        refreshRequest = axios
+          .post(`${adminApiBaseUrl}auth/refresh/`, { refresh: refreshToken })
+          .then((response) => {
+            const { access, refresh } = response.data || {};
+            if (!access) {
+              throw new Error('The developer session could not be refreshed.');
+            }
+            sessionStorage.setItem('shopgenie_dev_access_token', access);
+            if (refresh) {
+              sessionStorage.setItem('shopgenie_dev_refresh_token', refresh);
+            }
+            return access;
+          })
+          .finally(() => {
+            refreshRequest = null;
+          });
+      }
+
+      const accessToken = await refreshRequest;
+      originalRequest.headers = {
+        ...originalRequest.headers,
+        Authorization: `Bearer ${accessToken}`,
+      };
+      return adminAxios(originalRequest);
+    } catch (refreshError) {
+      sessionStorage.removeItem('shopgenie_dev_access_token');
+      sessionStorage.removeItem('shopgenie_dev_refresh_token');
+      sessionStorage.removeItem('shopgenie_dev_user');
+      window.dispatchEvent(new CustomEvent('dev-auth-expired'));
+      return Promise.reject(refreshError);
+    }
   }
 );
 
@@ -82,6 +130,7 @@ export const adminApi = {
 
   // Direct test ping for public app-settings
   testPublicAppSettings: (appKey) => adminAxios.get(`app-settings/${appKey}/`),
+  probePublicEndpoint: (path) => adminAxios.get(path),
 };
 
 export default adminApi;

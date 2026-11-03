@@ -27,11 +27,13 @@ export const AuthProvider = ({ children }) => {
       setUser(userData);
       return { success: true, user: userData };
     } catch (err) {
-      console.error('Login error:', err);
-      const errorMsg = err.response?.data?.detail
-        || err.response?.data?.message
-        || 'Login failed. Invalid credentials or backend unavailable.';
-      return { success: false, error: errorMsg };
+      return {
+        success: false,
+        error: err.response?.data?.detail
+          || err.response?.data?.message
+          || 'Login failed. Invalid credentials or backend unavailable.',
+        code: err.response?.data?.code,
+      };
     } finally {
       setLoading(false);
     }
@@ -43,7 +45,6 @@ export const AuthProvider = ({ children }) => {
       const response = await authAPI.register(userData);
       return { success: true, message: response.data.detail };
     } catch (err) {
-      console.error('Registration error:', err);
       return { success: false, error: err.response?.data || 'Registration failed' };
     } finally {
       setLoading(false);

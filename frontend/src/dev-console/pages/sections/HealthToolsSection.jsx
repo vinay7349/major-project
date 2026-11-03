@@ -14,17 +14,26 @@ import {
 } from 'lucide-react';
 
 const ENDPOINTS_TO_TEST = [
-  { name: 'Shops Public Catalog', path: '/api/shops/' },
-  { name: 'Products Public Directory', path: '/api/products/' },
-  { name: 'Offers Registry', path: '/api/offers/' },
-  { name: 'Customer App Remote Settings', path: '/api/app-settings/customer_app/' },
-  { name: 'Shop Owner App Remote Settings', path: '/api/app-settings/owner_app/' },
+  { name: 'Shops Public Catalog', path: '/api/shops/', apiPath: 'shops/' },
+  { name: 'Products Public Directory', path: '/api/products/', apiPath: 'products/' },
+  { name: 'Offers Registry', path: '/api/offers/', apiPath: 'offers/' },
+  {
+    name: 'Customer App Remote Settings',
+    path: '/api/app-settings/customer_app/',
+    apiPath: 'app-settings/customer_app/',
+  },
+  {
+    name: 'Shop Owner App Remote Settings',
+    path: '/api/app-settings/owner_app/',
+    apiPath: 'app-settings/owner_app/',
+  },
 ];
 
 const HealthToolsSection = () => {
   const [healthData, setHealthData] = useState(null);
   const [consistencyData, setConsistencyData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   // Ping test states
   const [endpointResults, setEndpointResults] = useState({});
@@ -32,6 +41,7 @@ const HealthToolsSection = () => {
 
   const fetchHealth = async () => {
     setLoading(true);
+    setError(null);
     try {
       const [hRes, cRes] = await Promise.all([
         adminApi.getHealth(),
@@ -40,7 +50,7 @@ const HealthToolsSection = () => {
       setHealthData(hRes.data);
       setConsistencyData(cRes.data);
     } catch (err) {
-      console.error(err);
+      setError(err.response?.data?.detail || 'Failed to load system health and consistency data.');
     } finally {
       setLoading(false);
     }
@@ -50,24 +60,50 @@ const HealthToolsSection = () => {
     fetchHealth();
   }, []);
 
+  if (loading || !healthData || !consistencyData) {
+    return (
+      <div className="flex min-h-64 flex-col items-center justify-center gap-4 text-slate-400">
+        {loading ? (
+          <>
+            <RefreshCw className="h-6 w-6 animate-spin text-indigo-400" />
+            <span className="text-sm">Loading health and consistency data...</span>
+          </>
+        ) : (
+          <>
+            <AlertTriangle className="h-7 w-7 text-rose-400" />
+            <span className="text-sm text-rose-300">
+              {error || 'System health data is unavailable.'}
+            </span>
+            <button
+              onClick={fetchHealth}
+              className="rounded-lg bg-slate-800 px-3 py-2 text-xs text-slate-200 hover:bg-slate-700"
+            >
+              Retry
+            </button>
+          </>
+        )}
+      </div>
+    );
+  }
+
   const runAllEndpointTests = async () => {
     setTestingEndpoints(true);
     const results = {};
     for (const ep of ENDPOINTS_TO_TEST) {
       const startTime = performance.now();
       try {
-        const res = await fetch(ep.path);
+        const res = await adminApi.probePublicEndpoint(ep.apiPath);
         const duration = Math.round(performance.now() - startTime);
         results[ep.path] = {
           status: res.status,
-          ok: res.ok,
+          ok: true,
           duration,
         };
       } catch (e) {
         results[ep.path] = {
-          status: 'ERR',
+          status: e.response?.status || 'ERR',
           ok: false,
-          error: e.message,
+          error: e.response?.data?.detail || e.message,
         };
       }
     }
@@ -97,6 +133,12 @@ const HealthToolsSection = () => {
         </button>
       </div>
 
+      {error && (
+        <div className="p-4 bg-red-950/40 border border-red-800/60 rounded-xl text-red-300 text-sm">
+          {error}
+        </div>
+      )}
+
       {/* Grid: Health Card & API URLs */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {/* Database Health Card */}
@@ -104,7 +146,7 @@ const HealthToolsSection = () => {
           <div className="flex items-center justify-between pb-3 border-b border-slate-800">
             <div className="flex items-center space-x-2.5">
               <Database className="w-5 h-5 text-indigo-400" />
-              <h3 className="text-sm font-semibold text-white">PostgreSQL Connection Health</h3>
+              <h3 className="text-sm font-semibold text-white">Database Connection Health</h3>
             </div>
             <span
               className={`text-[10px] font-mono px-2 py-0.5 rounded font-semibold ${
@@ -128,7 +170,9 @@ const HealthToolsSection = () => {
             </div>
             <div className="flex justify-between items-center py-1.5 border-b border-slate-800/60 font-mono">
               <span className="text-slate-400">Database Engine:</span>
-              <span className="text-slate-300">django.db.backends.postgresql</span>
+              <span className="text-slate-300">
+                {healthData?.database?.engine || 'Unknown'}
+              </span>
             </div>
             <div className="flex justify-between items-center py-1.5 font-mono">
               <span className="text-slate-400">Backend Port / Host:</span>

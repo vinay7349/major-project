@@ -7,12 +7,14 @@ import {
   EyeOff,
   Lock,
   Package,
+  KeyRound,
   ShieldCheck,
   Store,
   UserRound,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/NotificationContext';
+import EmailVerificationPrompt from '../../components/EmailVerificationPrompt';
 
 const OWNER_ROLES = ['SHOP_OWNER', 'ADMIN'];
 
@@ -20,6 +22,8 @@ const ShopOwnerLoginPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [verificationRequired, setVerificationRequired] = useState(false);
+  const [verificationEmail, setVerificationEmail] = useState('');
   const { login, loading, logout, user, isAuthenticated } = useAuth();
   const { addToast } = useToast();
   const navigate = useNavigate();
@@ -37,9 +41,21 @@ const ShopOwnerLoginPage = () => {
 
     const result = await login(username, password, 'shop_owner');
     if (!result.success) {
-      addToast('We could not sign in with those details.', 'error', 'Sign in failed');
+      const needsVerification = result.code === 'email_verification_required';
+      setVerificationRequired(needsVerification);
+      if (needsVerification && username.includes('@')) {
+        setVerificationEmail(username.trim());
+      }
+      addToast(
+        needsVerification
+          ? 'Please verify your email before signing in.'
+          : 'We could not sign in with those details.',
+        'error',
+        needsVerification ? 'Email verification required' : 'Sign in failed'
+      );
       return;
     }
+    setVerificationRequired(false);
 
     if (!OWNER_ROLES.includes(result.user?.role)) {
       logout();
@@ -208,6 +224,17 @@ const ShopOwnerLoginPage = () => {
                 </button>
               </form>
 
+              {verificationRequired && (
+                <EmailVerificationPrompt initialEmail={verificationEmail} />
+              )}
+              <NavLink
+                to="/forgot-password?role=owner"
+                className="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-amber hover:underline"
+              >
+                <KeyRound className="h-3.5 w-3.5" />
+                Forgot password?
+              </NavLink>
+
               <div className="mt-6 rounded-xl bg-warmwhite p-4 dark:bg-charcoal/60">
                 <div className="flex items-start gap-3">
                   <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-mutedgreen dark:text-emerald-400" />
@@ -225,5 +252,3 @@ const ShopOwnerLoginPage = () => {
 };
 
 export default ShopOwnerLoginPage;
-
-

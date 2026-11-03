@@ -7,11 +7,13 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../../context/AuthContext';
 import { useToast } from '../../../context/NotificationContext';
+import EmailVerificationPrompt from '../../../components/EmailVerificationPrompt';
 
 const CustomerLoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [verificationRequired, setVerificationRequired] = useState(false);
   const { login, loading } = useAuth();
   const { addToast } = useToast();
   const navigate = useNavigate();
@@ -22,10 +24,19 @@ const CustomerLoginPage = () => {
     e.preventDefault();
     const result = await login(email, password, 'customer');
     if (result.success) {
+      setVerificationRequired(false);
       addToast(`Welcome to ShopGenie, ${result.user.username || 'Customer'}!`, 'success', 'Sign In Successful');
       navigate(redirectTo, { replace: true });
     } else {
-      addToast('Sign in failed. Try using demo customer access below.', 'error', 'Authentication Failed');
+      const needsVerification = result.code === 'email_verification_required';
+      setVerificationRequired(needsVerification);
+      addToast(
+        needsVerification
+          ? 'Please verify your email before signing in.'
+          : 'Sign in failed. Check your credentials and try again.',
+        'error',
+        needsVerification ? 'Email verification required' : 'Authentication Failed'
+      );
     }
   };
 
@@ -230,6 +241,10 @@ const CustomerLoginPage = () => {
                 </button>
               </form>
 
+              {verificationRequired && (
+                <EmailVerificationPrompt initialEmail={email} />
+              )}
+
               <div className="pt-4 border-t border-border dark:border-border-dark text-center">
                 <p className="text-xs text-text-muted dark:text-text-mutedDark">
                   New to ShopGenie?{' '}
@@ -256,7 +271,6 @@ const CustomerLoginPage = () => {
 };
 
 export default CustomerLoginPage;
-
 
 
 

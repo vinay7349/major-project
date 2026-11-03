@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api';
+const configuredApiBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+export const API_BASE_URL = configuredApiBaseUrl
+  || (import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : '');
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -12,6 +14,11 @@ const api = axios.create({
 // Request Interceptor: Attach Bearer Token if logged in
 api.interceptors.request.use(
   (config) => {
+    if (!API_BASE_URL) {
+      return Promise.reject(
+        new Error('Set VITE_API_BASE_URL to the Django API origin ending in /api.')
+      );
+    }
     const token = localStorage.getItem('shopgenie_access_token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -57,10 +64,12 @@ export const authAPI = {
   ),
   verifyEmail: (data) => api.post('/auth/email-verification/confirm/', data),
   resendVerification: (data) => api.post('/auth/email-verification/resend/', data),
+  getCaptchaConfig: () => api.get('/auth/captcha-config/'),
+  requestPasswordReset: (data) => api.post('/auth/password-reset/request/', data),
+  confirmPasswordReset: (data) => api.post('/auth/password-reset/confirm/', data),
   getProfile: () => api.get('/accounts/profile/'),
   updateProfile: (data) => api.patch('/accounts/profile/', data),
-  forgotPassword: (email) => api.post('/accounts/forgot-password/', { email }),
-  getAuditLogs: () => api.get('/accounts/audit-logs/'),
+  getAuditLogs: () => api.get('/admin/audit-logs/'),
 };
 
 export const productsAPI = {
